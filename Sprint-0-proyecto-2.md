@@ -361,38 +361,21 @@ Se identificaron:
 
 **Lugar:** Instalaciones de Sumicolor.
 
-## 
+
 
 ## Principales requerimientos funcionales identificados
 
-  ---------------------------------------------------------------------------
-  **Código**   **Requerimiento**
-  ------------ --------------------------------------------------------------
-  RF-01        El sistema debe permitir crear una Orden de Producción.
-
-  RF-02        El sistema debe permitir registrar información desde cada base
-               de producción.
-
-  RF-03        El sistema debe impedir que una orden avance si la etapa
-               anterior no ha sido completada.
-
-  RF-04        El sistema debe permitir consultar el historial completo de
-               una orden.
-
-  RF-05        El administrador podrá crear, modificar o eliminar módulos del
-               sistema.
-
-  RF-06        El administrador podrá agregar, editar o eliminar campos
-               dentro de cada módulo.
-
-  RF-07        El sistema debe administrar usuarios y roles.
-
-  RF-08        El sistema debe almacenar toda la información en una base de
-               datos SQL Server.
-
-  RF-09        El sistema debe permitir el acceso desde tablets y
-               computadores.
-  ---------------------------------------------------------------------------
+| Código | Requerimiento |
+|--------|----------------|
+| RF-01 | El sistema debe permitir crear una Orden de Producción. |
+| RF-02 | El sistema debe permitir registrar información desde cada base de producción. |
+| RF-03 | El sistema debe impedir que una orden avance si la etapa anterior no ha sido completada. |
+| RF-04 | El sistema debe permitir consultar el historial completo de una orden. |
+| RF-05 | El administrador podrá crear, modificar o eliminar módulos del sistema. |
+| RF-06 | El administrador podrá agregar, editar o eliminar campos dentro de cada módulo. |
+| RF-07 | El sistema debe administrar usuarios y roles. |
+| RF-08 | El sistema debe almacenar toda la información en una base de datos SQL Server. |
+| RF-09 | El sistema debe permitir el acceso desde tablets y computadores. |
 
 ### EVIDENCIAS
 
@@ -457,5 +440,3 @@ implementarán en **Software Polygon**.
                                                                                                                                                 haya sido diligenciada
                                                                                                                                                 completamente.
   ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-### 
