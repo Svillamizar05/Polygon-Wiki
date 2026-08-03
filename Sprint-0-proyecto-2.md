@@ -5,7 +5,7 @@
 ## Descripción de la empresa
 
 Sumicolor es una empresa reconocida por la fabricación de
-**MASTERBATCH®** (concentrados de color) para la industria plástica.
+* <a id="glosario-api"></a>**MASTERBATCH** (concentrados de color) para la industria plástica.
 Cuenta con una amplia experiencia en el desarrollo de colores estándar,
 especiales y de efectos, trabajando con diferentes polímeros base y
 materiales de ingeniería. Entre los materiales que procesa se encuentran
@@ -210,6 +210,7 @@ en cada una de ellas.
 | **Tablet** | Dispositivo móvil utilizado por los operarios para registrar información directamente desde cada base de producción. |
 | **Trazabilidad** | Capacidad del sistema para registrar y consultar el historial completo de una orden de producción durante todas sus etapas. |
 | **Usuario** | Persona autorizada para acceder al sistema según el rol asignado. |
+| [MASTERBATCH](#glosario-api) | Es una mezcla concentrada de pigmentos, colorantes o aditivos funcionales dispersos en una resina polimérica portadora (carrier), presentada en forma de gránulos sólidos. |
 
 # Seccion 2.
 
