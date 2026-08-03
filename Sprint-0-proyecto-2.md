@@ -73,7 +73,7 @@ haya sido diligenciada completamente antes de permitir que la orden
 continúe hacia la siguiente etapa, garantizando la trazabilidad y
 evitando omisiones de información.
 
-###**Administrador del sistema**
+## **Administrador del sistema**
 
 El administrador es el usuario encargado de la configuración y
 mantenimiento del sistema. Sus principales funciones son:
@@ -93,7 +93,7 @@ El administrador no participa directamente en el proceso productivo,
 sino que garantiza que el sistema se adapte a las necesidades de la
 empresa.
 
-**Personal de Planeación**
+##  **Personal de Planeación**
 
 El proceso inicia en el módulo de Planeación.
 
@@ -115,7 +115,7 @@ Producción, como:
 Una vez todos los campos obligatorios estén diligenciados, el sistema
 habilita automáticamente el siguiente módulo (Picky).
 
-**Personal de Picky**
+##  **Personal de Picky**
 
 El personal encargado del área de Picky consulta las órdenes pendientes
 y registra la preparación o entrega de las materias primas necesarias
@@ -124,7 +124,7 @@ para la producción.
 Después de completar la información requerida, el sistema permite que la
 orden avance al módulo de Pesaje.
 
-**Personal de Pesaje**
+##  **Personal de Pesaje**
 
 El operario de pesaje registra la información correspondiente al pesaje
 de las materias primas utilizadas para la orden de producción.
@@ -135,7 +135,7 @@ permitirá avanzar la orden hacia la siguiente etapa.
 Al finalizar correctamente el registro, la orden pasa al módulo de
 Mezcla.
 
-**Personal de Mezcla**
+##  **Personal de Mezcla**
 
 El operario de mezcla consulta la orden y registra la información
 correspondiente al proceso de mezclado de materiales.
@@ -143,7 +143,7 @@ correspondiente al proceso de mezclado de materiales.
 Una vez finalizado el registro y validados los datos, el sistema
 habilita el módulo de Extrusión.
 
-**Personal de Extrusión**
+##  **Personal de Extrusión**
 
 El personal de extrusión registra la información del proceso de
 extrusión del material.
@@ -151,7 +151,7 @@ extrusión del material.
 El sistema verifica que todos los datos requeridos hayan sido
 diligenciados antes de permitir el paso al área de Calidad.
 
-**Personal de Calidad**
+##  **Personal de Calidad**
 
 El área de calidad realiza las inspecciones correspondientes y registra
 los resultados obtenidos durante el proceso.
@@ -163,7 +163,7 @@ Por otro lado, si la orden no pasa calidad, se habilitaria un subproceso
 donde se determina en que base fallo y dependendiendo el fallo se manda
 a tamizaje, saranda, homogenizado, secado o molino
 
-**Personal de Empaque**
+##  **Personal de Empaque**
 
 El operario de empaque registra la información relacionada con el
 embalaje y finalización del producto.
@@ -171,7 +171,7 @@ embalaje y finalización del producto.
 Una vez completado el registro, la orden queda lista para ser enviada al
 módulo Espacio Cliente.
 
-**Espacio Cliente**
+##  **Espacio Cliente**
 
 En este módulo se registra la información final relacionada con la
 entrega del producto al cliente o la finalización del proceso
@@ -181,7 +181,7 @@ Aquí puede consultarse el historial completo de la orden de producción,
 incluyendo todas las etapas por las que pasó y la información registrada
 en cada una de ellas.
 
-**GLOSARIO DE TERMINOS**
+##  **GLOSARIO DE TERMINOS**
 
   ----------------------------------------------------------------------------
   **Término**        **Descripción**
@@ -274,7 +274,7 @@ en cada una de ellas.
                      permitir avanzar la orden de producción.
   ----------------------------------------------------------------------------
 
-Seccion 2.
+# Seccion 2.
 
 # Elicitación de Requerimientos
 
@@ -350,29 +350,11 @@ Se identificaron:
 
 -   Resultados de calidad
 
-  -----------------------------------------------------------------------
-  **Participante**   **Rol**
-  ------------------ ----------------------------------------------------
-  Equipo de Proyecto Analistas de requerimientos y encargados de
-  2                  recopilar la información necesaria para el
-                     desarrollo del sistema.
+ 
+<img width="707" height="272" alt="image" src="https://github.com/user-attachments/assets/34abe6f3-55f9-413b-be62-a87d0b69b569" />
 
-  Jefe de Producción Explicó el flujo del proceso productivo, las
-  de Sumicolor       necesidades de la empresa y los problemas del
-                     proceso actual basado en formatos físicos.
 
-  Ingeniero de       Describió las actividades realizadas en cada base de
-  Procesos de        producción, los datos que deben registrarse y los
-  Sumicolor          requerimientos funcionales del sistema.
-
-  Equipo de TI de    Explicó la infraestructura tecnológica actual de la
-  Sumicolor          empresa, los sistemas existentes (como SQL Server,
-                     Visual Control y Excel), y brindó orientación sobre
-                     la viabilidad técnica e integración del software
-                     Polygon con los recursos tecnológicos disponibles.
-  -----------------------------------------------------------------------
-
-# Fecha de realización
+## Fecha de realización
 
 **Fecha:** Viernes 24 de julio de 2026 2:30 pm*.*
 
@@ -413,11 +395,8 @@ Se identificaron:
 
 ### EVIDENCIAS
 
-![](media/image7.jpg){width="4.218771872265966in"
-height="2.8641808836395453in"}
+<img width="738" height="1600" alt="WhatsApp Image 2026-08-02 at 2 54 37 PM" src="https://github.com/user-attachments/assets/e7f66efe-1018-4f0a-97d0-8331fafdb1b3" />
 
-![](media/image8.jpg){width="2.3269225721784776in"
-height="3.9479166666666665in"}
 
 ### Análisis de la competencia
 
