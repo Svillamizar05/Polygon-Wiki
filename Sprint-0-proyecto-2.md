@@ -182,98 +182,34 @@ Aquí puede consultarse el historial completo de la orden de producción,
 incluyendo todas las etapas por las que pasó y la información registrada
 en cada una de ellas.
 
-##  **GLOSARIO DE TERMINOS**
+##  GLOSARIO DE TERMINOS
 
-  ----------------------------------------------------------------------------
-  **Término**        **Descripción**
-  ------------------ ---------------------------------------------------------
-  **Administrador    Usuario encargado de configurar el sistema, administrar
-  del Sistema**      usuarios, permisos, módulos y realizar modificaciones en
-                     los formularios o campos del software.
 
-  **Base de          Cada una de las áreas o estaciones del proceso productivo
-  Producción**       donde se ejecuta una actividad específica y se registra
-                     información en el sistema.
-
-  **Campo**          Espacio dentro de un formulario destinado a capturar un
-                     dato específico, como cantidades, fechas, observaciones o
-                     códigos.
-
-  **Computador       Equipo utilizado por personal administrativo o de
-  (PC)**             producción para acceder al sistema Software Polygon.
-
-  **Espacio          Módulo final del sistema donde se registra la información
-  Cliente**          correspondiente a la finalización de la orden de
-                     producción y su disponibilidad para el cliente.
-
-  **Estado de la     Situación actual de una orden de producción dentro del
-  Orden**            proceso (Pendiente, En proceso, Finalizada, etc.).
-
-  **Extrusión**      Etapa del proceso productivo donde el material es
-                     transformado mediante maquinaria especializada para
-                     obtener el producto requerido.
-
-  **Formulario**     Interfaz del sistema utilizada para registrar o consultar
-                     información de una orden de producción.
-
-  **Módulo**         Sección funcional del sistema que representa una etapa
-                     del proceso de producción, como Planeación, Pesaje o
-                     Calidad.
-
-  **Operario**       Usuario encargado de registrar la información
-                     correspondiente a la etapa del proceso en la que trabaja.
-
-  **Orden de         Documento que contiene toda la información necesaria para
-  Producción (OP)**  fabricar un lote de producto y que recorre todas las
-                     etapas del proceso dentro del sistema.
-
-  **PC**             Computador utilizado para acceder a Software Polygon
-                     desde las diferentes áreas de la empresa.
-
-  **Pesaje**         Proceso donde se registran las cantidades exactas de
-                     materias primas que serán utilizadas en la producción.
-
-  **Planeación**     Primera etapa del proceso productivo donde se crea la
-                     orden de producción y se define la información inicial
-                     del lote.
-
-  **Picky**          Área encargada de preparar y suministrar las materias
-                     primas necesarias para iniciar la producción.
-
-  **Proceso          Conjunto de actividades que transforman las materias
-  Productivo**       primas en un producto terminado mediante diferentes
-                     etapas.
-
-  **Registro**       Información ingresada por un usuario dentro del sistema
-                     durante una etapa del proceso.
-
-  **Rol**            Conjunto de permisos asignados a un usuario para
-                     determinar las funciones que puede realizar dentro del
-                     sistema.
-
-  **Software         Aplicación web desarrollada para Sumicolor con el
-  Polygon**          objetivo de digitalizar y controlar el proceso de
-                     producción, reemplazando los registros en papel.
-
-  **SQL Server**     Sistema de gestión de bases de datos donde se almacena
-                     toda la información registrada en Software Polygon.
-
-  **Tablet**         Dispositivo móvil utilizado por los operarios para
-                     registrar información directamente desde cada base de
-                     producción.
-
-  **Trazabilidad**   Capacidad del sistema para registrar y consultar el
-                     historial completo de una orden de producción durante
-                     todas sus etapas.
-
-  **Usuario**        Persona autorizada para acceder al sistema según el rol
-                     asignado.
-
-  **Validación**     Verificación realizada por el sistema para asegurar que
-                     los datos ingresados sean correctos y que todos los
-                     campos obligatorios hayan sido diligenciados antes de
-                     permitir avanzar la orden de producción.
-  ----------------------------------------------------------------------------
+| Término | Descripción |
+|---------|--------------|
+| **Administrador del Sistema** | Usuario encargado de configurar el sistema, administrar usuarios, permisos, módulos y realizar modificaciones en los formularios o campos del software. |
+| **Base de Producción** | Cada una de las áreas o estaciones del proceso productivo donde se ejecuta una actividad específica y se registra información en el sistema. |
+| **Campo** | Espacio dentro de un formulario destinado a capturar un dato específico, como cantidades, fechas, observaciones o códigos. |
+| **Computador (PC)** | Equipo utilizado por personal administrativo o de producción para acceder al sistema Software Polygon. |
+| **Espacio Cliente** | Módulo final del sistema donde se registra la información correspondiente a la finalización de la orden de producción y su disponibilidad para el cliente. |
+| **Estado de la Orden** | Situación actual de una orden de producción dentro del proceso (Pendiente, En proceso, Finalizada, etc.). |
+| **Extrusión** | Etapa del proceso productivo donde el material es transformado mediante maquinaria especializada para obtener el producto requerido. |
+| **Formulario** | Interfaz del sistema utilizada para registrar o consultar información de una orden de producción. |
+| **Módulo** | Sección funcional del sistema que representa una etapa del proceso de producción, como Planeación, Pesaje o Calidad. |
+| **Operario** | Usuario encargado de registrar la información correspondiente a la etapa del proceso en la que trabaja. |
+| **Orden de Producción (OP)** | Documento que contiene toda la información necesaria para fabricar un lote de producto y que recorre todas las etapas del proceso dentro del sistema. |
+| **PC** | Computador utilizado para acceder a Software Polygon desde las diferentes áreas de la empresa. |
+| **Pesaje** | Proceso donde se registran las cantidades exactas de materias primas que serán utilizadas en la producción. |
+| **Planeación** | Primera etapa del proceso productivo donde se crea la orden de producción y se define la información inicial del lote. |
+| **Picky** | Área encargada de preparar y suministrar las materias primas necesarias para iniciar la producción. |
+| **Proceso Productivo** | Conjunto de actividades que transforman las materias primas en un producto terminado mediante diferentes etapas. |
+| **Registro** | Información ingresada por un usuario dentro del sistema durante una etapa del proceso. |
+| **Rol** | Conjunto de permisos asignados a un usuario para determinar las funciones que puede realizar dentro del sistema. |
+| **Software Polygon** | Aplicación web desarrollada para Sumicolor con el objetivo de digitalizar y controlar el proceso de producción, reemplazando los registros en papel. |
+| **SQL Server** | Sistema de gestión de bases de datos donde se almacena toda la información registrada en Software Polygon. |
+| **Tablet** | Dispositivo móvil utilizado por los operarios para registrar información directamente desde cada base de producción. |
+| **Trazabilidad** | Capacidad del sistema para registrar y consultar el historial completo de una orden de producción durante todas sus etapas. |
+| **Usuario** | Persona autorizada para acceder al sistema según el rol asignado. |
 
 # Seccion 2.
 
@@ -391,52 +327,8 @@ de tipo **MES (Manufacturing Execution System)** y **ERP con módulos de
 manufactura**, las cuales ofrecen funcionalidades similares a las que se
 implementarán en **Software Polygon**.
 
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **Aplicación**   **Empresa**                                                      **Costo**                                                   **Diferencia con Software
-                                                                                                                                                Polygon**
-  ---------------- ---------------------------------------------------------------- ----------------------------------------------------------- ------------------------------
-  **Tulip**        [Tulip Interfaces                                                Desde **USD 100 por interfaz/mes** (plan Essentials, mínimo Tulip es una plataforma muy
-                   Inc.](https://tulip.co/plans/?utm_source=chatgpt.com)            10 interfaces).                                             completa para la
-                                                                                    ([Tulip](https://tulip.co/plans/?utm_source=chatgpt.com))   digitalización industrial,
-                                                                                                                                                pero está diseñada para
-                                                                                                                                                múltiples industrias y suele
-                                                                                                                                                requerir una inversión
-                                                                                                                                                considerable. **Software
-                                                                                                                                                Polygon** estará desarrollado
-                                                                                                                                                específicamente para el
-                                                                                                                                                proceso productivo de
-                                                                                                                                                Sumicolor, adaptándose
-                                                                                                                                                exactamente al flujo de
-                                                                                                                                                Planeación → Picky → Pesaje →
-                                                                                                                                                Mezcla → Extrusión → Calidad →
-                                                                                                                                                Empaque → Espacio Cliente, sin
-                                                                                                                                                funcionalidades innecesarias.
-
-  **Odoo           [Odoo                                                            Desde **USD 24,90 por usuario/mes** (plan Estándar). (Odoo) Odoo es un ERP completo que
-  Manufacturing    S.A.](https://www.odoo.com/es/pricing?utm_source=chatgpt.com)                                                                incluye contabilidad, ventas,
-  (MRP)**                                                                                                                                       inventario, CRM y muchos otros
-                                                                                                                                                módulos. La propuesta de
-                                                                                                                                                **Software Polygon** se enfoca
-                                                                                                                                                exclusivamente en la gestión
-                                                                                                                                                de órdenes de producción de
-                                                                                                                                                Sumicolor, ofreciendo una
-                                                                                                                                                solución más sencilla,
-                                                                                                                                                personalizada y fácil de
-                                                                                                                                                implementar para la empresa.
-
-  **Prodsmart**    [Prodsmart                                                       Precio bajo cotización; estimaciones del mercado indican    Prodsmart permite controlar la
-                   (Autodesk)](https://www.prodsmart.com/?utm_source=chatgpt.com)   aproximadamente **USD 45--165 por usuario/mes**,            producción en tiempo real y
-                                                                                    dependiendo del plan y número de usuarios.                  recopilar datos de planta. Sin
-                                                                                    (VendorBenchmark)                                           embargo, es una solución
-                                                                                                                                                comercial orientada a
-                                                                                                                                                diferentes tipos de
-                                                                                                                                                fabricantes. **Software
-                                                                                                                                                Polygon** incorpora reglas
-                                                                                                                                                específicas del proceso de
-                                                                                                                                                Sumicolor, como impedir que
-                                                                                                                                                una orden avance a la
-                                                                                                                                                siguiente base hasta que la
-                                                                                                                                                información de la etapa actual
-                                                                                                                                                haya sido diligenciada
-                                                                                                                                                completamente.
-  ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ | Aplicación | Empresa | Costo | Diferencia con Software Polygon |
+|---|---|---|---|
+| **Tulip** | [Tulip Interfaces Inc.](https://tulip.co/plans/?utm_source=chatgpt.com) | Desde **USD 100 por interfaz/mes** (plan Essentials, mínimo 10 interfaces). ([Tulip](https://tulip.co/plans/?utm_source=chatgpt.com)) | Tulip es una plataforma muy completa para la digitalización industrial, pero está diseñada para múltiples industrias y suele requerir una inversión considerable. **Software Polygon** estará desarrollado específicamente para el proceso productivo de Sumicolor, adaptándose exactamente al flujo de Planeación → Picky → Pesaje → Mezcla → Extrusión → Calidad → Empaque → Espacio Cliente, sin funcionalidades innecesarias. |
+| **Odoo Manufacturing (MRP)** | [Odoo S.A.](https://www.odoo.com/es/pricing?utm_source=chatgpt.com) | Desde **USD 24,90 por usuario/mes** (plan Estándar). (Odoo) | Odoo es un ERP completo que incluye contabilidad, ventas, inventario, CRM y muchos otros módulos. La propuesta de **Software Polygon** se enfoca exclusivamente en la gestión de órdenes de producción de Sumicolor, ofreciendo una solución más sencilla, personalizada y fácil de implementar para la empresa. |
+| **Prodsmart** | [Prodsmart (Autodesk)](https://www.prodsmart.com/?utm_source=chatgpt.com) | Precio bajo cotización; estimaciones del mercado indican aproximadamente **USD 45–165 por usuario/mes**, dependiendo del plan y número de usuarios. (VendorBenchmark) | Prodsmart permite controlar la producción en tiempo real y recopilar datos de planta. Sin embargo, es una solución comercial orientada a diferentes tipos de fabricantes. **Software Polygon** incorpora reglas específicas del proceso de Sumicolor, como impedir que una orden avance a la siguiente base hasta que la información de la etapa actual haya sido diligenciada completamente. |
