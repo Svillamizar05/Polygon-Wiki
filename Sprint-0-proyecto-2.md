@@ -209,7 +209,7 @@ en cada una de ellas.
 | **Tablet** | Dispositivo móvil utilizado por los operarios para registrar información directamente desde cada base de producción. |
 | **Trazabilidad** | Capacidad del sistema para registrar y consultar el historial completo de una orden de producción durante todas sus etapas. |
 | **Usuario** | Persona autorizada para acceder al sistema según el rol asignado. |
-| * <a id="glosario-api"></a>**MASTERBATCH** | Es una mezcla concentrada de pigmentos, colorantes o aditivos funcionales dispersos en una resina polimérica portadora (carrier), presentada en forma de gránulos sólidos. |
+| <a id="glosario-api"></a>**MASTERBATCH** | Es una mezcla concentrada de pigmentos, colorantes o aditivos funcionales dispersos en una resina polimérica portadora (carrier), presentada en forma de gránulos sólidos. |
 
 # Seccion 2.
 
