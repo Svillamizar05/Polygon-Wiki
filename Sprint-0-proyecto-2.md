@@ -1,6 +1,6 @@
-###  DEFINICION DEL PRODUCTO
+#   DEFINICION DEL PRODUCTO
 
-###  SECCION 1.
+#  SECCION 1.
 
 ## Descripción de la empresa
 
