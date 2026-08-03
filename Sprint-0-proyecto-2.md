@@ -288,7 +288,12 @@ Se identificaron:
 -   Resultados de calidad
 
  
-<img width="707" height="272" alt="image" src="https://github.com/user-attachments/assets/34abe6f3-55f9-413b-be62-a87d0b69b569" />
+| Participante | Rol |
+|---|---|
+| Equipo de Proyecto 2 | Analistas de requerimientos y encargados de recopilar la información necesaria para el desarrollo del sistema. |
+| Jefe de Producción de Sumicolor | Explicó el flujo del proceso productivo, las necesidades de la empresa y los problemas del proceso actual basado en formatos físicos. |
+| Ingeniero de Procesos de Sumicolor | Describió las actividades realizadas en cada base de producción, los datos que deben registrarse y los requerimientos funcionales del sistema. |
+| Equipo de TI de Sumicolor | Explicó la infraestructura tecnológica actual de la empresa, los sistemas existentes (como SQL Server, Visual Control y Excel), y brindó orientación sobre la viabilidad técnica e integración del software Polygon con los recursos tecnológicos disponibles. |
 
 
 ## Fecha de realización
