@@ -1,6 +1,6 @@
-## DEFINICION DEL PRODUCTO
+###  DEFINICION DEL PRODUCTO
 
-## SECCION 1.
+###  SECCION 1.
 
 ## Descripción de la empresa
 
@@ -55,13 +55,13 @@ productivo.
 
   
 <img width="360" height="555" alt="image" src="https://github.com/user-attachments/assets/1e5ef3f8-e0ef-4d1b-9b8c-b7113fbe226c" />
-------------------------------------------------------------------------------------------------------------------------------------
 
-> **Público objetivo y contexto**
->
-> ![](media/image6.png){width="6.5in" height="2.625in"}
 
-# Descripción textual de la interacción de los usuarios con el sistema
+>##  **Público objetivo y contexto**
+<img width="1132" height="352" alt="DcontextoP2 drawio" src="https://github.com/user-attachments/assets/aa88f43e-2824-4a32-a1b1-6dc531f3101a" />
+
+
+## Descripción textual de la interacción de los usuarios con el sistema
 
 El sistema **Software Polygon** tiene como objetivo digitalizar el
 proceso de producción de Sumicolor, reemplazando los formatos físicos
@@ -73,7 +73,7 @@ haya sido diligenciada completamente antes de permitir que la orden
 continúe hacia la siguiente etapa, garantizando la trazabilidad y
 evitando omisiones de información.
 
-**Administrador del sistema**
+###**Administrador del sistema**
 
 El administrador es el usuario encargado de la configuración y
 mantenimiento del sistema. Sus principales funciones son:
