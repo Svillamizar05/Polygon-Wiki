@@ -51,26 +51,11 @@ asociados al manejo manual de documentos y proporcionar a la
 administración un seguimiento en tiempo real del estado de cada proceso
 productivo.
 
-**Personas y roles del proyecto**
+## **Personas y roles del proyecto**
 
-  ----------------------------------------------------------------------------------------------------------------
-  **Integrantes**   **foto**                                             **correo**                **Rol**
-  ----------------- ---------------------------------------------------- ------------------------- ---------------
-  Simon Castro      ![](media/image1.jpg){width="0.8522462817147857in"   Secastrov@eafit.edu.co    Scrum
-  Valencia          height="1.5104166666666667in"}                                                 master-tester
-
-  Samuel Herrera    ![](media/image2.jpg){width="1.115107174103237in"    Sherrerag3@eafit.edu.co   Desarrollador
-                    height="1.4895833333333333in"}                                                 
-
-  Michael Agudelo   ![](media/image3.jpg){width="1.1841830708661418in"   Maagudeloo@eafit.edu.co   Arquitecto
-                    height="1.59375in"}                                                            
-
-  Santiago          ![](media/image4.jpg){width="0.96875in"              Svillamiza@eafit.edu.co   Desarrollador
-  Villamizar        height="1.7168930446194226in"}                                                 
-
-  Alejandro         ![](media/image5.jpg){width="1.0520833333333333in"   Ajaramillr@eafit.edu.co   UX
-  Jaramillo         height="1.8645833333333333in"}                                                 
-  ----------------------------------------------------------------------------------------------------------------
+  
+<img width="360" height="555" alt="image" src="https://github.com/user-attachments/assets/1e5ef3f8-e0ef-4d1b-9b8c-b7113fbe226c" />
+------------------------------------------------------------------------------------------------------------------------------------
 
 > **Público objetivo y contexto**
 >
