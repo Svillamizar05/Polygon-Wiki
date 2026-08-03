@@ -57,7 +57,8 @@ productivo.
 <img width="360" height="555" alt="image" src="https://github.com/user-attachments/assets/1e5ef3f8-e0ef-4d1b-9b8c-b7113fbe226c" />
 
 
->##  **Público objetivo y contexto**
+>## **Público objetivo y contexto**
+
 <img width="1132" height="352" alt="DcontextoP2 drawio" src="https://github.com/user-attachments/assets/aa88f43e-2824-4a32-a1b1-6dc531f3101a" />
 
 
