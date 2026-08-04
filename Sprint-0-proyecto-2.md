@@ -337,3 +337,13 @@ implementarán en **Software Polygon**.
 | **Tulip** | [Tulip Interfaces Inc.](https://tulip.co/plans/?utm_source=chatgpt.com) | Desde **USD 100 por interfaz/mes** (plan Essentials, mínimo 10 interfaces). ([Tulip](https://tulip.co/plans/?utm_source=chatgpt.com)) | Tulip es una plataforma muy completa para la digitalización industrial, pero está diseñada para múltiples industrias y suele requerir una inversión considerable. **Software Polygon** estará desarrollado específicamente para el proceso productivo de Sumicolor, adaptándose exactamente al flujo de Planeación → Picky → Pesaje → Mezcla → Extrusión → Calidad → Empaque → Espacio Cliente, sin funcionalidades innecesarias. |
 | **Odoo Manufacturing (MRP)** | [Odoo S.A.](https://www.odoo.com/es/pricing?utm_source=chatgpt.com) | Desde **USD 24,90 por usuario/mes** (plan Estándar). (Odoo) | Odoo es un ERP completo que incluye contabilidad, ventas, inventario, CRM y muchos otros módulos. La propuesta de **Software Polygon** se enfoca exclusivamente en la gestión de órdenes de producción de Sumicolor, ofreciendo una solución más sencilla, personalizada y fácil de implementar para la empresa. |
 | **Prodsmart** | [Prodsmart (Autodesk)](https://www.prodsmart.com/?utm_source=chatgpt.com) | Precio bajo cotización; estimaciones del mercado indican aproximadamente **USD 45–165 por usuario/mes**, dependiendo del plan y número de usuarios. (VendorBenchmark) | Prodsmart permite controlar la producción en tiempo real y recopilar datos de planta. Sin embargo, es una solución comercial orientada a diferentes tipos de fabricantes. **Software Polygon** incorpora reglas específicas del proceso de Sumicolor, como impedir que una orden avance a la siguiente base hasta que la información de la etapa actual haya sido diligenciada completamente. |
+
+# Seccion 3.
+## Story Mapping
+https://miro.com/welcomeonboard/cXViUWdFWHlOY3l4VUtpbXg4bzhYa1ZXNlJMSnJQV2w2aGpjaDgvZFF2bS9acjFnTFRhQ1RxajdrZXdzWEpiRWcxQms1M1M2ZUpWR1NyQlNmelRvZ2pnS0lLTUllUWdqOWdMamQrMlpSRUxaMS95Tk9BZ0UyZ2dPSUlyMDBiVlVQdGo1ZEV3bUdPQWRZUHQzSGl6V2NBPT0hdjE=?share_link_id=363086209415
+
+## Backlog
+https://github.com/users/SimonCastroV/projects/10
+
+## Sprint 1 Planning 
+<img width="1505" height="688" alt="image" src="https://github.com/user-attachments/assets/0342f992-c01e-4089-b5d3-00c955e0de5d" />
