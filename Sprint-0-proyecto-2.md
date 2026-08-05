@@ -341,7 +341,7 @@ implementarán en [Software Polygon](#glosario-api-sp).
 
 ### Story Mapping
 
-https://miro.com/welcomeonboard/cXViUWdFWHlOY3l4VUtpbXg4bzhYa1ZXNlJMSnJQV2w2aGpjaDgvZFF2bS9acjFnTFRhQ1RxajdrZXdzWEpiRWcxQms1M1M2ZUpWR1NyQlNmelRvZ2pnS0lLTUllUWdqOWdMamQrMlpSRUxaMS95Tk9BZ0UyZ2dPSUlyMDBiVlVQdGo1ZEV3bUdPQWRZUHQzSGl6V2NBPT0hdjE=?share_link_id=363086209415
+https://miro.com/app/board/uXjVH1COXho=/?share_link_id=626833667391
 
 ### Backlog
 
