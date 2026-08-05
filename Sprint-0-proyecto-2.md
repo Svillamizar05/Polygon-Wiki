@@ -779,4 +779,21 @@ Puedes consultar el prototipo interactivo en el siguiente enlace:
 
 ### Prueba de prototipo
 
+Se realizó una sesión de validación del prototipo con el Product Owner de Sumicolor, en la cual se presentaron los principales módulos de la aplicación y el flujo general de trabajo para los operarios y administradores.
 
+#### Casos de prueba iniciales
+
+|Caso de prueba | Resultado |
+| -- | -- |
+| Navegación entre los módulos del sistema | ✅ Correcto |
+| Visualización de las órdenes de producción por estado | ✅ Correcto |
+| Inicio y continuación del proceso de una Orden de Producción | ✅ Correcto |
+| Identificación visual de estados (Pendiente, En proceso, Requiere ajuste y Reproceso) | ✅ Correcto |
+| Acceso al módulo de administración de formularios | ✅ Correcto |
+| Flujo general entre el módulo operativo y el administrativo | ✅ Correcto |
+
+#### Resultado de la validación
+
+Durante la sesión, el Product Owner manifestó su conformidad con el diseño propuesto, destacando la simplicidad de la interfaz, la facilidad para identificar el estado de las órdenes de producción y la organización de la información. Asimismo, confirmó que el flujo planteado representa adecuadamente el proceso actual de la empresa y consideró que el prototipo cumple con las expectativas iniciales del proyecto.
+
+Como resultado de esta validación, el mockup fue aceptado por el usuario, autorizando al equipo a continuar con el desarrollo del MVP tomando como base el diseño presentado.
