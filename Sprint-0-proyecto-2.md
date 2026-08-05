@@ -24,8 +24,14 @@ Con la implementación de esta solución se espera mejorar la [trazabilidad](#gl
 
 ## **Personas y roles del proyecto**
 
-  
-<img width="360" height="555" alt="image" src="https://github.com/user-attachments/assets/1e5ef3f8-e0ef-4d1b-9b8c-b7113fbe226c" />
+
+| Integrante | Foto | Correo | Rol |
+| -- | -- | -- | -- |
+| Simón Castro Valencia | <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/cd960ed2-1031-4249-98ef-e7b2e81b755d" /> | secastrov@eafit.edu.co | Scrum master-tester |
+| Samuel Herrera Galvis | <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/b10d6a99-92d3-4fcb-982c-916682665eea" /> | sherrerag3@eafit.edu.co | Desarrollador |
+| Michael Andrey Agudelo Ortiz | <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/ed441e6e-4c04-4a5f-a388-b8315f0e9301" /> | maagudeloo@eafit.edu.co | Arquitecto |
+| Santiago Villamizar | <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/38ab71bf-9c13-40bb-8e06-dcb2406e7493" /> | svillamiza@eafit.edu.co | Desarrollador |
+| Alejandro Jaramillo Rodríguez | <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/a1ca27a2-1513-4256-a268-c0834aef4c9b" /> | ajaramillr@eafit.edu.co | UX |
 
 
 ## **Público objetivo y contexto**
@@ -725,14 +731,3 @@ flowchart LR
     Usuarios --> BD
     Catalogos --> BD
 ```
-
-
-
-
-| Integrante | Foto | Correo | Rol |
-| -- | -- | -- | -- |
-| Simón Castro Valencia | <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/cd960ed2-1031-4249-98ef-e7b2e81b755d" /> | secastrov@eafit.edu.co | Scrum master-tester |
-| Samuel Herrera Galvis | <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/b10d6a99-92d3-4fcb-982c-916682665eea" /> | sherrerag3@eafit.edu.co | Desarrollador |
-| Michael Andrey Agudelo Ortiz | <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/ed441e6e-4c04-4a5f-a388-b8315f0e9301" /> | maagudeloo@eafit.edu.co | Arquitecto |
-| Santiago Villamizar | <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/38ab71bf-9c13-40bb-8e06-dcb2406e7493" /> | svillamiza@eafit.edu.co | Desarrollador |
-| Alejandro Jaramillo Rodríguez | <img width="150" height="200" alt="image" src="https://github.com/user-attachments/assets/a1ca27a2-1513-4256-a268-c0834aef4c9b" /> | ajaramillr@eafit.edu.co | UX |
