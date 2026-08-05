@@ -152,7 +152,7 @@ Aquí puede consultarse el historial completo de la [orden de producción](#glos
 incluyendo todas las etapas por las que pasó y la información registrada
 en cada una de ellas.
 
-###  GLOSARIO DE TERMINOS
+###  Glosario de Términos
 
 
 | Término | Descripción |
@@ -258,7 +258,7 @@ Se identificaron:
 
 -   Resultados de calidad
 
-##### 3. ¿QUIENES PARTICIPARON Y CUAL FUE SU ROL?
+##### 3. ¿Quiénes participaron y cuál fue su rol?
 
 | Participante | Rol |
 |---|---|
@@ -268,7 +268,7 @@ Se identificaron:
 | Equipo de TI de Sumicolor | Explicó la infraestructura tecnológica actual de la empresa, los sistemas existentes (como [SQL Servers](#glosario-api-sql), Visual Control y Excel), y brindó orientación sobre la viabilidad técnica e integración del [Software Polygon](#glosario-api-sp) con los recursos tecnológicos disponibles. |
 
 
-##### 4. FECHA DE REALIZACIÓN
+##### 4. Fecha de Realización
 
 **Fecha:** Viernes 24 de julio de 2026 2:30 pm*.*
 
@@ -290,7 +290,7 @@ Se identificaron:
 | RF-08 | El sistema debe almacenar toda la información en una base de datos [SQL Servers](#glosario-api-sql). |
 | RF-09 | El sistema debe permitir el acceso desde [tabletas](#glosario-api-ta) y [computadores](#glosario-api). |
 
-#####  6. EVIDENCIAS
+#####  6. Evidencias
 
 #####  Reunión Presencial
 <img width="738" height="1600" alt="WhatsApp Image 2026-08-02 at 2 54 37 PM" src="https://github.com/user-attachments/assets/e7f66efe-1018-4f0a-97d0-8331fafdb1b3" />
@@ -769,7 +769,7 @@ Esta arquitectura responde directamente a los principales requisitos no funciona
 
 En conjunto, esta solución arquitectónica proporciona una base sólida para el desarrollo del MVP de Polygon, permitiendo validar el funcionamiento del proceso de digitalización de órdenes de producción y ofreciendo una estructura preparada para evolucionar hacia una plataforma configurable para otros procesos industriales.
 
-# Diseño de Interfaces 
+# DISEÑO DE INTERFACES 
 
 ### Prototipo (Mockup interactivo)
 
