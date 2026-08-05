@@ -1,18 +1,20 @@
-# DEFINICION DEL PRODUCTO
+# DEFINICIÓN DEL PRODUCTO
 
-# SECCIÓN 1.
+# Sección 1. Generalidades del Proyecto
 
-## Descripción de la empresa
+## Descripción del problema y su solución software  
+
+### Descripción de la empresa
 
 Sumicolor es una empresa reconocida por la fabricación de [MASTERBATCH](#glosario-api-m) (concentrados de color) para la industria plástica. Cuenta con una amplia experiencia en el desarrollo de colores estándar, especiales y de efectos, trabajando con diferentes polímeros base y materiales de ingeniería. Entre los materiales que procesa se encuentran polietileno (PE), polipropileno (PP), poliestireno (PS), PET, EVA, poliamidas (PA), ABS y POM, entre otros. Sus productos están dirigidos a diversos procesos de transformación de termoplásticos, como inyección, soplado, [extrusión](#glosario-api) y rotomoldeo.
 
-## Planteamiento del problema
+### Planteamiento del problema
 
 Actualmente, Sumicolor realiza el seguimiento de sus órdenes de producción mediante hojas físicas que acompañan cada lote durante todo el proceso de fabricación. Estas hojas contienen la información y las actividades que deben ejecutar los diferentes [operarios](#glosario-api) en cada etapa del [proceso productivo](#glosario-api).
 
 Al tratarse de documentación en papel, las hojas deben ser trasladadas manualmente de un operador a otro, lo que dificulta el flujo de información, aumenta el riesgo de pérdida o deterioro de los documentos y retrasa la consulta del estado de una [orden de producción](#glosario-api). Además, este método representa una carga administrativa adicional, ya que la información debe revisarse y organizarse manualmente, limitando la [trazabilidad](#glosario-api-t) y el control oportuno de los procesos.
 
-## Propuesta de solución
+### Propuesta de solución
 
 Como solución a esta problemática, se propone el desarrollo de un gestor de procesos de producción, cuyo objetivo principal será digitalizar las hojas de seguimiento de las órdenes de producción y centralizar toda la información en una única plataforma.
 
@@ -31,12 +33,12 @@ Con la implementación de esta solución se espera mejorar la [trazabilidad](#gl
 <img width="1132" height="352" alt="DcontextoP2 drawio" src="https://github.com/user-attachments/assets/aa88f43e-2824-4a32-a1b1-6dc531f3101a" />
 
 
-## Descripción textual de la interacción de los usuarios con el sistema
+## Descripción del proceso de interacción 
 
 El sistema [Software Polygon](#glosario-api-sp) tiene como objetivo digitalizar el proceso de producción de Sumicolor, reemplazando los formatos físicos
 por [registros](#glosario-api) electrónicos realizados desde [computadores](#glosario-api) y [tabletas](#glosario-api-ta) ubicados en cada una de las bases de producción. Cada orden de producción (OP) avanza de manera secuencial entre las diferentes etapas del proceso. El sistema valida que la información requerida en una base haya sido diligenciada completamente antes de permitir que la orden continúe hacia la siguiente etapa, garantizando la [trazabilidad](#glosario-api-t) y evitando omisiones de información.
 
-## **Administrador del sistema**
+### **Administrador del sistema**
 
 El administrador es el [usuario](#glosario-api) encargado de la configuración y
 mantenimiento del sistema. Sus principales funciones son:
@@ -56,7 +58,7 @@ El administrador no participa directamente en el [proceso productivo](#glosario-
 sino que garantiza que el sistema se adapte a las necesidades de la
 empresa.
 
-##  **Personal de Planeación**
+###  **Personal de Planeación**
 
 El proceso inicia en el [módulo](#glosario-api) de [Planeación](#glosario-api).
 
@@ -78,7 +80,7 @@ Producción, como:
 Una vez todos los [campos](#glosario-api) obligatorios estén diligenciados, el sistema
 habilita automáticamente el siguiente [módulo](#glosario-api) ([Picky](#glosario-api)).
 
-##  **Personal de Picky**
+###  **Personal de Picky**
 
 El personal encargado del área de [Picky](#glosario-api) consulta las órdenes pendientes
 y registra la preparación o entrega de las materias primas necesarias
@@ -87,7 +89,7 @@ para la producción.
 Después de completar la información requerida, el sistema permite que la
 orden avance al [módulo](#glosario-api) de [Pesaje](#glosario-api).
 
-##  **Personal de Pesaje**
+###  **Personal de Pesaje**
 
 El [operario](#glosario-api) de [pesaje](#glosario-api) registra la información correspondiente al [pesaje](#glosario-api)
 de las materias primas utilizadas para la [orden de producción](#glosario-api).
@@ -98,7 +100,7 @@ permitirá avanzar la orden hacia la siguiente etapa.
 Al finalizar correctamente el [registro](#glosario-api), la orden pasa al [módulo](#glosario-api) de
 Mezcla.
 
-##  **Personal de Mezcla**
+###  **Personal de Mezcla**
 
 El [operario](#glosario-api) de mezcla consulta la orden y registra la información
 correspondiente al proceso de mezclado de materiales.
@@ -106,7 +108,7 @@ correspondiente al proceso de mezclado de materiales.
 Una vez finalizado el [registro](#glosario-api) y validados los datos, el sistema
 habilita el [módulo](#glosario-api) de [extrusión](#glosario-api).
 
-##  **Personal de Extrusión**
+###  **Personal de Extrusión**
 
 El personal de [extrusión](#glosario-api) registra la información del proceso de
 [extrusión](#glosario-api) del material.
@@ -114,7 +116,7 @@ El personal de [extrusión](#glosario-api) registra la información del proceso 
 El sistema verifica que todos los datos requeridos hayan sido
 diligenciados antes de permitir el paso al área de Calidad.
 
-##  **Personal de Calidad**
+###  **Personal de Calidad**
 
 El área de calidad realiza las inspecciones correspondientes y registra
 los resultados obtenidos durante el proceso.
@@ -126,7 +128,7 @@ Por otro lado, si la orden no pasa calidad, se habilitaria un subproceso
 donde se determina en que base fallo y dependendiendo el fallo se manda
 a tamizaje, saranda, homogenizado, secado o molino
 
-##  **Personal de Empaque**
+###  **Personal de Empaque**
 
 El [operario](#glosario-api) de empaque registra la información relacionada con el
 embalaje y finalización del producto.
@@ -134,7 +136,7 @@ embalaje y finalización del producto.
 Una vez completado el [registro](#glosario-api), la orden queda lista para ser enviada al
 [módulo](#glosario-api) [Espacio Cliente](#glosario-api).
 
-##  **Espacio Cliente**
+###  **Espacio Cliente**
 
 En este [módulo](#glosario-api) se registra la información final relacionada con la
 entrega del producto al cliente o la finalización del proceso
@@ -174,11 +176,11 @@ en cada una de ellas.
 | <a id="glosario-api"></a>**Usuario** | Persona autorizada para acceder al sistema según el rol asignado. |
 | <a id="glosario-api-m"></a>**MASTERBATCH** | Es una mezcla concentrada de pigmentos, colorantes o aditivos funcionales dispersos en una resina polimérica portadora (carrier), presentada en forma de gránulos sólidos. |
 
-# Seccion 2.
+# Sección 2. Determinación de necesidades 
 
-# Elicitación de Requerimientos
+## Elicitación de Requerimientos
 
-## Objetivo
+### Objetivo
 
 Identificar las necesidades de la empresa Sumicolor para desarrollar el
 software **Polygon**, el cual busca digitalizar el proceso de
@@ -186,9 +188,9 @@ producción, reemplazando los formatos físicos por [registros](#glosario-api) d
 desde [computadores](#glosario-api) y [tabletas](#glosario-api-ta), mejorando la [trazabilidad](#glosario-api-t) y el
 seguimiento de las órdenes de producción.
 
-# Técnicas utilizadas
+### Técnicas utilizadas
 
-## 1. Entrevista semiestructurada
+#### 1. Entrevista semiestructurada
 
 **Descripción**
 
@@ -218,7 +220,7 @@ productivo.
 -   Cada orden debe avanzar únicamente cuando la etapa anterior haya
     sido completada.
 
-## 2. Revisión documental
+#### 2. Revisión documental
 
 **Descripción**
 
@@ -250,7 +252,8 @@ Se identificaron:
 
 -   Resultados de calidad
 
- 
+#### 3. ¿QUIENES PARTICIPARON Y CUAL FUE SU ROL?
+
 | Participante | Rol |
 |---|---|
 | Equipo de Proyecto 2 | Analistas de requerimientos y encargados de recopilar la información necesaria para el desarrollo del sistema. |
@@ -259,15 +262,15 @@ Se identificaron:
 | Equipo de TI de Sumicolor | Explicó la infraestructura tecnológica actual de la empresa, los sistemas existentes (como [SQL Servers](#glosario-api-sql), Visual Control y Excel), y brindó orientación sobre la viabilidad técnica e integración del [Software Polygon](#glosario-api-sp) con los recursos tecnológicos disponibles. |
 
 
-## Fecha de realización
+#### 4. FECHA DE REALIZACIÓN
 
 **Fecha:** Viernes 24 de julio de 2026 2:30 pm*.*
 
-**Lugar:** Instalaciones de Sumicolor.
+**Lugar:** Instalaciones de SUMICOLOR S.A.
 
 
 
-## Principales requerimientos funcionales identificados
+#### 5. Principales requerimientos funcionales identificados
 
 | Código | Requerimiento |
 |--------|----------------|
@@ -281,17 +284,45 @@ Se identificaron:
 | RF-08 | El sistema debe almacenar toda la información en una base de datos [SQL Servers](#glosario-api-sql). |
 | RF-09 | El sistema debe permitir el acceso desde [tabletas](#glosario-api-ta) y [computadores](#glosario-api). |
 
-### EVIDENCIAS
+####  6. EVIDENCIAS
 
-####  Reunión Presencial
+#####  Reunión Presencial
 <img width="738" height="1600" alt="WhatsApp Image 2026-08-02 at 2 54 37 PM" src="https://github.com/user-attachments/assets/e7f66efe-1018-4f0a-97d0-8331fafdb1b3" />
 
-#### Grupo de Teams con la empresa SUMICOLOR S.A
+<img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/2499dee7-aba5-496a-ad08-7f2a1367f350" />
+
+##### Grupo de Teams con la empresa SUMICOLOR S.A
 <img width="1918" height="918" alt="image" src="https://github.com/user-attachments/assets/7fe3a7ac-732d-45f4-9ca8-cf8a4c915b58" />
 
-#### Stikers utilizados en producción para marcar las ordenes
+##### Stikers utilizados en producción para marcar las ordenes
 
 <img width="1179" height="1110" alt="image" src="https://github.com/user-attachments/assets/76494b94-2fec-44f1-9c5f-c2c858de9cc7" />
+
+##### Técnica de Planificación Planning Poker
+
+##### Evaluación de la HU-12 Consultar Órdenes de Producción 
+
+<img width="1600" height="727" alt="image" src="https://github.com/user-attachments/assets/169d87da-45da-45ac-8d77-630495030ed9" />
+
+##### Resultado de la HU-12 Consultar Órdenes de Producción
+
+<img width="1600" height="724" alt="image" src="https://github.com/user-attachments/assets/169279d2-ad83-4e8e-b0d3-f74d76bf2b39" />
+
+##### Evaluación de la HU-13 Liberar Orden de Producción a Picky  
+
+<img width="1600" height="721" alt="image" src="https://github.com/user-attachments/assets/122a7a75-b9ad-496e-b6f0-64ad94dc35ee" />
+
+##### Resultado de la HU-13 Liberar Orden de Producción a Picky
+
+<img width="1600" height="724" alt="image" src="https://github.com/user-attachments/assets/24e9ec31-fb5f-4dc5-9f32-4794028cf9bb" />
+
+##### Evaluación de la HU-14 Cancelar Orden de Producción   
+
+<img width="1600" height="722" alt="image" src="https://github.com/user-attachments/assets/3b0e786f-b751-4e47-9b80-c76d6440290b" />
+
+##### Resultado de la HU-14 Cancelar Orden de Producción 
+
+<img width="1600" height="721" alt="image" src="https://github.com/user-attachments/assets/611a78d9-ba77-4180-9999-151c9009f12b" />
 
 ### Análisis de la competencia
 
