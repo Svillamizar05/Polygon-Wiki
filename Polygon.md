@@ -11,4 +11,4 @@ Bienvenidos al proyecto polygon que sera un gestor de procesos de produccion
 
 ## Grabación Reuniones
 
-[Recordings] (https://eafit.sharepoint.com/:f:/s/Proyecto2simicolor/IgBVZZxWsEhaSJTY1lQek6B8AXof7VRjQ-zI1UuzZ8K5AOQ?e=3Fc8ST)
+[Recordings](https://eafit.sharepoint.com/:f:/s/Proyecto2simicolor/IgBVZZxWsEhaSJTY1lQek6B8AXof7VRjQ-zI1UuzZ8K5AOQ?e=3Fc8ST)
