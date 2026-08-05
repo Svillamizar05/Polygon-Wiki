@@ -22,6 +22,32 @@ El sistema estará diseñado para funcionar tanto en [tabletas](#glosario-api-ta
 
 Con la implementación de esta solución se espera mejorar la [trazabilidad](#glosario-api-t) de las órdenes de producción, optimizar el flujo de información entre las diferentes áreas, reducir el uso de papel, disminuir los errores asociados al manejo manual de documentos y proporcionar a la administración un seguimiento en tiempo real del estado de cada proceso productivo.
 
+## **Alcance**
+La solución propuesta consiste en el desarrollo de una plataforma web configurable para la gestión y digitalización de procesos productivos, capaz de adaptarse a distintos tipos de industrias mediante la definición de flujos de trabajo representados como grafos. La plataforma permitirá modelar procesos a través de etapas interconectadas, configurar formularios dinámicos para cada etapa, gestionar órdenes de trabajo, gestionar usuarios y roles, visualizar el estado de cada orden, mantener trazabilidad del proceso, generar reportes, administrar catálogos de datos, integrarse con sistemas externos y ofrecer herramientas de configuración que permitan adaptar el flujo productivo sin necesidad de realizar modificaciones al código fuente. La arquitectura de la solución estará orientada a la escalabilidad y extensibilidad, permitiendo incorporar nuevas funcionalidades y módulos de manera progresiva conforme evolucionen las necesidades de las organizaciones que la utilicen.
+
+El MVP contempla únicamente el desarrollo del motor de flujos de trabajo, compuesto por la creación de procesos mediante nodos y conexiones, la configuración de formularios por etapa y la ejecución de órdenes que recorren el flujo definido. Esta versión permitirá validar la arquitectura propuesta y el funcionamiento del núcleo de la plataforma, dejando las funcionalidades complementarias para futuras iteraciones sin comprometer la escalabilidad del sistema.
+
+## **Componentes de la solución**
+### **Cliente web**
+Interfaz gráfica utilizada por administradores y operadores. Permite construir flujos de trabajo, diligenciar formularios y gestionar órdenes de producción mediante una SPA. Se construye utilizando Vue 3, Vite y Tailwind CSS.
+### **API REST**
+Expone los servicios necesarios para la comunicación entre el cliente y la base de datos, implementando la lógica de negocio, autenticación y validación de las operaciones del sistema. Se construye utilizando Django.
+### **Motor de flujos de trabajo**
+Subsistema encargado de administrar los procesos definidos como grafos, validando las transiciones entre etapas y controlando el avance de las órdenes dentro del flujo. Django.
+### **Motor de formularios dinámicos**
+Administra la definición, almacenamiento y renderizado de formularios configurables asociados a cada etapa del proceso. DJango y PostgreSQL
+### **Gestión de órdenes**
+Administra el ciclo de vida de las órdenes de trabajo, su estado actual, historial de etapas y la información diligenciada durante el proceso. DJango y PostgreSQL.
+### **Autenticación y gestión de usuarios**
+Controla el acceso a la plataforma mediante autenticación y asignación de roles (Administrador y Operador para el MVP). JWT y DJango.
+### **Base de datos**
+Almacena toda la información del sistema: procesos, nodos, conexiones, formularios, usuarios, órdenes y registros del flujo de trabajo. PostgreSQL.
+### **Persistencia**
+Capa encargada de mapear las entidades del sistema a la base de datos y facilitar las operaciones CRUD. Prisma ORM.
+
+## **Diagrama de componentes**
+
+
 ## **Personas y roles del proyecto**
 
   
