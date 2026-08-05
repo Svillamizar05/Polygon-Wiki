@@ -54,7 +54,7 @@ productivo.
 <img width="1132" height="352" alt="DcontextoP2 drawio" src="https://github.com/user-attachments/assets/aa88f43e-2824-4a32-a1b1-6dc531f3101a" />
 
 
-## Descripción textual de la interacción de los [usuarios](#glosario-api) con el sistema
+## Descripción textual de la interacción de los usuarios con el sistema
 
 El sistema **Software Polygon** tiene como objetivo digitalizar el
 proceso de producción de Sumicolor, reemplazando los formatos físicos
@@ -68,7 +68,7 @@ evitando omisiones de información.
 
 ## **Administrador del sistema**
 
-El administrador es el usuario encargado de la configuración y
+El administrador es el [usuario](#glosario-api) encargado de la configuración y
 mantenimiento del sistema. Sus principales funciones son:
 
 -   Crear, modificar o desactivar módulos (bases de producción).
@@ -76,7 +76,7 @@ mantenimiento del sistema. Sus principales funciones son:
 -   Agregar, editar o eliminar campos de los formularios de cada módulo
     cuando sea necesario.
 
--   Administrar usuarios, roles y permisos.
+-   Administrar [usuarios](#glosario-api), roles y permisos.
 
 -   Configurar parámetros generales del sistema.
 
@@ -307,7 +307,7 @@ Se identificaron:
 | RF-04 | El sistema debe permitir consultar el historial completo de una orden. |
 | RF-05 | El administrador podrá crear, modificar o eliminar módulos del sistema. |
 | RF-06 | El administrador podrá agregar, editar o eliminar campos dentro de cada módulo. |
-| RF-07 | El sistema debe administrar usuarios y roles. |
+| RF-07 | El sistema debe administrar [usuarios](#glosario-api) y roles. |
 | RF-08 | El sistema debe almacenar toda la información en una base de datos SQL Server. |
 | RF-09 | El sistema debe permitir el acceso desde tablets y computadores. |
 
@@ -328,8 +328,8 @@ implementarán en **Software Polygon**.
  | Aplicación | Empresa | Costo | Diferencia con Software Polygon |
 |---|---|---|---|
 | **Tulip** | [Tulip Interfaces Inc.](https://tulip.co/plans/?utm_source=chatgpt.com) | Desde **USD 100 por interfaz/mes** (plan Essentials, mínimo 10 interfaces). ([Tulip](https://tulip.co/plans/?utm_source=chatgpt.com)) | Tulip es una plataforma muy completa para la digitalización industrial, pero está diseñada para múltiples industrias y suele requerir una inversión considerable. **Software Polygon** estará desarrollado específicamente para el proceso productivo de Sumicolor, adaptándose exactamente al flujo de Planeación → Picky → Pesaje → Mezcla → Extrusión → Calidad → Empaque → Espacio Cliente, sin funcionalidades innecesarias. |
-| **Odoo Manufacturing (MRP)** | [Odoo S.A.](https://www.odoo.com/es/pricing?utm_source=chatgpt.com) | Desde **USD 24,90 por usuario/mes** (plan Estándar). (Odoo) | Odoo es un ERP completo que incluye contabilidad, ventas, inventario, CRM y muchos otros módulos. La propuesta de **Software Polygon** se enfoca exclusivamente en la gestión de órdenes de producción de Sumicolor, ofreciendo una solución más sencilla, personalizada y fácil de implementar para la empresa. |
-| **Prodsmart** | [Prodsmart (Autodesk)](https://www.prodsmart.com/?utm_source=chatgpt.com) | Precio bajo cotización; estimaciones del mercado indican aproximadamente **USD 45–165 por usuario/mes**, dependiendo del plan y número de usuarios. (VendorBenchmark) | Prodsmart permite controlar la producción en tiempo real y recopilar datos de planta. Sin embargo, es una solución comercial orientada a diferentes tipos de fabricantes. **Software Polygon** incorpora reglas específicas del proceso de Sumicolor, como impedir que una orden avance a la siguiente base hasta que la información de la etapa actual haya sido diligenciada completamente. |
+| **Odoo Manufacturing (MRP)** | [Odoo S.A.](https://www.odoo.com/es/pricing?utm_source=chatgpt.com) | Desde **USD 24,90 por [usuario](#glosario-api)/mes** (plan Estándar). (Odoo) | Odoo es un ERP completo que incluye contabilidad, ventas, inventario, CRM y muchos otros módulos. La propuesta de **Software Polygon** se enfoca exclusivamente en la gestión de órdenes de producción de Sumicolor, ofreciendo una solución más sencilla, personalizada y fácil de implementar para la empresa. |
+| **Prodsmart** | [Prodsmart (Autodesk)](https://www.prodsmart.com/?utm_source=chatgpt.com) | Precio bajo cotización; estimaciones del mercado indican aproximadamente **USD 45–165 por [usuario](#glosario-api)/mes**, dependiendo del plan y número de [usuarios](#glosario-api). (VendorBenchmark) | Prodsmart permite controlar la producción en tiempo real y recopilar datos de planta. Sin embargo, es una solución comercial orientada a diferentes tipos de fabricantes. **Software Polygon** incorpora reglas específicas del proceso de Sumicolor, como impedir que una orden avance a la siguiente base hasta que la información de la etapa actual haya sido diligenciada completamente. |
 
 # Seccion 3.
 ## Story Mapping
