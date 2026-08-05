@@ -46,7 +46,8 @@ Almacena toda la información del sistema: procesos, nodos, conexiones, formular
 Capa encargada de mapear las entidades del sistema a la base de datos y facilitar las operaciones CRUD. Prisma ORM.
 
 ## **Diagrama de componentes**
-<img width="975" height="380" alt="image" src="https://github.com/user-attachments/assets/f3d2a937-8459-4859-a346-aa985226946b" />
+<img width="1486" height="520" alt="image" src="https://github.com/user-attachments/assets/21f998ed-82cb-45e4-839b-acfbff8acbfe" />
+
 
 ## **Personas y roles del proyecto**
 
