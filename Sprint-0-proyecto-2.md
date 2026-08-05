@@ -316,14 +316,6 @@ Se identificaron:
 #####  Reunión Presencial
 <img width="738" height="1600" alt="WhatsApp Image 2026-08-02 at 2 54 37 PM" src="https://github.com/user-attachments/assets/e7f66efe-1018-4f0a-97d0-8331fafdb1b3" />
 
-<img width="960" height="1280" alt="image" src="https://github.com/user-attachments/assets/2499dee7-aba5-496a-ad08-7f2a1367f350" />
-
-##### Grupo de Teams con la empresa SUMICOLOR S.A
-<img width="1918" height="918" alt="image" src="https://github.com/user-attachments/assets/7fe3a7ac-732d-45f4-9ca8-cf8a4c915b58" />
-
-##### Stikers utilizados en producción para marcar las ordenes
-
-<img width="1179" height="1110" alt="image" src="https://github.com/user-attachments/assets/76494b94-2fec-44f1-9c5f-c2c858de9cc7" />
 
 ##### Técnica de Planificación Planning Poker
 
