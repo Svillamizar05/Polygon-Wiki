@@ -340,3 +340,5 @@ https://github.com/users/SimonCastroV/projects/10
 
 ## Sprint 1 Planning 
 <img width="1505" height="688" alt="image" src="https://github.com/user-attachments/assets/0342f992-c01e-4089-b5d3-00c955e0de5d" />
+
+
