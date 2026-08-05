@@ -4,14 +4,7 @@
 
 ## Descripción de la empresa
 
-Sumicolor es una empresa reconocida por la fabricación de [MASTERBATCH](#glosario-api) (concentrados de color) para la industria plástica.
-Cuenta con una amplia experiencia en el desarrollo de colores estándar,
-especiales y de efectos, trabajando con diferentes polímeros base y
-materiales de ingeniería. Entre los materiales que procesa se encuentran
-polietileno (PE), polipropileno (PP), poliestireno (PS), PET, EVA,
-poliamidas (PA), ABS y POM, entre otros. Sus productos están dirigidos a
-diversos procesos de transformación de termoplásticos, como inyección,
-soplado, extrusión y rotomoldeo.
+Sumicolor es una empresa reconocida por la fabricación de [MASTERBATCH](#glosario-api) (concentrados de color) para la industria plástica. Cuenta con una amplia experiencia en el desarrollo de colores estándar, especiales y de efectos, trabajando con diferentes polímeros base y materiales de ingeniería. Entre los materiales que procesa se encuentran polietileno (PE), polipropileno (PP), poliestireno (PS), PET, EVA, poliamidas (PA), ABS y POM, entre otros. Sus productos están dirigidos a diversos procesos de transformación de termoplásticos, como inyección, soplado, extrusión y rotomoldeo.
 
 ## Planteamiento del problema
 
@@ -61,7 +54,7 @@ productivo.
 <img width="1132" height="352" alt="DcontextoP2 drawio" src="https://github.com/user-attachments/assets/aa88f43e-2824-4a32-a1b1-6dc531f3101a" />
 
 
-## Descripción textual de la interacción de los usuarios con el sistema
+## Descripción textual de la interacción de los [usuarios](#glosario-api) con el sistema
 
 El sistema **Software Polygon** tiene como objetivo digitalizar el
 proceso de producción de Sumicolor, reemplazando los formatos físicos
@@ -208,7 +201,7 @@ en cada una de ellas.
 | **SQL Server** | Sistema de gestión de bases de datos donde se almacena toda la información registrada en Software Polygon. |
 | **Tablet** | Dispositivo móvil utilizado por los operarios para registrar información directamente desde cada base de producción. |
 | **Trazabilidad** | Capacidad del sistema para registrar y consultar el historial completo de una orden de producción durante todas sus etapas. |
-| **Usuario** | Persona autorizada para acceder al sistema según el rol asignado. |
+| <a id="glosario-api"></a>**Usuario** | Persona autorizada para acceder al sistema según el rol asignado. |
 | <a id="glosario-api"></a>**MASTERBATCH** | Es una mezcla concentrada de pigmentos, colorantes o aditivos funcionales dispersos en una resina polimérica portadora (carrier), presentada en forma de gránulos sólidos. |
 
 # Seccion 2.
