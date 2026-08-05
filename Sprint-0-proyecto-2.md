@@ -726,17 +726,13 @@ flowchart LR
     Catalogos --> BD
 ```
 
-<html>
-<body>
-<!--StartFragment-->
-Integrantes | foto | correo | Rol
--- | -- | -- | --
-Simon Castro Valencia |   | Secastrov@eafit.edu.co | Scrum master-tester
-Samuel Herrera |   | Sherrerag3@eafit.edu.co | Desarrollador
-Michael Agudelo |   | Maagudeloo@eafit.edu.co | Arquitecto
-Santiago Villamizar |   | Svillamiza@eafit.edu.co | Desarrollador
-Alejandro Jaramillo |   | Ajaramillr@eafit.edu.co | UX
 
-<!--EndFragment-->
-</body>
-</html>
+
+
+| Integrante | Foto | Correo | Rol |
+| -- | -- | -- | -- |
+| Simón Castro Valencia |   | secastrov@eafit.edu.co | Scrum master-tester |
+| Samuel Herrera Galvis |   | sherrerag3@eafit.edu.co | Desarrollador |
+| Michael Andrey Agudelo Ortiz |   | maagudeloo@eafit.edu.co | Arquitecto |
+| Santiago Villamizar |   | svillamiza@eafit.edu.co | Desarrollador |
+| Alejandro Jaramillo Rodríguez |   | ajaramillr@eafit.edu.co | UX |
