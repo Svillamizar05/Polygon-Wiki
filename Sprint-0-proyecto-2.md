@@ -1,6 +1,6 @@
-#   DEFINICION DEL PRODUCTO
+# DEFINICION DEL PRODUCTO
 
-#  SECCION 1.
+# SECCIÓN 1.
 
 ## Descripción de la empresa
 
@@ -8,40 +8,17 @@ Sumicolor es una empresa reconocida por la fabricación de [MASTERBATCH](#glosar
 
 ## Planteamiento del problema
 
-Actualmente, Sumicolor realiza el seguimiento de sus órdenes de
-producción mediante hojas físicas que acompañan cada lote durante todo
-el proceso de fabricación. Estas hojas contienen la información y las
-actividades que deben ejecutar los diferentes [operarios](#glosario-api) en cada etapa
-del [proceso productivo](#glosario-api).
+Actualmente, Sumicolor realiza el seguimiento de sus órdenes de producción mediante hojas físicas que acompañan cada lote durante todo el proceso de fabricación. Estas hojas contienen la información y las actividades que deben ejecutar los diferentes [operarios](#glosario-api) en cada etapa del [proceso productivo](#glosario-api).
 
-Al tratarse de documentación en papel, las hojas deben ser trasladadas
-manualmente de un operador a otro, lo que dificulta el flujo de
-información, aumenta el riesgo de pérdida o deterioro de los documentos
-y retrasa la consulta del estado de una [orden de producción](#glosario-api). Además,
-este método representa una carga administrativa adicional, ya que la
-información debe revisarse y organizarse manualmente, limitando la
-[trazabilidad](#glosario-api-t) y el control oportuno de los procesos.
+Al tratarse de documentación en papel, las hojas deben ser trasladadas manualmente de un operador a otro, lo que dificulta el flujo de información, aumenta el riesgo de pérdida o deterioro de los documentos y retrasa la consulta del estado de una [orden de producción](#glosario-api). Además, este método representa una carga administrativa adicional, ya que la información debe revisarse y organizarse manualmente, limitando la [trazabilidad](#glosario-api-t) y el control oportuno de los procesos.
 
 ## Propuesta de solución
 
-Como solución a esta problemática, se propone el desarrollo de un gestor
-de procesos de producción, cuyo objetivo principal será digitalizar las
-hojas de seguimiento de las órdenes de producción y centralizar toda la
-información en una única plataforma.
+Como solución a esta problemática, se propone el desarrollo de un gestor de procesos de producción, cuyo objetivo principal será digitalizar las hojas de seguimiento de las órdenes de producción y centralizar toda la información en una única plataforma.
 
-El sistema estará diseñado para funcionar tanto en [tabletas](#glosario-api-ta) como en
-[computadores](#glosario-api), permitiendo que cada [operario](#glosario-api) registre el avance de las
-actividades correspondientes a su proceso de forma rápida y sencilla.
-Asimismo, el software contará con una interfaz intuitiva y fácil de
-utilizar, adaptada a las necesidades de los trabajadores de planta,
-minimizando la curva de aprendizaje y facilitando su adopción.
+El sistema estará diseñado para funcionar tanto en [tabletas](#glosario-api-ta) como en [computadores](#glosario-api), permitiendo que cada [operario](#glosario-api) registre el avance de las actividades correspondientes a su proceso de forma rápida y sencilla. Asimismo, el software contará con una interfaz intuitiva y fácil de utilizar, adaptada a las necesidades de los trabajadores de planta, minimizando la curva de aprendizaje y facilitando su adopción.
 
-Con la implementación de esta solución se espera mejorar la [trazabilidad](#glosario-api-t)
-de las órdenes de producción, optimizar el flujo de información entre
-las diferentes áreas, reducir el uso de papel, disminuir los errores
-asociados al manejo manual de documentos y proporcionar a la
-administración un seguimiento en tiempo real del estado de cada proceso
-productivo.
+Con la implementación de esta solución se espera mejorar la [trazabilidad](#glosario-api-t) de las órdenes de producción, optimizar el flujo de información entre las diferentes áreas, reducir el uso de papel, disminuir los errores asociados al manejo manual de documentos y proporcionar a la administración un seguimiento en tiempo real del estado de cada proceso productivo.
 
 ## **Personas y roles del proyecto**
 
@@ -56,15 +33,8 @@ productivo.
 
 ## Descripción textual de la interacción de los usuarios con el sistema
 
-El sistema [Software Polygon](#glosario-api-sp) tiene como objetivo digitalizar el
-proceso de producción de Sumicolor, reemplazando los formatos físicos
-por [registros](#glosario-api) electrónicos realizados desde [computadores](#glosario-api) y [tabletas](#glosario-api-ta)
-ubicados en cada una de las bases de producción. Cada orden de
-producción (OP) avanza de manera secuencial entre las diferentes etapas
-del proceso. El sistema valida que la información requerida en una base
-haya sido diligenciada completamente antes de permitir que la orden
-continúe hacia la siguiente etapa, garantizando la [trazabilidad](#glosario-api-t) y
-evitando omisiones de información.
+El sistema [Software Polygon](#glosario-api-sp) tiene como objetivo digitalizar el proceso de producción de Sumicolor, reemplazando los formatos físicos
+por [registros](#glosario-api) electrónicos realizados desde [computadores](#glosario-api) y [tabletas](#glosario-api-ta) ubicados en cada una de las bases de producción. Cada orden de producción (OP) avanza de manera secuencial entre las diferentes etapas del proceso. El sistema valida que la información requerida en una base haya sido diligenciada completamente antes de permitir que la orden continúe hacia la siguiente etapa, garantizando la [trazabilidad](#glosario-api-t) y evitando omisiones de información.
 
 ## **Administrador del sistema**
 
@@ -319,10 +289,13 @@ Se identificaron:
 #### Grupo de Teams con la empresa SUMICOLOR S.A
 <img width="1918" height="918" alt="image" src="https://github.com/user-attachments/assets/7fe3a7ac-732d-45f4-9ca8-cf8a4c915b58" />
 
+#### Stikers utilizados en producción para marcar las ordenes
+
+<img width="1179" height="1110" alt="image" src="https://github.com/user-attachments/assets/76494b94-2fec-44f1-9c5f-c2c858de9cc7" />
 
 ### Análisis de la competencia
 
-## Aplicaciones similares
+#### Aplicaciones similares
 
 Durante el análisis del mercado se identificaron diferentes soluciones
 de tipo **MES (Manufacturing Execution System)** y **ERP con [módulos](#glosario-api) de
