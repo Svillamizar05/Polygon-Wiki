@@ -296,24 +296,24 @@ Se identificaron:
 <img width="738" height="1600" alt="WhatsApp Image 2026-08-02 at 2 54 37 PM" src="https://github.com/user-attachments/assets/e7f66efe-1018-4f0a-97d0-8331fafdb1b3" />
 
 
-###### Técnica de Planificación Planning Poker
+##### Técnica de Planificación Planning Poker
 
-###### Evaluación de la HU-12 Consultar Órdenes de Producción 
+##### Evaluación de la HU-12 Consultar Órdenes de Producción 
 <img width="1600" height="727" alt="image" src="https://github.com/user-attachments/assets/169d87da-45da-45ac-8d77-630495030ed9" />
 
-###### Resultado de la HU-12 Consultar Órdenes de Producción
+##### Resultado de la HU-12 Consultar Órdenes de Producción
 <img width="1600" height="724" alt="image" src="https://github.com/user-attachments/assets/169279d2-ad83-4e8e-b0d3-f74d76bf2b39" />
 
-###### Evaluación de la HU-13 Liberar Orden de Producción a Picky  
+##### Evaluación de la HU-13 Liberar Orden de Producción a Picky  
 <img width="1600" height="721" alt="image" src="https://github.com/user-attachments/assets/122a7a75-b9ad-496e-b6f0-64ad94dc35ee" />
 
-###### Resultado de la HU-13 Liberar Orden de Producción a Picky
+##### Resultado de la HU-13 Liberar Orden de Producción a Picky
 <img width="1600" height="724" alt="image" src="https://github.com/user-attachments/assets/24e9ec31-fb5f-4dc5-9f32-4794028cf9bb" />
 
-###### Evaluación de la HU-14 Cancelar Orden de Producción   
+##### Evaluación de la HU-14 Cancelar Orden de Producción   
 <img width="1600" height="722" alt="image" src="https://github.com/user-attachments/assets/3b0e786f-b751-4e47-9b80-c76d6440290b" />
 
-###### Resultado de la HU-14 Cancelar Orden de Producción 
+##### Resultado de la HU-14 Cancelar Orden de Producción 
 <img width="1600" height="721" alt="image" src="https://github.com/user-attachments/assets/611a78d9-ba77-4180-9999-151c9009f12b" />
 
 ### Análisis de la competencia
