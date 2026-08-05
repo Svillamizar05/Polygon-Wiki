@@ -795,5 +795,3 @@ Se realizó una sesión de validación del prototipo con el Product Owner de Sum
 #### Resultado de la validación
 
 Durante la sesión, el Product Owner manifestó su conformidad con el diseño propuesto, destacando la simplicidad de la interfaz, la facilidad para identificar el estado de las órdenes de producción y la organización de la información. Asimismo, confirmó que el flujo planteado representa adecuadamente el proceso actual de la empresa y consideró que el prototipo cumple con las expectativas iniciales del proyecto.
-
-Como resultado de esta validación, el mockup fue aceptado por el usuario, autorizando al equipo a continuar con el desarrollo del MVP tomando como base el diseño presentado.
