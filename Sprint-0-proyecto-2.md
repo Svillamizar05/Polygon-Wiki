@@ -753,6 +753,22 @@ flowchart LR
     Catalogos --> BD
 ```
 
+#### Justificación del diseño propuesto
+
+La arquitectura propuesta sigue un modelo cliente-servidor, compuesto por una aplicación web (SPA), una API REST, varios componentes especializados de lógica de negocio y una base de datos centralizada. Este diseño fue seleccionado por su modularidad, facilidad de mantenimiento y capacidad de crecimiento, características fundamentales para un sistema que busca digitalizar el proceso productivo de Sumicolor y que, en el futuro, pueda adaptarse a otros procesos industriales.
+
+El Frontend, desarrollado como una Single Page Application (SPA), proporciona una interfaz rápida e intuitiva para los usuarios finales. Esta decisión permite reducir los tiempos de carga y ofrecer una experiencia de uso sencilla, aspecto especialmente importante debido a que los principales usuarios del sistema serán operarios de planta con distintos niveles de experiencia tecnológica. Asimismo, el uso de Vue 3 y Tailwind CSS facilita el desarrollo de interfaces responsivas, compatibles con computadores y tabletas, favoreciendo la accesibilidad y la usabilidad del sistema.
+
+La API REST actúa como punto central de comunicación entre el cliente y la lógica de negocio. Esta separación entre presentación y procesamiento permite desacoplar ambos componentes, facilitando el mantenimiento, la incorporación de nuevas funcionalidades y la reutilización de los servicios por otros clientes o aplicaciones en el futuro.
+
+La lógica del negocio se encuentra dividida en componentes especializados, cada uno con responsabilidades claramente definidas. El Motor de Flujos de Trabajo administra la secuencia de etapas del proceso productivo y valida que una Orden de Producción únicamente pueda avanzar cuando la etapa anterior haya sido completada correctamente. El Motor de Formularios permite gestionar formularios dinámicos asociados a cada etapa del proceso, haciendo posible adaptar el sistema a cambios futuros sin modificar la estructura principal de la aplicación. Por su parte, el componente de Gestión de Órdenes controla el ciclo de vida de las Órdenes de Producción y mantiene su trazabilidad, mientras que Autenticación y Usuarios garantiza el acceso seguro mediante roles y permisos. Finalmente, el componente de Catálogos centraliza la administración de información maestra, como productos, materias primas y demás datos de referencia utilizados durante la operación.
+
+Toda la información se almacena en una base de datos PostgreSQL, lo que garantiza consistencia, integridad y persistencia de los datos registrados durante el proceso productivo. Al centralizar la información en un único repositorio, el sistema facilita la consulta histórica de las órdenes, mejora la trazabilidad del proceso y reduce los riesgos asociados al manejo de documentación física.
+
+Esta arquitectura responde directamente a los principales requisitos no funcionales definidos para el proyecto. La separación por componentes favorece la mantenibilidad, al permitir realizar cambios en un módulo sin afectar los demás. La organización modular también mejora la escalabilidad, haciendo posible incorporar nuevas etapas del proceso, formularios o funcionalidades con un impacto mínimo sobre la arquitectura existente. El uso de autenticación basada en roles fortalece la seguridad, asegurando que cada usuario acceda únicamente a las funciones autorizadas. Finalmente, la comunicación mediante una SPA y una API REST contribuye a cumplir los requisitos de rendimiento, ofreciendo tiempos de respuesta bajos incluso cuando múltiples usuarios registren información simultáneamente desde diferentes estaciones de trabajo.
+
+En conjunto, esta solución arquitectónica proporciona una base sólida para el desarrollo del MVP de Polygon, permitiendo validar el funcionamiento del proceso de digitalización de órdenes de producción y ofreciendo una estructura preparada para evolucionar hacia una plataforma configurable para otros procesos industriales.
+
 # Diseño de Interfaces 
 
 ### Prototipo (Mockup interactivo)
