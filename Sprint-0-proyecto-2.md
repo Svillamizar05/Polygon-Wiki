@@ -610,6 +610,7 @@ Materias primas utilizadas durante la producción.
 
 ## Diagrama del dominio
 
+``` mermaid
 classDiagram
 
 class Usuario{
@@ -687,6 +688,8 @@ Registro --> ModuloProduccion : pertenece
 Registro --> Formulario : diligencia
 
 OrdenProduccion --> MateriaPrima : utiliza
+
+```
 
 ## **Componentes de la solución**
 ### **Cliente web**
