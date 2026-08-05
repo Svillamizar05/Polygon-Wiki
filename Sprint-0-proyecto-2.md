@@ -343,6 +343,8 @@ implementarán en [Software Polygon](#glosario-api-sp).
 
 https://miro.com/app/board/uXjVH1COXho=/?share_link_id=626833667391
 
+<img width="2287" height="682" alt="Polygon Story Map" src="https://github.com/user-attachments/assets/88eb4670-632e-4be1-9590-1059d6b22cce" />
+
 ### Backlog
 
 https://github.com/users/SimonCastroV/projects/10
