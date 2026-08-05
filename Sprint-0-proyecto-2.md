@@ -753,8 +753,14 @@ flowchart LR
     Catalogos --> BD
 ```
 
-### Mockup interactivo
+# Diseño de Interfaces 
+
+### Prototipo (Mockup interactivo)
 
 Puedes consultar el prototipo interactivo en el siguiente enlace:
 
 [Ver mockup en Figma](https://www.figma.com/make/HOK0PDMTdRvZvOTU1kFlLJ/Sistema-visual-para-aplicaci%C3%B3n?t=UrzVdbfKpVKqdFi1-1)
+
+### Prueba de prototipo
+
+
