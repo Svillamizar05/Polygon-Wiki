@@ -7,8 +7,8 @@ Bienvenidos al proyecto polygon que sera un gestor de procesos de produccion
 
 ## Acta Reunión Ceremonia 1
 
-https://eafit.sharepoint.com/:f:/s/Proyecto2simicolor/IgDnxzqFMMHRQpq15re-4Z21AQPSaKEZ9q2TOOrlo8BddT4?e=pLs9xC
+[Ceremonias](https://eafit.sharepoint.com/:f:/s/Proyecto2simicolor/IgDnxzqFMMHRQpq15re-4Z21AQPSaKEZ9q2TOOrlo8BddT4?e=pLs9xC)
 
 ## Grabación Reuniones
 
-https://eafit.sharepoint.com/:f:/s/Proyecto2simicolor/IgBVZZxWsEhaSJTY1lQek6B8AXof7VRjQ-zI1UuzZ8K5AOQ?e=3Fc8ST
+[Recordings] (https://eafit.sharepoint.com/:f:/s/Proyecto2simicolor/IgBVZZxWsEhaSJTY1lQek6B8AXof7VRjQ-zI1UuzZ8K5AOQ?e=3Fc8ST)
