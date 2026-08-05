@@ -312,10 +312,11 @@ Se identificaron:
 | RF-09 | El sistema debe permitir el acceso desde [tabletas](#glosario-api-ta) y [computadores](#glosario-api). |
 
 ### EVIDENCIAS
+
 ####  Reunión Presencial
 <img width="738" height="1600" alt="WhatsApp Image 2026-08-02 at 2 54 37 PM" src="https://github.com/user-attachments/assets/e7f66efe-1018-4f0a-97d0-8331fafdb1b3" />
 
-#### Grupo de teams 
+#### Grupo de Teams con la empresa SUMICOLOR S.A
 <img width="1918" height="918" alt="image" src="https://github.com/user-attachments/assets/7fe3a7ac-732d-45f4-9ca8-cf8a4c915b58" />
 
 
