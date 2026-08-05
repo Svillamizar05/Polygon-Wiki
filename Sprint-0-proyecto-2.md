@@ -346,6 +346,348 @@ La solución propuesta consiste en el desarrollo de una plataforma web configura
 
 El MVP contempla únicamente el desarrollo del motor de flujos de trabajo, compuesto por la creación de procesos mediante nodos y conexiones, la configuración de formularios por etapa y la ejecución de órdenes que recorren el flujo definido. Esta versión permitirá validar la arquitectura propuesta y el funcionamiento del núcleo de la plataforma, dejando las funcionalidades complementarias para futuras iteraciones sin comprometer la escalabilidad del sistema.
 
+## Dimensiones del sistema y requisitos no funcionales
+
+### Dimensiones del sistema
+
+Software Polygon será utilizado principalmente por el personal operativo y administrativo de Sumicolor para gestionar digitalmente las Órdenes de Producción (OP), reemplazando completamente el uso de formatos físicos durante el proceso productivo. El sistema deberá funcionar continuamente durante la jornada laboral y permitir que múltiples usuarios registren información simultáneamente desde diferentes estaciones de trabajo.
+
+### Cantidad estimada de usuarios
+
+<html>
+<body>
+<!--StartFragment--><html><head></head><body>
+Tipo de usuario | Cantidad aproximada
+-- | --
+Administradores | 2 - 5
+Planeación | 3 - 5
+Operarios de producción (Picky, Pesaje, Mezcla, Extrusión, Calidad, Empaque) | 30 - 50
+Supervisores / Consulta | 5 - 10
+
+</body></html><!--EndFragment-->
+</body>
+</html>
+
+Usuarios concurrentes esperados: 20–30 usuarios.
+
+### Órdenes de producción
+
+Se estima que diariamente el sistema administrará entre 300 y 600 Órdenes de Producción, dependiendo de la carga operativa de la planta.
+
+Cada orden recorrerá todas las etapas del proceso productivo, generando múltiples registros durante su ciclo de vida.
+
+### Volumen de información
+
+Cada Orden de Producción almacenará información correspondiente a:
+
+- Planeación
+- Picky
+- Pesaje
+- Mezcla
+- Extrusión
+- Calidad
+- Empaque
+- Espacio Cliente
+- Historial de cambios
+- Usuario responsable
+- Fechas y horas
+- Observaciones
+
+Se espera almacenar varios miles de registros históricos sin afectar el rendimiento del sistema.
+
+### Peticiones esperadas
+
+Debido a que el sistema será utilizado principalmente para diligenciar formularios y consultar órdenes:
+
+- Consultas por segundo: 5 – 10
+- Escrituras por segundo: 3 – 5
+- Pico esperado: hasta 15 peticiones por segundo durante cambios de turno o inicio de jornada.
+
+No se espera un tráfico masivo, pero sí disponibilidad constante durante la operación de la planta.
+
+### Tiempo de respuesta
+
+<html>
+<body>
+<!--StartFragment--><html><head></head><body>
+Operación | Tiempo esperado
+-- | --
+Inicio de sesión | < 2 segundos
+Consulta de OP | < 2 segundos
+Cambio de módulo | < 2 segundos
+Guardar formulario | < 3 segundos
+Generar historial | < 5 segundos
+Generar reporte | < 10 segundos
+
+</body></html><!--EndFragment-->
+</body>
+</html>
+
+### Disponibilidad
+
+El sistema deberá encontrarse disponible durante toda la jornada de producción.
+
+**Disponibilidad esperada:** 99 % durante horario laboral.
+
+### Escalabilidad
+
+La arquitectura deberá permitir:
+
+- Agregar nuevos módulos de producción;
+- Incorporar nuevos formularios sin modificar el código fuente;
+- Aumentar el número de usuarios;
+- Adaptar el sistema a otras plantas o empresas.
+
+### Requisitos no funcionales
+
+#### RNF-01 Rendimiento
+
+El sistema deberá responder a las operaciones habituales en menos de 3 segundos, garantizando fluidez durante el registro de información.
+
+#### RNF-02 Disponibilidad
+
+El sistema deberá permanecer disponible durante toda la jornada de producción, minimizando interrupciones del servicio.
+
+#### RNF-03 Seguridad
+
+El acceso al sistema requerirá autenticación mediante usuario y contraseña.
+
+Cada usuario visualizará únicamente las funcionalidades autorizadas según su rol.
+
+#### RNF-04 Integridad de datos
+
+No podrá avanzarse una Orden de Producción mientras existan campos obligatorios pendientes en la etapa actual.
+
+#### RNF-05 Trazabilidad
+
+Todas las modificaciones realizadas sobre una Orden de Producción deberán registrar:
+
+usuario
+fecha
+hora
+etapa
+acción realizada
+
+#### RNF-06 Usabilidad
+
+La interfaz deberá:
+
+ser minimalista;
+reducir la cantidad de clics;
+utilizar botones grandes;
+emplear colores fácilmente distinguibles;
+mantener una navegación simple.
+
+Este requisito responde al perfil de los operarios descrito en el proyecto, buscando minimizar la curva de aprendizaje.
+
+#### RNF-07 Accesibilidad
+
+La aplicación deberá facilitar su uso por personas con baja experiencia tecnológica mediante:
+
+tipografía grande;
+alto contraste;
+iconografía clara;
+mensajes sencillos;
+formularios simples.
+
+#### RNF-08 Compatibilidad
+
+El sistema deberá funcionar correctamente en:
+
+computadores de escritorio;
+tablets Android;
+navegadores modernos (Chrome y Edge).
+
+#### RNF-09 Mantenibilidad
+
+Los administradores podrán modificar formularios y módulos sin necesidad de realizar cambios en el código fuente, alineado con la capacidad de configuración definida para Polygon.
+
+#### RNF-10 Escalabilidad
+
+La arquitectura permitirá incorporar nuevas etapas del proceso productivo sin afectar las funcionalidades existentes.
+
+#### RNF-11 Respaldo de información
+
+Toda la información almacenada deberá poder respaldarse periódicamente para evitar pérdida de datos.
+
+#### RNF-12 Auditabilidad
+
+El sistema conservará el historial completo de cada Orden de Producción para facilitar auditorías internas y consultas históricas.
+
+## Modelado del dominio
+
+### Principales entidades
+
+#### Usuario
+
+Representa cualquier persona autorizada para acceder al sistema.
+
+Atributos principales:
+
+- id
+- nombre
+- correo
+- contraseña
+- estado
+
+#### Rol
+
+Determina los permisos del usuario.
+
+Principales roles del sistemas:
+
+- Administrador.
+- Operario.
+
+#### OrdenProduccion
+
+Es la entidad principal del sistema.
+
+Representa una orden de fabricación desde su creación hasta su finalización.
+
+Atributos:
+
+- número OP
+- fecha
+- estado
+- producto
+- cantidad
+- observaciones
+
+#### MóduloProducción
+
+Representa cada etapa del proceso:
+ 
+1. Planeación
+2. Picky
+3. Pesaje
+4. Mezcla
+5. Extrusión
+6. Calidad
+7. Empaque
+8. Espacio Cliente
+
+#### Formulario
+
+Conjunto de campos que debe diligenciar un operario en una etapa determinada.
+
+Cada módulo posee su propio formulario configurable.
+
+#### CampoFormulario
+
+Representa cada dato configurable del formulario:
+
+- Cantidad
+- Temperatura
+- Observación
+- Fecha
+- Responsable
+
+#### Registro
+
+Información diligenciada por un usuario en una etapa específica.
+
+Cada registro queda asociado a una Orden de Producción y forma parte de su historial.
+
+#### Historial
+
+Permite conocer toda la trazabilidad de una Orden de Producción.
+
+Incluye:
+
+- usuario
+- fecha
+- acción
+- etapa
+
+#### Producto
+
+Producto que será fabricado.
+
+#### MateriaPrima
+
+Materias primas utilizadas durante la producción.
+
+## Diagrama del dominio
+
+classDiagram
+
+class Usuario{
+  +id
+  +nombre
+  +correo
+  +estado
+}
+
+class Rol{
+  +id
+  +nombre
+}
+
+class OrdenProduccion{
+  +id
+  +numero
+  +fecha
+  +estado
+  +cantidad
+}
+
+class Producto{
+  +id
+  +nombre
+}
+
+class ModuloProduccion{
+  +id
+  +nombre
+  +orden
+}
+
+class Formulario{
+  +id
+  +nombre
+}
+
+class CampoFormulario{
+  +id
+  +nombre
+  +tipo
+  +obligatorio
+}
+
+class Registro{
+  +id
+  +fechaHora
+  +valor
+}
+
+class Historial{
+  +id
+  +fechaHora
+  +accion
+}
+
+class MateriaPrima{
+  +id
+  +nombre
+}
+
+Usuario --> Rol : posee
+Usuario --> Registro : registra
+
+OrdenProduccion --> Producto : fabrica
+OrdenProduccion --> Historial : genera
+OrdenProduccion --> Registro : contiene
+
+ModuloProduccion --> Formulario : utiliza
+
+Formulario --> CampoFormulario : contiene
+
+Registro --> ModuloProduccion : pertenece
+Registro --> Formulario : diligencia
+
+OrdenProduccion --> MateriaPrima : utiliza
+
 ## **Componentes de la solución**
 ### **Cliente web**
 Interfaz gráfica utilizada por administradores y operadores. Permite construir flujos de trabajo, diligenciar formularios y gestionar órdenes de producción mediante una SPA. Se construye utilizando Vue 3, Vite y Tailwind CSS.
