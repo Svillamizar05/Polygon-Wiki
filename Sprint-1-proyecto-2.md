@@ -57,12 +57,6 @@ Debido a que este corresponde al primero de tres sprints de desarrollo, se prior
 - HU-13 - Liberar Orden de Producción a Picky (#21)
 - HU-14 - Cancelar Orden de Producción (#22)
 
-Las siguientes historias pueden ser incorporadas al Sprint 1 si la capacidad del equipo lo permite o trasladarse a un sprint posterior:
-
-- HU-03 - Recuperar contraseña (#11)
-- HU-07 - Configurar módulos de producción (#15)
-- HU-08 - Configurar formularios (#16)
-
 La priorización busca obtener primero un flujo funcional completo antes de incorporar funcionalidades administrativas de mayor complejidad.
 
 ---
@@ -233,7 +227,6 @@ Entre las principales funcionalidades planteadas para Polygon se encuentran:
 - Registro de información en cada etapa productiva.
 - Control de calidad.
 - Gestión de reprocesos.
-- Empaque y finalización.
 - Consulta de trazabilidad.
 - Generación de reportes.
 
@@ -274,16 +267,6 @@ Se propone seguir las convenciones establecidas por PEP 8.
 - Clases: `PascalCase`
 - Constantes: `UPPER_SNAKE_CASE`
 
-Ejemplos:
-
-```python
-orden_produccion = ...
-registrar_mezcla()
-class OrdenProduccion:
-    pass
-MAX_INTENTOS = 3
-```
-
 ### Frontend - Vue / JavaScript
 
 Se utilizará una convención consistente para todo el frontend:
@@ -293,19 +276,6 @@ Se utilizará una convención consistente para todo el frontend:
 - Componentes Vue: `PascalCase`
 - Constantes: `UPPER_SNAKE_CASE`
 
-Ejemplo:
-
-```javascript
-const ordenProduccion = {}
-function registrarMezcla() {}
-const API_BASE_URL = ''
-```
-
-Componente:
-
-```text
-OrdenProduccionForm.vue
-```
 
 ---
 
@@ -328,8 +298,6 @@ Permitirá analizar estáticamente el código JavaScript/Vue y detectar errores 
 **Prettier**
 
 Se utilizará como herramienta de formateo automático para mantener un estilo homogéneo en el código frontend.
-
-La configuración definitiva de estas herramientas será acordada por el equipo.
 
 ---
 
@@ -405,8 +373,6 @@ npm ci
 
 Un Pull Request podrá considerarse listo para integrar cuando las comprobaciones automáticas terminen correctamente.
 
-La implementación del pipeline se realizará después de definir definitivamente las herramientas de calidad utilizadas por el equipo.
-
 ---
 
 # 7. Pruebas Funcionales Manuales
@@ -472,40 +438,11 @@ Una Historia de Usuario únicamente será considerada finalizada cuando:
 
 # 9. Ceremonias del Sprint
 
-Durante el Sprint se conservarán evidencias de las ceremonias realizadas por el equipo.
 
-| Ceremonia | Objetivo | Evidencia |
-|-----------|----------|-----------|
-| Sprint Planning | Definir objetivo y alcance del Sprint | Pendiente |
-| Daily / reuniones de seguimiento | Revisar avances y bloqueos | Pendiente |
-| Sprint Review | Revisar las funcionalidades desarrolladas | Pendiente |
-| Retrospectiva | Analizar aspectos positivos y oportunidades de mejora | Pendiente |
-
-Las evidencias pueden incluir:
-
-- Actas.
-- Fotografías.
-- Grabaciones.
-- Capturas de reuniones.
-- Registro de decisiones realizadas por el equipo.
 
 ---
 
-# 10. Estado de los Entregables
-
-| Entregable | Estado |
-|------------|--------|
-| MVP V1 | En desarrollo |
-| Caso de Negocio V1 | En elaboración |
-| Pruebas Funcionales Manuales | Pendiente de ejecución |
-| Calidad del Software | En definición |
-| Backlog actualizado | En progreso |
-| Evidencias de ceremonias | En recopilación |
-| Presentación Sprint 1 | Pendiente |
-
----
-
-# 11. Resultado esperado del Sprint
+# 10. Resultado esperado del Sprint
 
 Al finalizar el Sprint 1 se espera contar con una primera versión demostrable de Polygon en la que un usuario autorizado pueda ingresar al sistema y gestionar el inicio del ciclo de una Orden de Producción.
 
