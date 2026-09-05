@@ -279,7 +279,7 @@ Se utilizará una convención consistente para todo el frontend:
 
 ---
 
-# 6.2 Análisis estático de código
+## 6.2 Análisis estático de código
 
 Como propuesta inicial para el proyecto se consideran las siguientes herramientas:
 
@@ -301,7 +301,7 @@ Se utilizará como herramienta de formateo automático para mantener un estilo h
 
 ---
 
-# 6.3 Estrategia de ramas
+## 6.3 Estrategia de ramas
 
 El equipo utilizará una estrategia basada en GitHub Flow.
 
@@ -349,7 +349,7 @@ El objetivo es evitar modificaciones directas sobre `main` y permitir que los ca
 
 ---
 
-# 6.4 Integración Continua
+## 6.4 Integración Continua
 
 Como mejora de calidad se contempla la utilización de GitHub Actions para ejecutar automáticamente comprobaciones sobre los Pull Requests.
 
