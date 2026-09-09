@@ -979,7 +979,11 @@ Una Historia de Usuario únicamente será considerada finalizada cuando:
 
 # 9. Ceremonias del Sprint
 
+Evidencias reuniones Sprint 1
 
+<img width="1917" height="867" alt="image" src="https://github.com/user-attachments/assets/91498aa9-6fb7-41e0-af14-aa1f800c2f2d" />
+
+Para ver las actas y las grabaciones dirigirse a la sección de la Wiki titulada "Polygon"
 
 ---
 
