@@ -551,6 +551,10 @@ misma rama cuando forman parte de un mismo bloque funcional (ejemplo:
 | `feature/hu-05-06-10-11-correcciones` | ✅ Sí |
 | `feature/hu-all-correcciones-generales` | ✅ Sí |
 
+Git Flow
+
+<img width="1132" height="697" alt="Captura de pantalla 2026-09-08 225858" src="https://github.com/user-attachments/assets/d956977e-336e-44f4-9b3f-d9f66f794a79" />
+
 ## 6.4 Integración Continua
 
 **Estado actual: no implementado.** El repositorio todavía no tiene ningún workflow de
