@@ -2,9 +2,12 @@
 
 # 1. Información general
 
-**Proyecto:** Polygon  
-**Cliente:** Empresa Sumicolor S.A. 
+**Proyecto:** Polygon
+
+**Cliente:** Empresa Sumicolor S.A.
+
 **Sprint:** Sprint 1  
+
 **Versión:** MVP V1  
 
 Polygon es un sistema orientado a la gestión y trazabilidad de las Órdenes de Producción de Sumicolor. El sistema busca digitalizar la información generada durante el proceso productivo y permitir que las diferentes áreas involucradas consulten y registren la información correspondiente a cada etapa.
