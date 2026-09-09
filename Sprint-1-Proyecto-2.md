@@ -429,25 +429,11 @@ Un Pull Request podrá considerarse listo para integrar cuando las comprobacione
 
 ---
 
-# 7. Casos de Prueba Funcionales — Sprint 1
+# 7. Diseño de casos de Pruebas Funcionales
+
+# 7.1 Casos de Prueba Funcionales — Sprint 1
 
 Las pruebas funcionales estarán directamente relacionadas con las Historias de Usuario implementadas durante el Sprint 1.
-
-Cada Historia de Usuario deberá conservar la siguiente relación:
-
-```text
-Historia de Usuario
-        ↓
-Criterio de aceptación
-        ↓
-Caso de prueba
-        ↓
-Ejecución
-        ↓
-Resultado
-        ↓
-Bug (si se encuentra un error)
-```
 
 > Formato: **Dada** una situación, **cuando** ocurre una acción, **entonces** el sistema
 > produce el resultado esperado. Cada CP va asociado a su HU y a su criterio de aceptación
@@ -726,6 +712,48 @@ entonces el sistema cambia el estado de la OP a "Mezcla".
 Dado una OP en Pesaje con información de pesaje incompleta,
 cuando el operario intenta confirmar el envío a Mezcla,
 entonces el sistema impide el cambio de estado e informa qué falta.
+
+---
+
+# 7.2 Ejecución de Pruebas y Reporte de Errores
+
+## Evidencia de algunas pruebas realizadas, la la ejecución total del flujo del desarrollo del Sprint 1 se verá evidenciado en la sustentación:
+
+### Inicio de sesión
+
+<img width="1917" height="872" alt="image" src="https://github.com/user-attachments/assets/6904f2ff-d1ac-48a8-9bae-5de243da3adc" />
+
+### Vista del Administrador
+
+<img width="1917" height="866" alt="image" src="https://github.com/user-attachments/assets/ed0ff888-4803-4aa8-a37f-4addab685bc9" />
+
+### Nuevo usuario y asignar rol
+
+<img width="1917" height="875" alt="image" src="https://github.com/user-attachments/assets/d5d00d5e-0930-4396-b3b6-fad62b9ef1b6" />
+
+## Evidencia de un BUG reportado
+
+<img width="1282" height="651" alt="Captura de pantalla 2026-09-08 214459" src="https://github.com/user-attachments/assets/d7e3905d-d04c-4ad1-8137-f69d57ca07dd" />
+
+---
+
+# 7.3 Conexión HUCP-Errores
+
+Cada Historia de Usuario deberá conservar la siguiente relación lógica:
+
+```text
+Historia de Usuario
+        ↓
+Criterio de aceptación
+        ↓
+Caso de prueba
+        ↓
+Ejecución
+        ↓
+Resultado
+        ↓
+Bug (si se encuentra un error)
+```
 
 ---
 
