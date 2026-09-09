@@ -952,9 +952,8 @@ Bug (si se encuentra un error)
 
 # 8. Gestión del Backlog
 
-Las Historias de Usuario correspondientes al Sprint serán administradas mediante GitHub Issues y el tablero del proyecto.
-
-Los estados utilizados permitirán identificar como mínimo:
+Las Historias de Usuario del Sprint se administraron mediante GitHub Issues y el tablero
+del proyecto (GitHub Projects), usando como mínimo los siguientes estados:
 
 ```text
 Backlog
@@ -968,12 +967,17 @@ Revisión
 Finalizado
 ```
 
-Una Historia de Usuario únicamente será considerada finalizada cuando:
+Una Historia de Usuario solo se consideró finalizada cuando:
 
-- Su funcionalidad esté implementada.
-- Cumpla los criterios de aceptación.
-- Los casos de prueba correspondientes hayan sido ejecutados.
-- Los errores críticos encontrados hayan sido solucionados.
+- Su funcionalidad quedó implementada.
+- Cumplió los criterios de aceptación definidos.
+- Los casos de prueba correspondientes fueron ejecutados (ver sección "Diseño de casos de
+  Pruebas Funcionales").
+- Los errores críticos encontrados durante la ejecución de pruebas fueron solucionados.
+
+**Estado al cierre del Sprint 1.** Las 15 Historias de Usuario comprometidas para este
+Sprint (HU-01, HU-02, HU-04, HU-05, HU-06, HU-10, HU-11, HU-12, HU-13, HU-15, HU-16, HU-17,
+HU-18, HU-19 y HU-20) llegaron al estado "Finalizado" en el tablero del proyecto.
 
 ---
 
@@ -1032,8 +1036,35 @@ Si se quiere revisar a profundidad cada grabación o acta, diríjase a la pagina
 
 ---
 
-# 10. Resultado esperado del Sprint
+# 10. Resultado del Sprint
 
-Al finalizar el Sprint 1 se espera contar con una primera versión demostrable de Polygon en la que un usuario autorizado pueda ingresar al sistema y gestionar el inicio del ciclo de una Orden de Producción.
+> Nota: esta sección se redacta como *resultado obtenido*, no como *resultado esperado*,
+> porque se completa al cierre del Sprint y el alcance real superó lo planeado
+> originalmente (ver aclaración más abajo).
 
-El resultado de este Sprint constituirá la base para que durante el Sprint 2 se implementen las etapas operativas de Picky, Pesaje, Mezcla y Extrusión.
+Al finalizar el Sprint 1, Polygon cuenta con una primera versión demostrable en la que un
+usuario autorizado puede ingresar al sistema según su rol y seguir el ciclo completo de una
+Orden de Producción desde su creación hasta su entrada al proceso de Mezcla:
+
+- Autenticación, control de acceso por rol y administración de usuarios (creación, edición,
+  asignación de roles), con auditoría de cada cambio.
+- Creación, edición y consulta de Órdenes de Producción en Planeación.
+- Liberación de la Orden de Producción hacia Picky.
+- Consulta, registro de materiales preparados y confirmación de envío desde Picky hacia
+  Pesaje.
+- Consulta, registro del pesaje de materias primas y confirmación de envío desde Pesaje
+  hacia Mezcla.
+
+**Aclaración frente a la planeación inicial.** El alcance original de este Sprint (definido
+al inicio, sección 3) contemplaba dejar las etapas operativas de Picky, Pesaje, Mezcla y
+Extrusión para el Sprint 2. Durante la ejecución, el equipo decidió adelantar y completar
+también Picky y Pesaje dentro del Sprint 1 (HU-15 a HU-20), además de las HU de
+autenticación, administración y planeación de OP originalmente planeadas. Esto significa que
+el resultado obtenido es más amplio que el planeado inicialmente en esas dos etapas.
+
+El resultado de este Sprint constituye la base para que, en el Sprint 2, se implementen las
+etapas operativas de **Mezcla, Extrusión, Control de Calidad y Empaque** (y no ya Picky y
+Pesaje, adelantadas en este Sprint), junto con las funcionalidades que quedaron pendientes de
+esta primera versión: gestión de catálogos (HU-09) y cancelación de una Orden de Producción
+(HU-14).
+
