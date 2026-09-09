@@ -453,14 +453,6 @@ Bug (si se encuentra un error)
 > produce el resultado esperado. Cada CP va asociado a su HU y a su criterio de aceptación
 > en el Issue correspondiente de GitHub.
 
-# Casos de Prueba Funcionales — Sprint 1
-
-> Formato: **Dada** una situación, **cuando** ocurre una acción, **entonces** el sistema
-> produce el resultado esperado. Cada CP va asociado a su HU y a su criterio de aceptación
-> en el Issue correspondiente de GitHub.
-
----
-
 ## HU-01 Iniciar sesión
 
 **CP-01-01 (criterio: el usuario puede ingresar con sus credenciales / el sistema valida
