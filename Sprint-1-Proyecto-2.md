@@ -514,36 +514,14 @@ formatear automáticamente. Corrido sobre `Frontend/src`, no reporta errores.
 
 ## 6.3 Estrategia de ramas
 
-El equipo utilizará una estrategia basada en GitHub Flow.
-
-La rama principal será:
-
-```text
-main
-```
-
-Cada nueva funcionalidad se desarrollará en una rama independiente.
-
-Convención:
-
-```text
-feature/hu-XX-descripcion
-```
-
-Ejemplos:
-
-```text
-feature/hu-01-login
-feature/hu-10-crear-op
-feature/hu-22-23-mezcla
-```
-
-El flujo de trabajo será:
+El equipo utiliza **GitHub Flow** [1]: `main` es la rama principal y siempre debe quedar en
+un estado desplegable; todo cambio se desarrolla en una rama de feature independiente, se
+somete a Pull Request, se revisa y se fusiona a `main`.
 
 ```text
 main
   ↓
-feature/hu-XX
+feature/hu-XX-descripcion
   ↓
 desarrollo
   ↓
@@ -556,33 +534,87 @@ revisión
 merge a main
 ```
 
-El objetivo es evitar modificaciones directas sobre `main` y permitir que los cambios sean revisados antes de integrarse.
+Convención de nombres definida: `feature/hu-XX-descripcion`, agrupando varias HU en una
+misma rama cuando forman parte de un mismo bloque funcional (ejemplo:
+`feature/hu-22-23-mezcla`).
 
----
+**Estado real del repositorio (8 ramas activas, verificado en GitHub):**
+
+| Rama | ¿Sigue la convención? |
+| --- | --- |
+| `main` (default) | — |
+| `feature/hu-01-02-04-login-logout-usuarios` | ✅ Sí |
+| `feature/hu-05-06-10-11-usuario-roles-ord...` | ✅ Sí |
+| `feature/hu-12-13-15-16-17-picky-produc...` | ✅ Sí |
+| `feature/hu-18-consultar-pesaje` | ✅ Sí |
+| `feature/hu-19-20-pesaje` | ✅ Sí |
+| `feature/hu-05-06-10-11-correcciones` | ✅ Sí |
+| `feature/hu-all-correcciones-generales` | ✅ Sí |
 
 ## 6.4 Integración Continua
 
-Como mejora de calidad se contempla la utilización de GitHub Actions para ejecutar automáticamente comprobaciones sobre los Pull Requests.
+**Estado actual: no implementado.** El repositorio todavía no tiene ningún workflow de
+GitHub Actions configurado — no hay carpeta `.github/workflows/` en el proyecto. Esto es una
+tarea pendiente, no algo que ya esté funcionando.
 
-El pipeline podrá incluir:
+**Propuesta de pipeline** (a implementar), retomando las herramientas ya documentadas en
+6.1/6.2, para que el análisis estático deje de depender de que cada persona lo corra
+manualmente antes de hacer commit:
 
-### Backend
+```yaml
+# .github/workflows/ci.yml (propuesta, pendiente de crear)
+name: CI
 
-```text
-Instalar dependencias
-→ Ejecutar Ruff
-→ Ejecutar pruebas de Django
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements.txt
+      - run: ruff check .
+      - run: python manage.py test
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+      - run: npm ci
+      - run: npx eslint .
+      - run: npm run build
 ```
 
-### Frontend
+Este pipeline corre en cada Pull Request hacia `main` y ejecuta, en paralelo, la revisión de
+estilo/nombramiento (`ruff check`, `eslint`) y una verificación funcional básica (`manage.py
+test` en backend, `npm run build` para confirmar que el frontend compila). Para que cumpla lo
+que pide el documento maestro ("bloquear la fusión de un PR hasta que el pipeline esté
+'green' y tenga aprobación de revisión de pares"), falta además:
 
-```text
-npm ci
-→ Ejecutar ESLint
-→ Compilar aplicación con Vite
-```
+1. Crear el archivo de workflow de arriba en `.github/workflows/`.
+2. Activar **branch protection** sobre `main` en la configuración del repositorio, marcando
+   este workflow como *required status check* y exigiendo al menos una aprobación de PR.
+3. (Pendiente aparte, fuera de este Sprint) escribir pruebas automatizadas de Django
+   (`manage.py test`) — hoy el proyecto no tiene ninguna, así que ese paso del pipeline
+   pasaría siempre, pero sin verificar nada real todavía.
 
-Un Pull Request podrá considerarse listo para integrar cuando las comprobaciones automáticas terminen correctamente.
+**Referencias**
+
+1. GitHub Docs — *GitHub flow*. https://docs.github.com/en/get-started/using-github/github-flow
 
 ---
 
