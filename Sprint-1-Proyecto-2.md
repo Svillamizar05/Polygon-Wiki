@@ -982,6 +982,10 @@ Una Historia de Usuario solo se consideró finalizada cuando:
 Sprint (HU-01, HU-02, HU-04, HU-05, HU-06, HU-10, HU-11, HU-12, HU-13, HU-15, HU-16, HU-17,
 HU-18, HU-19 y HU-20) llegaron al estado "Finalizado" en el tablero del proyecto.
 
+- Evidencia Sprint 1 Completado en el Backlog
+
+<img width="1917" height="867" alt="image" src="https://github.com/user-attachments/assets/48c281f2-4355-495d-a5f1-d1293e78f7c8" />
+
 ---
 
 # 9. Ceremonias del Sprint
