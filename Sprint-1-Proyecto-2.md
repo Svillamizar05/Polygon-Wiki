@@ -3,7 +3,7 @@
 ## 1. Información general
 
 **Proyecto:** Polygon  
-**Cliente:** Sumicolor  
+**Cliente:** Empresa Sumicolor S.A. 
 **Sprint:** Sprint 1  
 **Versión:** MVP V1  
 
@@ -120,23 +120,37 @@ A partir de esta estructura se desarrollarán las funcionalidades comprometidas 
 
 # 5.1 Descripción del Negocio
 
-Sumicolor cuenta con un proceso productivo compuesto por diferentes etapas que deben ejecutarse de manera secuencial para completar una Orden de Producción.
+Sumicolor es una empresa manufacturera cuyo proceso productivo actualmente depende
+de formatos físicos (lápiz y papel) para registrar la información generada en cada
+etapa de una Orden de Producción: Planeación, Picky, Pesaje, Mezcla, Extrusión,
+Control de Calidad y Empaque. Esta dependencia de registros físicos dificulta
+mantener una trazabilidad centralizada y actualizada del estado de cada orden a
+medida que avanza por las distintas áreas de la empresa.
 
-Durante estas etapas se genera información relacionada con materiales, cantidades, procesos realizados, responsables, controles de calidad y estado de cada Orden de Producción.
-
-Actualmente parte de esta información depende de formatos y registros que dificultan mantener una trazabilidad centralizada del proceso.
-
-Polygon surge como una solución para centralizar digitalmente la información de las Órdenes de Producción y permitir que cada área registre la información correspondiente a su etapa.
-
-Esto permite que una Orden de Producción pueda ser seguida desde Planeación hasta su finalización.
+Polygon nace como la solución de software encargada de digitalizar y centralizar
+este proceso: reemplaza los formatos físicos por un flujo digital único, en el que
+cada área registra la información correspondiente a su etapa y cualquier
+responsable autorizado puede consultar el estado y el historial de una Orden de
+Producción en tiempo real.
 
 ## Misión
 
-Digitalizar y centralizar la gestión de las Órdenes de Producción de Sumicolor mediante una plataforma que permita registrar, consultar y mantener la trazabilidad de la información generada durante el proceso productivo.
+Digitalizar y centralizar la gestión de las Órdenes de Producción de
+Sumicolor mediante una plataforma que permita registrar, consultar y mantener la
+trazabilidad de la información generada durante el proceso productivo.
 
 ## Visión
 
-Consolidar Polygon como la plataforma central para la gestión del proceso productivo de Sumicolor, facilitando el seguimiento de las Órdenes de Producción, reduciendo la dependencia de registros físicos y mejorando la disponibilidad y trazabilidad de la información.
+Consolidar Polygon como la plataforma central para la gestión del
+proceso productivo de Sumicolor, facilitando el seguimiento de las Órdenes de
+Producción, reduciendo la dependencia de registros físicos y mejorando la
+disponibilidad y trazabilidad de la información en todas las etapas del proceso.
+
+La misión y la visión son coherentes con la propuesta de valor de Polygon: no se
+trata simplemente de reemplazar un formato físico por uno digital, sino de conectar
+las distintas etapas del proceso productivo dentro de un mismo flujo, con control
+de acceso por rol y trazabilidad completa de cada Orden de Producción desde que se
+crea hasta que finaliza.
 
 ---
 
@@ -144,67 +158,91 @@ Consolidar Polygon como la plataforma central para la gestión del proceso produ
 
 ## Investigación de mercado
 
-Polygon se encuentra orientado inicialmente a resolver una necesidad específica dentro del proceso productivo de Sumicolor: disponer de una herramienta centralizada que permita administrar las Órdenes de Producción y conservar la trazabilidad entre las diferentes etapas de fabricación.
+Colombia se encuentra en una etapa de adopción digital todavía desigual pero en aceleración.
+Según el Índice Global de Madurez de Transformación Digital 2023 (Cintel), el 55% de las
+empresas del país está en fase de planificación de su estrategia digital y solo un 7% la
+tiene completamente implementada [1]. En respuesta a este panorama, el Ministerio TIC
+definió la Estrategia Nacional Digital 2023-2026, cuyo objetivo es fortalecer el sector
+productivo colombiano mediante el uso y apropiación de datos y tecnologías digitales [2].
 
-La necesidad identificada se relaciona con procesos donde diferentes áreas deben intercambiar información de manera secuencial y donde conocer el estado actual e historial de una Orden de Producción resulta fundamental para el control del proceso.
+Dentro de este panorama general, la industria manufacturera colombiana muestra una madurez
+digital superior a la de otros sectores productivos: un estudio reciente enfocado en
+proyectos de adopción tecnológica encontró que solo el 9% de las empresas manufactureras
+colombianas está en una etapa "Nula" de digitalización, frente a un 45% que ya se considera
+avanzado en el uso de datos y tecnología en sus procesos [3]. Esto es consistente con
+reportes internacionales sobre Industria 4.0: McKinsey estima que la automatización de
+procesos productivos puede aumentar la productividad hasta en un 40%, Deloitte reporta
+reducciones de costos operativos de hasta un 20%, PwC señala una disminución de errores de
+producción del 80%, y Forrester indica incrementos de hasta un 50% en capacidad de
+producción [4]. Aun así, Colombia ocupa todavía una posición intermedia frente al resto de
+Latinoamérica en adopción de Industria 4.0 [4], lo que sugiere que buena parte del mercado
+manufacturero nacional -incluidas empresas del tamaño de Sumicolor- todavía opera con
+procesos manuales o parcialmente digitalizados, exactamente el problema que Polygon busca
+resolver.
 
-El sistema pertenece al contexto de soluciones empresariales destinadas a la digitalización y gestión de procesos productivos.
+En términos de categoría de producto, Polygon se ubica dentro de lo que la industria conoce
+como MES (Manufacturing Execution System): un software que monitorea, controla, rastrea y
+documenta los procesos de manufactura en el piso de producción en tiempo real, cerrando la
+brecha entre los sistemas de planeación empresarial y la ejecución física de la producción,
+y garantizando trazabilidad completa desde la materia prima hasta el producto terminado [5].
+Polygon corresponde a una versión enfocada de este tipo de solución: en lugar de cubrir toda
+la operación de una planta industrial grande, se concentra específicamente en la
+trazabilidad de la Orden de Producción de Sumicolor a través de sus etapas (Planeación,
+Picky, Pesaje, Mezcla, Extrusión, Calidad y Empaque).
 
-### Pendiente para complementar esta sección
+## Fuentes:
 
-Para completar la investigación de mercado se incorporarán fuentes externas y actualizadas relacionadas con:
-
-- Digitalización de procesos industriales.
-- Sistemas de gestión de producción.
-- Trazabilidad en procesos manufactureros.
-- Transformación digital en empresas manufactureras colombianas.
-
-Estas fuentes permitirán complementar el análisis con información cuantitativa y tendencias del mercado.
+1. Cintel — Índice Global de Madurez de Transformación Digital 2023, citado en *"Así se
+   perfila la transformación para las empresas en 2025"*, Claro Empresas (28 may. 2025).
+   https://www.claro.com.co/empresas/noticias-interes/transformacion-empresas-2025/
+2. MinTIC — *Estrategia Nacional Digital de Colombia 2023-2026*.
+   https://www.mintic.gov.co/portal/715/articles-334120_recurso_1.pdf
+3. *Análisis del principal desafío que enfrentan las industrias del sector Ingeniería,
+   Industria Manufacturera y Agricultura en Colombia para adoptar tecnologías digitales...*,
+   repositorio institucional UNIMINUTO.
+   https://repository.uniminuto.edu/items/237e0e1a-279b-4b5e-97d3-2ab0c4aa0fc5
+4. *"Industria 4.0: La apuesta que Colombia no puede seguir ignorando"*, Revista LatinPyme.
+   https://latinpyme.com/blog/revista-latinpyme-2/industria-4-0-la-apuesta-que-colombia-no-puede-seguir-ignorando-888
+5. Tractian — Glosario, *"MES (Sistema de Ejecución de Manufactura)"*.
+   https://tractian.com/es/glosario/mes-manufacturing-execution-system
 
 ## Segmentación del mercado
 
-El mercado potencial de Polygon puede segmentarse principalmente hacia organizaciones que:
+El mercado potencial de Polygon se segmenta hacia organizaciones que:
 
-- Manejan procesos de producción por etapas.
-- Utilizan Órdenes de Producción.
-- Requieren trazabilidad entre diferentes áreas.
-- Necesitan registrar información durante cada etapa productiva.
-- Buscan disminuir la dependencia de formatos físicos.
-- Necesitan consultar el estado de producción de manera centralizada.
+- Manejan procesos de producción por etapas secuenciales.
+- Utilizan Órdenes de Producción como unidad de control del proceso productivo.
+- Requieren trazabilidad entre diferentes áreas o departamentos de planta.
+- Necesitan registrar información específica durante cada etapa productiva.
+- Buscan reducir su dependencia de formatos físicos (papel) para el control de producción.
+- Necesitan consultar el estado de producción de manera centralizada y en tiempo real.
 
-El cliente principal de la primera versión de Polygon es Sumicolor.
+Este segmento corresponde, en términos de la industria, a pequeñas y medianas empresas
+manufactureras que aún no cuentan con un sistema MES o ERP de producción, y que dependen de
+procesos manuales para su trazabilidad — precisamente el segmento donde, según los datos de
+Cintel citados arriba, todavía se concentra la mayoría de la industria colombiana [1].
+
+El cliente principal de la primera versión de Polygon es **Sumicolor**.
 
 ## Clientes y usuarios objetivo
 
-Dentro de Sumicolor existen diferentes perfiles que interactuarán con Polygon.
+Dentro de Sumicolor existen distintos perfiles que interactúan con Polygon:
 
-### Administrador
+**Administrador.** Gestiona usuarios, roles, permisos y las configuraciones necesarias para
+el funcionamiento del sistema.
 
-Necesita gestionar usuarios, roles, permisos y configuraciones necesarias para el funcionamiento del sistema.
+**Personal de Planeación.** Crea, modifica, consulta y libera las Órdenes de Producción hacia
+la siguiente etapa del proceso.
 
-### Personal de Planeación
+**Operarios de producción.** Consultan las órdenes asignadas a su etapa y registran la
+información correspondiente al trabajo realizado. Los operarios contemplados son: Picky,
+Pesaje, Mezcla, Extrusión y Empaque.
 
-Necesita crear, modificar, consultar y liberar las Órdenes de Producción.
+**Inspector de Calidad.** Registra los resultados de las inspecciones y determina si una
+Orden de Producción puede continuar o debe entrar en reproceso.
 
-### Operarios de producción
-
-Necesitan consultar las órdenes asignadas a su etapa y registrar la información correspondiente al trabajo realizado.
-
-Los principales operarios contemplados son:
-
-- Picky
-- Pesaje
-- Mezcla
-- Extrusión
-- Empaque
-
-### Inspector de Calidad
-
-Necesita registrar los resultados de las inspecciones y determinar si una Orden de Producción puede continuar o debe entrar en reproceso.
-
-### Responsables de producción
-
-Necesitan consultar el estado, historial y posteriormente los reportes relacionados con las Órdenes de Producción.
+**Responsables de producción.** Consultan el estado, historial y, más adelante, los reportes
+relacionados con las Órdenes de Producción.
 
 ---
 
@@ -212,42 +250,58 @@ Necesitan consultar el estado, historial y posteriormente los reportes relaciona
 
 ## Descripción del producto
 
-Polygon es una aplicación web para gestionar digitalmente las Órdenes de Producción de Sumicolor.
+Polygon es una aplicación web para gestionar digitalmente las Órdenes de Producción de
+Sumicolor. La plataforma representa las diferentes etapas del proceso productivo y permite
+que la información de cada Orden de Producción avance de manera controlada entre ellas,
+reemplazando los formatos físicos que Sumicolor utiliza actualmente para registrar esta
+información.
 
-La plataforma representa las diferentes etapas del proceso productivo y permite que la información de cada Orden de Producción avance de manera controlada entre ellas.
+En este MVP V1 (Sprint 1), Polygon ya cubre de forma funcional el ciclo completo de una
+Orden de Producción desde su creación hasta su ingreso al proceso de Mezcla:
 
-Entre las principales funcionalidades planteadas para Polygon se encuentran:
+- Autenticación de usuarios y control de acceso según su rol (administrador, personal de
+  Planeación, operario de Picky, operario de Pesaje).
+- Administración de usuarios: creación, edición de datos y asignación de roles, con registro
+  de auditoría de cada cambio realizado.
+- Creación de Órdenes de Producción, con número de orden único autogenerado y validación de
+  campos obligatorios.
+- Edición y consulta de Órdenes de Producción mientras se encuentran en estado Planeación.
+- Liberación de una Orden de Producción hacia Picky, validando que la información esté
+  completa antes de permitir el cambio de estado.
+- Consulta y registro de materiales preparados en Picky, con confirmación de envío hacia
+  Pesaje.
+- Consulta y registro del pesaje de materias primas en Pesaje, con confirmación de envío
+  hacia Mezcla.
 
-- Autenticación de usuarios.
-- Control de acceso mediante roles.
-- Administración de usuarios.
-- Creación de Órdenes de Producción.
-- Consulta y modificación de órdenes.
-- Gestión de estados.
-- Registro de información en cada etapa productiva.
-- Control de calidad.
-- Gestión de reprocesos.
-- Consulta de trazabilidad.
-- Generación de reportes.
+Cada registro realizado permanece asociado a la Orden de Producción correspondiente,
+permitiendo mantener la información organizada y trazable durante todo su recorrido por las
+distintas áreas de la planta.
 
-Cada registro realizado permanece asociado a la Orden de Producción correspondiente, permitiendo mantener la información organizada durante todo su ciclo de vida.
+Quedan para los siguientes Sprints las etapas operativas de Mezcla, Extrusión, Control de
+Calidad y Empaque, así como la administración de catálogos (productos, materias primas,
+clientes) y la generación de reportes.
 
 ## Propuesta de Valor
 
-Polygon busca proporcionar a Sumicolor una plataforma única para gestionar el flujo de sus Órdenes de Producción.
+Polygon busca proporcionar a Sumicolor una plataforma única para gestionar el flujo de sus
+Órdenes de Producción. La propuesta de valor se basa en:
 
-La propuesta de valor se basa en:
+- Centralización de la información productiva, eliminando el uso de formatos físicos en las
+  etapas ya cubiertas por el sistema (Planeación, Picky y Pesaje).
+- Trazabilidad de la Orden de Producción: cada cambio de estado y cada dato registrado queda
+  asociado a la orden y a la persona que lo registró.
+- Control de acceso según responsabilidades: cada rol solo ve y modifica la información que
+  le corresponde.
+- Consulta del estado actual de una OP en cualquier momento, sin depender de reportes
+  verbales o físicos entre áreas.
+- Conservación del historial de cambios de usuarios y de Órdenes de Producción, como base
+  para auditoría.
+- Base de información estructurada para, en Sprints posteriores, generar reportes e
+  indicadores de producción.
 
-- Centralización de la información productiva.
-- Trazabilidad de las Órdenes de Producción.
-- Reducción de la dependencia de formatos físicos.
-- Control de acceso según responsabilidades.
-- Consulta del estado actual de una OP.
-- Conservación del historial del proceso.
-- Mayor disponibilidad de la información.
-- Base de información para generar posteriormente reportes e indicadores.
-
-Polygon no busca únicamente reemplazar un formato físico, sino conectar las diferentes etapas del proceso productivo dentro de un mismo flujo digital.
+Polygon no busca únicamente reemplazar un formato físico, sino conectar las diferentes etapas
+del proceso productivo dentro de un mismo flujo digital, empezando por el tramo
+Planeación → Picky → Pesaje que ya es funcional en este MVP.
 
 ---
 
