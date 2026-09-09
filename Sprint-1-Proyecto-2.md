@@ -1,6 +1,6 @@
 # Sprint 1 - Proyecto 2 - MVP Versión 1
 
-## 1. Información general
+# 1. Información general
 
 **Proyecto:** Polygon  
 **Cliente:** Empresa Sumicolor S.A. 
