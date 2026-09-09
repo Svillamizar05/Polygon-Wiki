@@ -1038,10 +1038,6 @@ Si se quiere revisar a profundidad cada grabación o acta, diríjase a la pagina
 
 # 10. Resultado del Sprint
 
-> Nota: esta sección se redacta como *resultado obtenido*, no como *resultado esperado*,
-> porque se completa al cierre del Sprint y el alcance real superó lo planeado
-> originalmente (ver aclaración más abajo).
-
 Al finalizar el Sprint 1, Polygon cuenta con una primera versión demostrable en la que un
 usuario autorizado puede ingresar al sistema según su rol y seguir el ciclo completo de una
 Orden de Producción desde su creación hasta su entrada al proceso de Mezcla:
