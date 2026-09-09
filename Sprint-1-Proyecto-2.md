@@ -429,7 +429,7 @@ Un Pull Request podrá considerarse listo para integrar cuando las comprobacione
 
 ---
 
-# 7. Pruebas Funcionales Manuales
+# 7. Casos de Prueba Funcionales — Sprint 1
 
 Las pruebas funcionales estarán directamente relacionadas con las Historias de Usuario implementadas durante el Sprint 1.
 
@@ -449,17 +449,291 @@ Resultado
 Bug (si se encuentra un error)
 ```
 
-Los criterios de aceptación serán ajustados al formato:
+> Formato: **Dada** una situación, **cuando** ocurre una acción, **entonces** el sistema
+> produce el resultado esperado. Cada CP va asociado a su HU y a su criterio de aceptación
+> en el Issue correspondiente de GitHub.
 
-> Dada una situación, cuando ocurre determinada acción, entonces el sistema debe producir el resultado esperado.
+# Casos de Prueba Funcionales — Sprint 1
 
-## Estado
+> Formato: **Dada** una situación, **cuando** ocurre una acción, **entonces** el sistema
+> produce el resultado esperado. Cada CP va asociado a su HU y a su criterio de aceptación
+> en el Issue correspondiente de GitHub.
 
-Diseño de casos de prueba: Pendiente de completar conforme se implementen las HU.
+---
 
-Ejecución de casos de prueba: Pendiente.
+## HU-01 Iniciar sesión
 
-Reporte de bugs: Se registrarán como Issues cuando sean encontrados durante la ejecución.
+**CP-01-01 (criterio: el usuario puede ingresar con sus credenciales / el sistema valida
+que sean correctas)**
+Dado un usuario activo con usuario y contraseña correctos,
+cuando envía el formulario de login,
+entonces el sistema lo autentica y responde con un token de sesión.
+
+**CP-01-02 (criterio: si las credenciales son incorrectas se muestra un mensaje de error)**
+Dado un usuario que ingresa una contraseña incorrecta,
+cuando envía el formulario de login,
+entonces el sistema rechaza el intento y muestra un mensaje de error, sin generar sesión.
+
+**CP-01-03 (criterio: el sistema identifica el rol y redirige al módulo correspondiente)**
+Dado un usuario autenticado con rol "admin",
+cuando inicia sesión exitosamente,
+entonces el sistema lo redirige al módulo de Usuarios; y dado un usuario con rol
+"supervisor", entonces lo redirige al módulo de Órdenes de Producción.
+
+**CP-01-04 (regla de negocio: solo usuarios activos pueden iniciar sesión)**
+Dado un usuario existente marcado como inactivo,
+cuando intenta iniciar sesión con sus credenciales correctas,
+entonces el sistema rechaza el acceso.
+
+---
+
+## HU-02 Cerrar sesión
+
+**CP-02-01 (criterio: el usuario puede cerrar sesión desde cualquier módulo)**
+Dado un usuario con sesión activa en cualquier módulo del sistema,
+cuando selecciona "Cerrar sesión",
+entonces el sistema elimina la sesión activa y lo redirige a la pantalla de login.
+
+**CP-02-02 (regla de negocio: ningún usuario puede seguir usando el sistema tras cerrar
+sesión)**
+Dado un usuario que acaba de cerrar sesión,
+cuando intenta acceder de nuevo a una ruta protegida sin volver a iniciar sesión,
+entonces el sistema le niega el acceso y lo redirige al login.
+
+---
+
+## HU-04 Crear usuario
+
+**CP-04-01 (criterio: el administrador puede registrar un nuevo usuario, queda asociado a
+un rol y activo)**
+Dado un administrador autenticado que diligencia los datos de un nuevo usuario con un rol
+válido,
+cuando envía el formulario de creación,
+entonces el sistema crea el usuario, lo asocia al rol indicado y lo deja activo para iniciar
+sesión.
+
+**CP-04-02 (criterio: el sistema valida que no existan usuarios duplicados)**
+Dado que ya existe un usuario con un nombre de usuario determinado,
+cuando el administrador intenta crear otro usuario con ese mismo nombre de usuario,
+entonces el sistema rechaza la creación e informa el error.
+
+**CP-04-03 (regla de negocio: solo un administrador puede crear usuarios)**
+Dado un usuario autenticado con rol distinto a "admin" (supervisor o planta),
+cuando intenta crear un nuevo usuario,
+entonces el sistema rechaza la solicitud por falta de permisos.
+
+**CP-04-04 (regla de negocio: cada usuario debe tener un rol asignado)**
+Dado un administrador que intenta crear un usuario sin especificar un rol,
+cuando envía el formulario,
+entonces el sistema no permite guardar el usuario hasta que se indique un rol válido.
+
+---
+
+## HU-05 Editar usuario
+
+**CP-05-01 (criterio: el administrador puede modificar la información de un usuario y el
+sistema guarda los cambios)**
+Dado un administrador autenticado y un usuario existente,
+cuando edita su nombre, apellido, rol o estado y guarda los cambios,
+entonces el sistema actualiza la información del usuario correctamente.
+
+**CP-05-02 (criterio: el sistema mantiene un registro de la modificación)**
+Dado un administrador que edita el rol de un usuario de "planta" a "supervisor",
+cuando guarda el cambio,
+entonces el sistema registra en el historial de auditoría el campo modificado, el valor
+anterior, el valor nuevo y quién hizo el cambio.
+
+**CP-05-03 (regla de negocio: solo el administrador puede modificar usuarios)**
+Dado un usuario autenticado con rol "supervisor" o "planta",
+cuando intenta editar los datos de otro usuario,
+entonces el sistema rechaza la solicitud por falta de permisos.
+
+---
+
+## HU-06 Asignar roles y permisos
+
+**CP-06-01 (criterio: el administrador puede asignar un rol y el sistema aplica los
+permisos correspondientes)**
+Dado un administrador que cambia el rol de un usuario a "supervisor",
+cuando el usuario afectado vuelve a iniciar sesión,
+entonces el sistema le concede acceso al módulo de Órdenes de Producción, correspondiente a
+su nuevo rol.
+
+**CP-06-02 (criterio: los usuarios solo visualizan los módulos autorizados)**
+Dado un usuario con rol "planta",
+cuando intenta acceder directamente a la URL del módulo de Usuarios o de Órdenes de
+Producción,
+entonces el sistema le niega el acceso, sin importar que conozca la ruta.
+
+**CP-06-03 (regla de negocio: cada usuario debe tener un único rol principal)**
+Dado un usuario existente con rol "planta",
+cuando el administrador le asigna el rol "supervisor",
+entonces el sistema reemplaza el rol anterior por el nuevo, sin que el usuario quede con más
+de un rol activo a la vez.
+
+---
+
+## HU-10 Crear Orden de Producción
+
+**CP-10-01 (criterio: se puede crear una nueva OP y el sistema asigna un número único)**
+Dado un usuario de Planeación autenticado que diligencia producto, cantidad, materia prima
+y observaciones,
+cuando guarda la nueva Orden de Producción,
+entonces el sistema la crea con un número de orden único generado automáticamente y estado
+"Planeación".
+
+**CP-10-02 (criterio: todos los campos obligatorios son validados)**
+Dado un usuario de Planeación que intenta crear una OP dejando vacío el campo "producto" o
+"materia prima", o con cantidad igual o menor a cero,
+cuando envía el formulario,
+entonces el sistema rechaza la creación e informa cuál campo es inválido.
+
+**CP-10-03 (criterio: la orden queda disponible para continuar hacia Picky)**
+Dado una OP recién creada en estado "Planeación",
+cuando se consulta su estado,
+entonces figura como disponible para ser liberada hacia Picky.
+
+**CP-10-04 (regla de negocio: no pueden existir dos órdenes con el mismo número)**
+Dado que ya existen Órdenes de Producción creadas previamente,
+cuando se crea una nueva OP,
+entonces el número de orden asignado por el sistema es distinto a los de todas las órdenes
+existentes.
+
+---
+
+## HU-11 Editar Orden de Producción
+
+**CP-11-01 (criterio: se puede modificar una OP en estado Planeación y el sistema guarda los
+cambios)**
+Dado una OP en estado "Planeación",
+cuando el usuario de Planeación edita su cantidad, producto, materia prima, urgencia u
+observaciones y guarda,
+entonces el sistema actualiza la información correctamente.
+
+**CP-11-02 (criterio: el sistema registra fecha, hora y usuario de la modificación)**
+Dado una OP en estado "Planeación" que es editada,
+cuando se guarda el cambio,
+entonces el sistema registra en el historial el campo modificado, los valores anterior y
+nuevo, quién hizo el cambio y cuándo.
+
+**CP-11-03 (criterio y regla de negocio: no es posible modificar una OP que ya inició
+producción / solo editable antes de liberarse a Picky)**
+Dado una OP que ya fue liberada y se encuentra en estado "Picky" (o posterior),
+cuando el usuario de Planeación intenta editarla,
+entonces el sistema rechaza la modificación indicando que la OP ya no está en Planeación.
+
+---
+
+## HU-12 Consultar Órdenes de Producción
+
+**CP-12-01 (criterio: el usuario puede consultar el listado de OP y ver su estado actual)**
+Dado un usuario autorizado (admin o supervisor) autenticado,
+cuando accede al listado de Órdenes de Producción,
+entonces el sistema muestra todas las OP con su información básica y su estado actual.
+
+**CP-12-02 (criterio: el usuario puede ingresar al detalle de una OP)**
+Dado un listado de Órdenes de Producción visible,
+cuando el usuario selecciona una OP específica,
+entonces el sistema muestra el detalle completo de esa orden.
+
+**CP-12-03 (regla de negocio: solo los usuarios autorizados pueden consultar órdenes)**
+Dado un usuario con rol "planta" sin acceso al módulo de Órdenes de Producción general,
+cuando intenta consultar el listado completo de OP,
+entonces el sistema le niega el acceso.
+
+---
+
+## HU-13 Liberar Orden de Producción a Picky
+
+**CP-13-01 (criterio: la OP cambia al estado "Picky" y queda disponible para ese personal)**
+Dado una OP en estado "Planeación" con todos los campos obligatorios completos,
+cuando el usuario de Planeación la libera hacia Picky,
+entonces el sistema cambia su estado a "Picky" y queda visible para el personal de esa
+etapa.
+
+**CP-13-02 (criterio y regla de negocio: si existen campos pendientes el sistema impide
+continuar / no puede liberarse una OP incompleta)**
+Dado una OP en estado "Planeación" con campos obligatorios incompletos,
+cuando el usuario intenta liberarla hacia Picky,
+entonces el sistema impide el cambio de estado e informa qué falta completar.
+
+---
+
+## HU-15 Consultar Orden de Producción en Picky
+
+**CP-15-01 (criterio: el operario puede visualizar las OP pendientes y solo las de Picky)**
+Dado que existen Órdenes de Producción en distintos estados (Planeación, Picky, Pesaje,
+etc.),
+cuando un operario de Picky consulta su listado de órdenes pendientes,
+entonces el sistema muestra únicamente las OP que están en estado "Picky".
+
+**CP-15-02 (criterio: se muestra la información necesaria para preparar los materiales)**
+Dado una OP en estado "Picky",
+cuando el operario consulta su detalle,
+entonces el sistema muestra el producto, la cantidad y la materia prima requerida para
+prepararla.
+
+---
+
+## HU-16 Registrar materiales preparados
+
+**CP-16-01 (criterio: el operario puede registrar los materiales preparados y quedan
+asociados a la OP)**
+Dado una OP en estado "Picky" que el operario está atendiendo,
+cuando registra los materiales preparados para esa orden,
+entonces el sistema almacena la información y la asocia correctamente a esa OP.
+
+---
+
+## HU-17 Confirmar envío a Pesaje
+
+**CP-17-01 (criterio: el sistema valida los datos y la OP cambia al estado Pesaje)**
+Dado una OP en Picky con los materiales preparados ya registrados completamente,
+cuando el operario confirma el envío a Pesaje,
+entonces el sistema cambia el estado de la OP a "Pesaje".
+
+**CP-17-02 (criterio: si existen datos pendientes el sistema impide continuar)**
+Dado una OP en Picky con información de materiales preparados incompleta,
+cuando el operario intenta confirmar el envío a Pesaje,
+entonces el sistema impide el cambio de estado e informa qué falta.
+
+---
+
+## HU-18 Consultar Orden de Producción en Pesaje
+
+**CP-18-01 (criterio: el operario visualiza solo las OP pendientes en Pesaje)**
+Dado que existen Órdenes de Producción en distintos estados,
+cuando un operario de Pesaje consulta su listado de órdenes pendientes,
+entonces el sistema muestra únicamente las OP en estado "Pesaje".
+
+**CP-18-02 (criterio: se visualiza la información necesaria para realizar el pesaje)**
+Dado una OP en estado "Pesaje",
+cuando el operario consulta su detalle,
+entonces el sistema muestra la información necesaria para pesar las materias primas
+correspondientes.
+
+---
+
+## HU-19 Registrar pesaje de materias primas
+
+**CP-19-01 (criterio: el operario puede registrar el pesaje y queda asociado a la OP)**
+Dado una OP en estado "Pesaje" que el operario está atendiendo,
+cuando registra las cantidades pesadas de las materias primas,
+entonces el sistema almacena la información y la asocia correctamente a esa OP.
+
+---
+
+## HU-20 Confirmar envío a Mezcla
+
+**CP-20-01 (criterio: el sistema valida la información y la OP cambia al estado Mezcla)**
+Dado una OP en Pesaje con la información de pesaje registrada completamente,
+cuando el operario confirma el envío a Mezcla,
+entonces el sistema cambia el estado de la OP a "Mezcla".
+
+**CP-20-02 (criterio: el sistema impide avanzar si existen datos pendientes)**
+Dado una OP en Pesaje con información de pesaje incompleta,
+cuando el operario intenta confirmar el envío a Mezcla,
+entonces el sistema impide el cambio de estado e informa qué falta.
 
 ---
 
