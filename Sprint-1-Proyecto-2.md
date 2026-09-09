@@ -307,29 +307,61 @@ Planeación → Picky → Pesaje que ya es funcional en este MVP.
 
 # 6. Calidad del Software
 
-Durante el Sprint 1 se definirán estándares técnicos que deberán ser utilizados por todos los integrantes del proyecto.
-
 ## 6.1 Estándares de nombramiento
 
-### Backend - Python / Django
+### Backend — Python / Django
 
-Se propone seguir las convenciones establecidas por PEP 8.
+El backend sigue las convenciones de **PEP 8**, el estándar oficial de nombramiento y estilo
+del lenguaje Python [1]:
 
-- Variables: `snake_case`
-- Funciones: `snake_case`
-- Métodos: `snake_case`
-- Clases: `PascalCase`
-- Constantes: `UPPER_SNAKE_CASE`
+| Elemento | Convención | Ejemplo real del proyecto |
+| --- | --- | --- |
+| Variables | `snake_case` | `numero_orden`, `creado_por` |
+| Funciones y métodos | `snake_case` | `_generar_numero_orden()`, `perform_update()` |
+| Clases | `PascalCase` | `OrdenProduccion`, `RegistroAuditoriaUsuario` |
+| Constantes | `UPPER_SNAKE_CASE` | `CAMPOS_AUDITADOS` |
 
-### Frontend - Vue / JavaScript
+**Justificación.** PEP 8 se eligió porque es el estándar oficial del lenguaje —definido por
+la Python Software Foundation— y es el que sigue Django internamente en su propio código
+fuente y en su documentación, por lo que mantiene el proyecto consistente con el framework
+que se está usando.
 
-Se utilizará una convención consistente para todo el frontend:
+### Frontend — Vue 3 / JavaScript
 
-- Variables: `camelCase`
-- Funciones: `camelCase`
-- Componentes Vue: `PascalCase`
-- Constantes: `UPPER_SNAKE_CASE`
+| Elemento | Convención | Ejemplo real del proyecto |
+| --- | --- | --- |
+| Variables y funciones | `camelCase` | `guardarEdicion()`, `erroresCrear` |
+| Componentes Vue | `PascalCase` | `GestionUsuarios.vue`, `OrdenesProduccion.vue` |
+| Constantes | `UPPER_SNAKE_CASE` | `ESTADO_BADGE` |
 
+**Justificación.** El nombramiento de componentes en `PascalCase` sigue la [Guía de Estilo
+Oficial de Vue.js][2], que lo marca como **fuertemente recomendado** ("strongly
+recommended"), precisamente para evitar ambigüedad con las etiquetas nativas de HTML (que
+son en minúsculas). El `camelCase` para variables y funciones sigue la convención estándar
+de JavaScript, tal como la documenta la [Guía de Estilo de JavaScript de Airbnb][3], una de
+las referencias más adoptadas por la comunidad para proyectos JS/Vue.
+
+#### Nombramiento enforzado por herramientas (no solo documentado)
+
+Ambos estándares ya están configurados para bloquear el código que no los cumpla, no
+dependen de que cada desarrollador se acuerde de seguirlos:
+
+- **Backend:** en `pyproject.toml`, Ruff tiene habilitado el grupo de reglas `"N"`
+  (`pep8-naming`), que revisa automáticamente que clases estén en `PascalCase` y
+  funciones/variables en `snake_case`.
+- **Frontend:** en `eslint.config.js`, `pluginVue.configs['flat/recommended']` incluye la
+  regla `vue/component-definition-name-casing` (fuerza `PascalCase` en componentes), y se
+  agregó explícitamente la regla `camelcase` para variables y funciones JS.
+- **Formateo automático:** Prettier (`.prettierrc.json`) corrige el estilo del código
+  frontend automáticamente al guardar, y Ruff (`ruff format`) hace lo mismo en el backend.
+
+**Referencias**
+
+1. Python Software Foundation — *PEP 8: Style Guide for Python Code*.
+   https://peps.python.org/pep-0008/
+2. Vue.js — *Guía de Estilo Oficial* (Component name casing in templates: strongly
+   recommended). https://vuejs.org/style-guide/
+3. Airbnb — *JavaScript Style Guide*. https://github.com/airbnb/javascript
 
 ---
 
