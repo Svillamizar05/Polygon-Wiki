@@ -363,27 +363,152 @@ dependen de que cada desarrollador se acuerde de seguirlos:
    recommended). https://vuejs.org/style-guide/
 3. Airbnb — *JavaScript Style Guide*. https://github.com/airbnb/javascript
 
+- Evidencia por medio del comando ruff check . en el backend
+
+<img width="1917" height="977" alt="image" src="https://github.com/user-attachments/assets/9c220ba4-b7fc-44be-90b6-688c5e3afdcf" />
+
+- Evidencia por medio del comando npx eslint . en el frontend
+
+<img width="1917" height="980" alt="image" src="https://github.com/user-attachments/assets/b8fe4542-d0d1-4035-bf6d-1bd2c85865eb" />
+
 ---
 
 ## 6.2 Análisis estático de código
 
-Como propuesta inicial para el proyecto se consideran las siguientes herramientas:
+El proyecto usa dos herramientas, una por cada lenguaje del stack, ambas ya integradas y
+configuradas:
 
-### Backend
+### Backend: Ruff
 
-**Ruff**
+**Qué es y por qué se eligió.** Ruff es un linter y formateador de código Python escrito en
+Rust [1]. Se eligió sobre alternativas más tradicionales (flake8 + isort + black por
+separado) porque combina en una sola herramienta y un solo archivo de configuración las
+reglas de estilo (pycodestyle), errores lógicos (pyflakes), orden de imports (isort),
+convenciones de nombres (pep8-naming), sintaxis moderna (pyupgrade), patrones propensos a
+bugs (flake8-bugbear) y buenas prácticas específicas de Django (flake8-django), además de
+formatear el código automáticamente — todo eso sin tener que instalar ni sincronizar
+configuraciones entre varias herramientas distintas.
 
-Permitirá detectar problemas de estilo, errores comunes y aplicar automáticamente diferentes reglas de formato para Python.
+**Configuración (`Backend/pyproject.toml`):**
 
-### Frontend
+```toml
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["migrations"]
 
-**ESLint**
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle (errores)
+    "W",   # pycodestyle (warnings)
+    "F",   # pyflakes (errores logicos: imports/variables sin usar, etc.)
+    "I",   # isort (orden de imports)
+    "N",   # pep8-naming (convenciones de nombres: clases, funciones, variables)
+    "UP",  # pyupgrade (sintaxis moderna de Python)
+    "B",   # flake8-bugbear (patrones propensos a bugs)
+    "C4",  # flake8-comprehensions (comprehensions mas claras/eficientes)
+    "SIM", # flake8-simplify (simplificacion de codigo)
+    "DJ",  # flake8-django (buenas practicas especificas de Django)
+]
+ignore = [
+    "DJ001", # permite null=True en CharField/TextField (uso comun para campos opcionales)
+]
 
-Permitirá analizar estáticamente el código JavaScript/Vue y detectar errores o incumplimientos de los estándares definidos.
+[tool.ruff.lint.isort]
+known-first-party = ["config", "apps"]
 
-**Prettier**
+[tool.ruff.format]
+quote-style = "single"
+```
 
-Se utilizará como herramienta de formateo automático para mantener un estilo homogéneo en el código frontend.
+**Justificación de esta configuración.** El conjunto de reglas seleccionado va más allá del
+modo por defecto de Ruff (que solo trae `E` y `F`): se optó deliberadamente por un modo más
+estricto, cercano al recomendado por la comunidad para proyectos Django, agregando `N`
+(nombramiento, ver sección 6.1), `B` (errores comunes que no son sintácticos pero sí
+riesgosos) y `DJ` (buenas prácticas propias del framework). Se ignora únicamente `DJ001`
+porque el equipo decidió permitir `null=True` en campos de texto opcionales
+(`observaciones`, por ejemplo), un caso de uso legítimo y frecuente en este proyecto.
+`exclude = ["migrations"]` evita que Ruff revise archivos autogenerados por Django, que no
+tiene sentido "corregir" a mano.
+
+**Ejecución:** `ruff check .` (revisión) y `ruff format .` (corrección automática de
+estilo). Corrido sobre el código de las apps `usuarios` y `produccion`, no reporta errores.
+
+### Frontend: ESLint + Prettier
+
+**Qué son y por qué se eligieron.** ESLint es el linter estándar de facto para JavaScript
+[2], y `eslint-plugin-vue` es el plugin oficial mantenido por el equipo de Vue.js para
+analizar archivos `.vue` [3]. Prettier es el formateador de código más usado en el
+ecosistema JavaScript/Vue [4]. Se usan juntos porque cada uno cubre un problema distinto:
+ESLint detecta errores y malas prácticas (variables sin usar, nombres de componentes mal
+formados, etc.), y Prettier resuelve el formato/estilo visual (comillas, punto y coma,
+indentación) — por eso al final de la configuración de ESLint se desactiva
+`eslint-config-prettier`, para que las reglas de estilo de ambas herramientas no compitan
+entre sí.
+
+**Configuración (`Frontend/eslint.config.js`):**
+
+```js
+export default [
+  { ignores: ['dist/**', 'node_modules/**'] },
+
+  js.configs.recommended,
+  ...pluginVue.configs['flat/recommended'],
+
+  {
+    rules: {
+      camelcase: ['warn', { properties: 'never' }],
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      'vue/multi-word-component-names': 'off',
+    },
+  },
+
+  configPrettier,
+]
+```
+
+**Justificación de esta configuración.** `eslint-plugin-vue` ofrece tres niveles de estrictez
+oficiales: `essential` (mínimo, evita errores), `strongly-recommended` (agrega estilo) y
+`recommended` (el más estricto de los tres) [3]. El proyecto adoptó directamente
+**`flat/recommended`**, el modo más estricto disponible, en línea con lo que sugiere el
+documento maestro ("modo estricto o recomendado por la comunidad"). Se desactivó
+puntualmente `vue/multi-word-component-names` porque el proyecto tiene componentes de una
+sola palabra a propósito (`Badge.vue`, `Login.vue`) donde el riesgo que esa regla previene
+—colisión con futuras etiquetas nativas de HTML— no aplica. `camelcase` se agregó de forma
+explícita para reforzar la convención de nombres documentada en la sección 6.1.
+
+**Configuración de Prettier (`Frontend/.prettierrc.json`):**
+
+```json
+{
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 100,
+  "trailingComma": "all",
+  "arrowParens": "always"
+}
+```
+
+**Ejecución:** `npx eslint .` (revisión) y Prettier se integra en el editor/al guardar para
+formatear automáticamente. Corrido sobre `Frontend/src`, no reporta errores.
+
+### Puntos adicionales cubiertos
+
+- **Nombramiento enforzado por la herramienta:** sí, en ambos lados (`N` en Ruff,
+  `vue/component-definition-name-casing` + `camelcase` en ESLint) — detalle completo en la
+  sección 6.1.
+- **Corrección automática de estilo (formateador):** sí, en ambos lados (`ruff format` en el
+  backend, Prettier en el frontend).
+
+**Referencias**
+
+1. Astral — *Ruff: An extremely fast Python linter and code formatter*.
+   https://docs.astral.sh/ruff/
+2. ESLint — *Getting Started with ESLint*.
+   https://eslint.org/docs/latest/use/getting-started
+3. eslint-plugin-vue — *User Guide* (niveles essential / strongly-recommended /
+   recommended). https://eslint.vuejs.org/user-guide/
+4. Prettier — *Documentación oficial*. https://prettier.io/docs/en/index.html
 
 ---
 
