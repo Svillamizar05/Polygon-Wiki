@@ -979,11 +979,56 @@ Una Historia de Usuario únicamente será considerada finalizada cuando:
 
 # 9. Ceremonias del Sprint
 
-Evidencias reuniones Sprint 1
+Durante el Sprint 1 el equipo realizó las cuatro ceremonias de Scrum: Sprint Planning,
+Daily Scrum, Sprint Review y Retrospectiva. A continuación se documenta cada una con su
+respectiva evidencia (actas, grabaciones y capturas).
 
-<img width="1917" height="867" alt="image" src="https://github.com/user-attachments/assets/91498aa9-6fb7-41e0-af14-aa1f800c2f2d" />
+## Sprint Planning
 
-Para ver las actas y las grabaciones dirigirse a la sección de la Wiki titulada "Polygon"
+**Objetivo.** Definir el Sprint Goal y seleccionar las Historias de Usuario del backlog que el equipo se comprometió a entregar en el Sprint 1.
+
+| Campo | Detalle |
+| --- | --- |
+| Fecha | 4 de agosto |
+| Participantes | equipo Polygon |
+| Acuerdos / HU seleccionadas | Sprint Goal ya definido en la sección 2 de este documento |
+
+## Daily Scrum
+
+**Objetivo.** Sincronizar al equipo diariamente sobre avances, bloqueos y próximos pasos
+durante la ejecución del Sprint.
+
+| Campo | Detalle |
+| --- | --- |
+| Frecuencia | semanal (cada lunes a las 8 pm) |
+| Participantes habituales | equipo Polygon |
+
+## Sprint Review
+
+**Objetivo.** Mostrar al equipo el incremento funcional logrado en el Sprint 1 frente al Sprint Goal planteado.
+
+| Campo | Detalle |
+| --- | --- |
+| Fecha | 4 de septiembre |
+| Participantes | equipo de Polygon y equipo de Sumicolor |
+
+## Retrospectiva
+
+**Objetivo.** Identificar qué funcionó bien, qué no, y qué acciones concretas se llevan al siguiente Sprint para mejorar como equipo.
+
+| Campo | Detalle |
+| --- | --- |
+| Fecha | 7 de septiembre |
+| Participantes | equipo Polygon |
+| Qué funcionó bien | se realizó la consolidación de todas la HUs, se actualizó el Backlog del repositorio y se mostraron los bugs encontrados en la página |
+| Qué se puede mejorar | Bugs reportados |
+| Acciones para el Sprint 2 | El CI/CD pendiente que documentamos en la sección 6.3/6.4 queda pendiente como un acuerdo |
+
+- Evidencia de las ceremonias
+
+<img width="1917" height="867" alt="Captura de pantalla 2026-09-08 231715" src="https://github.com/user-attachments/assets/51a3fe80-b038-4f28-aa9c-ab8db141f583" />
+
+Si se quiere revisar a profundidad cada grabación o acta, diríjase a la pagina de la Wiki titulada "Polygon"
 
 ---
 
