@@ -297,14 +297,30 @@ Ningún paso usa `continue-on-error`: cualquier paso con código de salida disti
 
 Evaluar la usabilidad del prototipo de Polygon con usuarios finales (operarios y personal de planeación de Sumicolor), para verificar que la aplicación es eficaz, eficiente y satisfactoria en el registro del proceso productivo y en la lectura del estado de las OP.
 
-### 3.2 Logística de la sesión
+Este objetivo responde a los requisitos no funcionales definidos en el Sprint 0 (`docs/context/SprintsWiki/Sprint0_Proyecto2_Sumicolor.md`): **RNF-06 Usabilidad** (interfaz minimalista, pocos clics, botones grandes, colores distinguibles, navegación simple), **RNF-07 Accesibilidad** (tipografía grande, alto contraste, iconografía clara, mensajes sencillos, formularios simples) y **RNF-08 Compatibilidad** (computadores de escritorio, tabletas Android, Chrome y Edge).
+
+### 3.2 Perfil de usuario (según Sprint 0)
+
+El sistema está diseñado para **operarios de planta con distintos niveles de experiencia tecnológica** y para **personal de planeación**. El Sprint 0 justifica las decisiones de diseño (SPA, interfaz intuitiva, RNF-06/07) por este perfil: trabajadores que antes registraban el proceso en papel y cuya curva de aprendizaje debe minimizarse (`docs/context/SprintsWiki/Sprint0_Proyecto2_Sumicolor.md`, Planteamiento del problema y justificación del Frontend SPA).
+
+Criterios de reclutamiento del participante objetivo:
+
+| Atributo | Criterio |
+|----------|----------|
+| Experiencia tecnológica | Baja a media; preferir participantes que registraban el proceso en papel. |
+| Edad | Perfil representativo de la planta, incluyendo **personas mayores de 50 años**, por ser el grupo donde la baja experiencia tecnológica y las limitaciones de visión/motricidad fina más impactan la usabilidad (ver RNF-07). |
+| Dispositivo habitual | Tableta Android y/o computador de escritorio, según su estación de trabajo. |
+
+> El Sprint 0 describe el perfil como "operarios de planta con distintos niveles de experiencia tecnológica" y motiva RNF-06/07 con ese perfil; el rango de edad concreto (mayores de 50 años) es la interpretación del equipo para efectos de reclutamiento. Confirmar la distribución real de edades y experiencia por rol con el Product Owner: `__(completar: distribución de edades y experiencia tecnológica del personal real)__`.
+
+### 3.3 Logística de la sesión
 
 - **Lugar:** instalaciones de Sumicolor S.A. (estación con computador/tablet de planta). `__(completar: sala o estación exacta)__`
 - **Fecha prevista:** Sprint 3. `__(completar: fecha de la sesión)__`
 - **Duración estimada:** 30-45 minutos por participante.
 - **Flujo de la sesión:** (1) adecuación del equipo, (2) contextualización del usuario, (3) ejecución de tareas con preguntas, (4) agradecimiento y cierre.
 
-### 3.3 Participantes y roles
+### 3.4 Participantes y roles
 
 | Rol en la prueba | Perfil del usuario |
 |------------------|--------------------|
@@ -314,45 +330,72 @@ Evaluar la usabilidad del prototipo de Polygon con usuarios finales (operarios y
 | Facilitador | Integrante del equipo que guía la sesión |
 | Observador | Integrante del equipo que toma notas y mide |
 
-### 3.4 Equipos usados
+> Alcance de la ejecución en el Sprint 3: las tareas probables se limitan a las etapas con funcionalidad entregada (Pesaje, Mezcla y envío a Extrusión) más la lectura del estado y la leyenda de colores de las OP (sección 1.1). Las etapas aún no entregadas (Picking, Calidad, Empaque) se incorporarán al protocolo cuando su funcionalidad esté disponible, siguiendo este mismo formato.
+
+### 3.5 Equipos usados
 
 - Computador portátil o tablet Android con la aplicación Polygon abierta en navegador (Chrome/Edge).
 - Herramienta de grabación de pantalla y de voz (previa autorización del participante).
 - Formato de observación impreso o digital para registrar tiempos y errores.
 
-### 3.5 Hipótesis, tareas, preguntas y criterios de evaluación
+### 3.6 Hipótesis, tareas, preguntas y criterios de evaluación
 
-Cada hipótesis tiene una tarea observable, al menos una pregunta y criterios medibles (tiempo, tasa de éxito, número de errores, satisfacción 1-5).
+Cada hipótesis parte de una decisión de diseño (RNF del Sprint 0 o regla de negocio del flujo entregado) y tiene una tarea observable alineada con un objetivo real del rol, al menos una pregunta y criterios medibles (tiempo, tasa de éxito, número de errores, satisfacción 1-5). Las tareas se limitan a las etapas con funcionalidad entregada en el Sprint 2 (ver 3.4).
 
 **Hipótesis 1 — El usuario distingue sin ayuda las OP normales, urgentes y de acompañamiento por el color de su hoja.**
+- Decisión de diseño: leyenda de colores con colores fácilmente distinguibles (RNF-06) y la mejora de notación de colores entregada en el Sprint 2 (sección 9.3).
+- Rol/objetivo real: cualquier operario que consulta el listado necesita priorizar las OP según su clasificación.
 - Tarea: identificar en el listado una OP urgente, una normal y una de acompañamiento de IP.
 - Pregunta (después): ¿qué significa cada color y dónde consultó la notación?
 - Criterios: tasa de éxito >= 90 %; sin ayuda del facilitador; satisfacción >= 4/5.
 
 **Hipótesis 2 — El operario encuentra y registra el proceso de Mezcla sin ayuda externa.**
+- Decisión de diseño: navegación simple y formularios sencillos (RNF-06/07) para el registro de la etapa de Mezcla (HU-22).
+- Rol/objetivo real: el operario de mezcla consulta la orden y registra el proceso de mezclado (Sprint 0, "Personal de Mezcla").
 - Tarea: registrar un turno de mezcla con datos válidos y confirmar que la OP avanza.
 - Pregunta (antes): ¿dónde cree que debe registrar el proceso de Mezcla?
 - Criterios: completa la tarea en < 5 min; <= 1 error de navegación.
 
 **Hipótesis 3 — El usuario comprende el estado y la etapa de una OP con solo mirar la pantalla.**
+- Decisión de diseño: interfaz minimalista con información de estado clara (RNF-06) y trazabilidad visible de la OP (RNF-05).
+- Rol/objetivo real: cualquier rol necesita saber en qué etapa está la OP y qué sigue, para dar continuidad al proceso.
 - Tarea: dado el detalle de una OP, explicar en qué etapa está y cuál es el siguiente paso.
 - Pregunta (después): ¿la información en pantalla fue suficiente? ¿Qué faltó?
 - Criterios: explica correctamente etapa y siguiente paso en >= 80 % de los casos.
 
 **Hipótesis 4 — El operario de Pesaje registra las cantidades y envía a Mezcla sin bloqueos inesperados.**
+- Decisión de diseño: validación de campos obligatorios que impide avanzar con datos incompletos, con mensajes sencillos (RNF-07); flujo de pesaje y envío a Mezcla (HU-19, HU-20).
+- Rol/objetivo real: el operario de pesaje registra los pesos de las materias primas; el sistema no permite avanzar si falta información obligatoria (Sprint 0, "Personal de Pesaje").
 - Tarea: registrar el pesaje de materias primas y confirmar el envío a Mezcla.
 - Pregunta (después): ¿el sistema le indicó con claridad qué faltaba cuando intentó avanzar?
 - Criterios: completa la tarea en < 6 min; comprende los mensajes de validación.
 
 **Hipótesis 5 — Los mensajes de error al ingresar datos inválidos son claros y accionables.**
+- Decisión de diseño: mensajes sencillos y accionables (RNF-07) sobre las validaciones de los formularios.
+- Rol/objetivo real: cualquier operario que diligencia un formulario necesita corregir datos sin ayuda cuando el sistema los rechaza.
 - Tarea: intentar enviar un registro con un campo obligatorio vacío o un valor fuera de rango.
 - Pregunta (después): ¿el mensaje le dijo qué salió mal y cómo corregirlo?
 - Criterios: identifica la causa del error sin ayuda en >= 80 % de los casos.
 
 **Hipótesis 6 — El usuario recorre el flujo entre etapas (Pesaje -> Mezcla -> Extrusión) sin perderse.**
+- Decisión de diseño: navegación simple entre etapas (RNF-06) y la regla de que una OP solo avanza al completar la información obligatoria de la etapa actual (HU-20, HU-23).
+- Rol/objetivo real: la OP recorre las etapas y cada rol debe continuar el proceso sin confundir su etapa con otra.
 - Tarea: seguir una OP a través de las etapas disponibles.
 - Pregunta (después): ¿en algún punto dudó sobre a dónde ir? ¿En cuál?
 - Criterios: completa el recorrido sin retrocesos innecesarios; satisfacción >= 4/5.
+
+### 3.7 Resumen de criterios medibles (transversal)
+
+Las mismas cuatro métricas se registran en todas las tareas para poder comparar resultados entre hipótesis:
+
+| Métrica | Cómo se mide | Instrumento |
+|---------|--------------|-------------|
+| Tiempo en tarea | Segundos desde el inicio hasta completar la tarea con éxito. | Cronómetro / grabación de pantalla. |
+| Tasa de éxito | % de participantes que completan la tarea sin ayuda del facilitador. | Formato de observación. |
+| Errores | N.º de acciones incorrectas, intentos fallidos de avanzar y usos de ayuda. | Formato de observación. |
+| Satisfacción | Puntaje en cuestionario post-tarea y global (Likert 1-5 o SUS). | Cuestionario de satisfacción. |
+
+Los umbrales por hipótesis están propuestos arriba; el equipo y el Product Owner los confirman antes del Sprint 3: `__(completar: validación de umbrales de tiempo, éxito y errores por tarea)__`.
 
 
 ---
