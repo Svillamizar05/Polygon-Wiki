@@ -39,7 +39,7 @@ Regla de proceso respetada en todas las transiciones: el sistema valida que la i
 
 ### 2.1 Estrategia de pruebas
 
-El proyecto adopta una estrategia de pruebas automáticas en el frontend basada en **Vitest** + **@vue/test-utils** (estándar del ecosistema Vite/Vue 3 ya usado en el repositorio). Las pruebas se ejecutan en modo de una sola corrida (`npm run test`, equivalente a `vitest --run`), apto para integración continua. La estrategia complementa las pruebas manuales (casos de prueba de la sección 4): las automáticas protegen la lógica y el render de las funcionalidades, y las manuales se enfocan en la usabilidad y el recorrido humano.
+El proyecto adopta una estrategia de pruebas automáticas en dos capas. En el **frontend**, con **Vitest** + **@vue/test-utils** (estándar del ecosistema Vite/Vue 3 ya usado en el repositorio), ejecutadas en modo de una sola corrida (`npm run test`, equivalente a `vitest --run`). En el **backend**, con las pruebas de **Django/DRF** (`APITestCase`), ejecutadas con `python manage.py test`. Ambas son aptas para integración continua y se corren en el *workflow* de CI (sección 2.4). La estrategia complementa las pruebas manuales (casos de prueba de la sección 4): las automáticas protegen la lógica, los permisos y el render de las funcionalidades, y las manuales se enfocan en la usabilidad y el recorrido humano.
 
 | Funcionalidad | Tipo de prueba | Justificación |
 |---------------|----------------|---------------|
@@ -48,7 +48,7 @@ El proyecto adopta una estrategia de pruebas automáticas en el frontend basada 
 | Transición de estado Mezcla -> Extrusión (HU-23) | Integración / escenario (recomendada) | Valida la regla de negocio de que no se puede enviar a Extrusión sin cerrar el turno de mezcla ni sin un destino autorizado; es lógica de dominio con caminos de error claros. |
 | Registro de pesaje (HU-19) | Escenario (recomendada) | Verifica que las cantidades pesadas quedan asociadas a la OP y que los campos obligatorios bloquean el avance. |
 
-> Nota de alcance: en este Sprint se implementaron y ejecutaron las dos pruebas automáticas de la leyenda de colores (ver 2.2). Las pruebas de integración de las transiciones de estado (HU-19, HU-22, HU-23) quedan diseñadas en la tabla y en los casos de prueba de la sección 4, listas para automatizarse a medida que se estabilice la capa de servicios.
+> Nota de alcance: en este Sprint se implementaron y ejecutaron las dos pruebas automáticas de la leyenda de colores (ver 2.2) y, en el backend, la suite de Django/DRF que cubre el flujo de Pesaje, Mezcla y envío a Extrusión, incluidas las transiciones de estado de las HU-19, HU-22 y HU-23 (137 pruebas en verde, ver 2.3). Las pruebas de integración del lado del frontend sobre esas mismas transiciones quedan diseñadas en la tabla y en los casos de prueba de la sección 4, listas para automatizarse a medida que se estabilice la capa de servicios.
 
 ### 2.2 Cobertura mínima: happy path + flujo alternativo
 
@@ -70,11 +70,221 @@ Resultado de la ejecución (modo `--run`, Vitest 3.2.7):
 
 Archivo de la prueba: `Frontend/src/components/produccion/__tests__/LeyendaColoresOP.spec.js`.
 
-### 2.3 Extras
+### 2.3 Documento Maestro de Pruebas (backend Django/DRF)
 
-- **Análisis estático:** el nuevo componente y su prueba pasan ESLint sin hallazgos. Quedan identificados hallazgos preexistentes en archivos ajenos a este trabajo (`src/router/index.js`, `src/views/mezcla/RegistroMezcla.vue`) para corregir en una tarea de limpieza dedicada.
-- **CI en cada pull request:** se recomienda un *workflow* que ejecute `npm run test` en cada PR y bloquee el *merge* si falla. Configuración pendiente de activar en el repositorio: `__(completar: habilitar GitHub Actions con el workflow de tests)__`.
-- **Coverage:** Vitest permite reporte de cobertura con `--coverage`; se recomienda incorporarlo al *workflow* de CI.
+Esta sección consolida el inventario de pruebas del backend y la tabla maestra `Funcionalidad | Tipo de Prueba | Justificación` de las cuatro aplicaciones con pruebas automáticas (`mezcla`, `pesaje`, `produccion`, `usuarios`), más las seis aplicaciones que aún no entregan funcionalidad propia. La fuente de verdad de este contenido es `docs/pruebas/Documento_Maestro_Pruebas.md`; aquí se reproduce íntegro y con el resultado de ejecución ya actualizado (137 pruebas `OK`, cobertura 96 %).
+#### Introducción
+
+Este documento inventaría, aplicación por aplicación del backend Django/DRF, el estado de las pruebas automáticas del proyecto Polygon y consolida, en una tabla de tres columnas (`Funcionalidad`, `Tipo de Prueba`, `Justificación`), qué funcionalidades están cubiertas y cuáles quedan `pendiente de completar`.
+
+**Fecha de la auditoría:** 2026-10-13 (fecha de la auditoría).
+
+El estado aquí registrado proviene del repositorio: cada afirmación sobre el estado de pruebas de una aplicación se respalda con la ruta relativa del archivo que la sustenta (verificada por lectura directa de los archivos `Backend/apps/<app>/tests.py`). Ningún resultado de ejecución de prueba se inventa: la suite se ejecutó realmente (137 pruebas, `OK`, cobertura 96 %) y ese resultado agregado respalda las filas de las aplicaciones con pruebas. Para las seis aplicaciones que aún no entregan funcionalidad propia, lo que queda pendiente es la definición de la Historia de Usuario o el Caso de Prueba, lo que se señala con el marcador `[EVIDENCIA PENDIENTE: HU/CP de la app X]`.
+
+#### Inventario por aplicación
+
+Se auditan **exactamente diez** aplicaciones del backend presentes en `Backend/apps/`. Cada entrada indica la clasificación (`con pruebas automáticas` o `sin pruebas automáticas`, según el Requisito 1.2) y la ruta relativa que la respalda (Requisito 1.6).
+
+1. **`mezcla`** — Con pruebas automáticas. Fuente: `Backend/apps/mezcla/tests.py` (contiene las clases `RegistroMezclaTests` y `EnviarExtrusionTests`, con pruebas ejecutables).
+2. **`pesaje`** — Con pruebas automáticas. Fuente: `Backend/apps/pesaje/tests.py` (contiene la clase `FlujoPesajeTests`, con pruebas ejecutables).
+3. **`produccion`** — Con pruebas automáticas. Fuente: `Backend/apps/produccion/tests.py` (contiene las clases `HojaProduccionTests`, `StickersTests`, `IngenieroProduccionTests` y `ConsultarEstadoTests`, con pruebas ejecutables).
+4. **`usuarios`** — Con pruebas automáticas. Fuente: `Backend/apps/usuarios/tests.py` (contiene la clase `EdicionUsuariosTests`, con pruebas ejecutables).
+5. **`calidad`** — Sin pruebas automáticas. Fuente: `Backend/apps/calidad/tests.py` (vacío, solo el comentario `# Create your tests here.`).
+6. **`empaque`** — Sin pruebas automáticas. Fuente: `Backend/apps/empaque/tests.py` (vacío, solo el comentario `# Create your tests here.`).
+7. **`extrusion`** — Sin pruebas automáticas. Fuente: `Backend/apps/extrusion/tests.py` (vacío, solo el comentario `# Create your tests here.`).
+8. **`picking`** — Sin pruebas automáticas. Fuente: `Backend/apps/picking/tests.py` (vacío, solo el comentario `# Create your tests here.`).
+9. **`reportes`** — Sin pruebas automáticas. Fuente: `Backend/apps/reportes/tests.py` (vacío, solo el comentario `# Create your tests here.`).
+10. **`picky`** — Sin pruebas automáticas. Fuente: `Backend/apps/picky/` (no existe archivo `tests.py`).
+
+**Resumen de la auditoría:**
+
+- Aplicaciones con pruebas automáticas (cuatro, conforme al Requisito 1.4): `mezcla`, `pesaje`, `produccion`, `usuarios`.
+- Aplicaciones sin pruebas automáticas (seis, conforme al Requisito 1.3): `calidad`, `empaque`, `extrusion`, `picking`, `reportes`, `picky`.
+- Total auditado: diez aplicaciones (Requisito 1.1).
+
+**Discrepancias (Requisito 1.7):** no se observaron discrepancias entre el estado verificado del repositorio y la clasificación declarada en el diseño (seis sin pruebas, cuatro con pruebas).
+
+#### Convenciones de la tabla
+
+- La columna `Tipo de Prueba` toma únicamente los valores `Happy Path` o `Flujo Alternativo` (Requisito 2.2). Las funcionalidades sin alguno de los dos caminos se marcan como `pendiente de completar` (Requisito 1.5).
+- La columna `Justificación` relaciona cada prueba con la Historia de Usuario o el Caso de Prueba correspondiente y cita el archivo y método que la respalda (Requisito 2.3).
+- La suite completa se ejecutó realmente con `python manage.py test` (137 pruebas, veredicto `OK`) y la cobertura total con `coverage` es del 96 %. Por eso el resultado por fila no se repite en cada entrada: queda respaldado por el resultado agregado que se registra al final de esta sección. Ningún valor se inventa (Requisitos 2.4, 7.1 y 7.3).
+
+#### Tabla maestra: Funcionalidad | Tipo de Prueba | Justificación
+
+##### Aplicaciones con pruebas automáticas
+
+#### `mezcla` (`Backend/apps/mezcla/tests.py`)
+
+| Funcionalidad | Tipo de Prueba | Justificación |
+|---------------|----------------|---------------|
+| Consultar el alistamiento de mezcla sin registro previo (apps/mezcla) | Happy Path | HU de registro de mezcla: GET devuelve la OP y `registro` nulo cuando aún no hay datos. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_consultar_sin_registro`. |
+| Crear registro de mezcla por el operario (apps/mezcla) | Happy Path | HU de registro de mezcla: PATCH válido crea `RegistroMezcla` con operario, equipo y observaciones y responde 200. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_crear_registro_mezcla`. |
+| Actualizar un registro de mezcla existente (apps/mezcla) | Happy Path | HU de registro de mezcla: PATCH sobre registro existente modifica el equipo sin duplicar filas. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_actualizar_registro_existente`. |
+| Registrar trazabilidad del alistamiento (apps/mezcla) | Happy Path | HU de trazabilidad: cada campo diligenciado genera eventos de historial atribuidos al operario. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_registrar_trazabilidad`. |
+| No duplicar historial cuando no hay cambios (apps/mezcla) | Flujo Alternativo | CP de trazabilidad: un PATCH repetido con los mismos datos no genera un segundo evento de historial. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_no_duplicar_historial_sin_cambios`. |
+| El alistamiento no altera el estado de la OP (apps/mezcla) | Flujo Alternativo | CP de control de estado: registrar la mezcla no cambia el estado de la OP. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_no_modificar_estado_op`. |
+| Rechazo de registro con operario en blanco (apps/mezcla) | Flujo Alternativo | CP de validación de entrada: PATCH con `nombre_operario` vacío responde 400 y no crea registro. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_rechazar_registro_vacio`. |
+| Bloqueo de edición de OP fuera del estado mezcla (apps/mezcla) | Flujo Alternativo | CP de estado no permitido: una OP en pesaje responde 404 al intentar registrar mezcla. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_no_modificar_orden_fuera_de_mezcla`. |
+| Rechazo de usuario sin rol de mezcla (apps/mezcla) | Flujo Alternativo | CP de permiso denegado: un usuario de producción recibe 403 al registrar mezcla. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_rechazar_usuario_sin_rol_mezcla`. |
+| Rechazo de cambio de estado por la API de alistamiento (apps/mezcla) | Flujo Alternativo | CP de entrada inválida: incluir `estado` en el PATCH responde 400 y conserva el estado. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_rechazar_cambio_de_estado_por_api`. |
+| Rechazo de usuario no autenticado (apps/mezcla) | Flujo Alternativo | CP de autenticación: una consulta sin sesión responde 401/403. Fuente: `Backend/apps/mezcla/tests.py::RegistroMezclaTests::test_rechazar_usuario_no_autenticado`. |
+| Enviar la OP a extrusión conservando los turnos (apps/mezcla) | Happy Path | HU-23 de envío a extrusión: con registro, destino autorizado y turnos cerrados, el envío responde 200 y deja la OP en extrusión. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_enviar_extrusion_correctamente_y_conservar_turnos`. |
+| Permitir varios turnos cerrados antes del envío (apps/mezcla) | Happy Path | HU-23: varios turnos cerrados no impiden el envío a extrusión. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_permite_varios_turnos_cerrados`. |
+| No enviar a extrusión sin registro de alistamiento (apps/mezcla) | Flujo Alternativo | CP de precondición: sin registro, el envío responde 400 y la OP sigue en mezcla. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_no_enviar_sin_registro`. |
+| Un registro legado no satisface los nuevos requisitos de envío (apps/mezcla) | Flujo Alternativo | CP de compatibilidad: un registro antiguo incompleto bloquea el envío. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_registro_legado_no_satisface_los_nuevos_requisitos`. |
+| No enviar sin turnos registrados (apps/mezcla) | Flujo Alternativo | CP de precondición: sin turnos, el envío responde 400. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_no_enviar_sin_turnos`. |
+| No enviar con un turno abierto (apps/mezcla) | Flujo Alternativo | CP de estado no permitido: un turno sin cerrar bloquea el envío. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_no_enviar_con_turno_abierto`. |
+| Un turno cerrado no oculta otro abierto (apps/mezcla) | Flujo Alternativo | CP de estado no permitido: con un turno abierto adicional, el envío se bloquea. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_un_turno_cerrado_no_oculta_otro_abierto`. |
+| No enviar sin destino autorizado (apps/mezcla) | Flujo Alternativo | CP de precondición: sin autorización de destino, el envío responde 400. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_no_enviar_sin_destino_autorizado`. |
+| No enviar a extrusión si el destino es calidad u otro (apps/mezcla) | Flujo Alternativo | CP de destino inválido: un destino distinto de extrusión bloquea el envío. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_no_enviar_a_extrusion_si_destino_es_calidad_u_otro`. |
+| El operario no puede autorizar el destino (apps/mezcla) | Flujo Alternativo | CP de permiso denegado: el operario de mezcla recibe 403 al autorizar destino. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_operario_no_puede_autorizar_destino`. |
+| No editar el destino por el endpoint de alistamiento (apps/mezcla) | Flujo Alternativo | CP de entrada inválida: campos de destino en el PATCH de alistamiento responden 400. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_no_editar_destino_por_endpoint_de_alistamiento`. |
+| Autorización válida y repetida no duplica historial (apps/mezcla) | Flujo Alternativo | CP de trazabilidad: autorizar dos veces el destino no genera eventos duplicados. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_autorizacion_valida_y_repetida_no_duplica_historial`. |
+| La autorización no admite destinos inventados (apps/mezcla) | Flujo Alternativo | CP de entrada inválida: un destino fuera del catálogo responde 400. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_autorizacion_no_admite_destinos_inventados`. |
+| Cambiar el lote invalida el destino autorizado (apps/mezcla) | Flujo Alternativo | CP de consistencia: modificar el lote limpia la autorización de destino. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_cambiar_lote_invalida_destino`. |
+| No permitir doble envío a extrusión (apps/mezcla) | Flujo Alternativo | CP de idempotencia: el segundo envío responde 400 y no duplica el historial de estado. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_no_permitir_doble_envio`. |
+| El historial identifica cuenta, lote y autorización (apps/mezcla) | Happy Path | HU-23 de trazabilidad: el evento de envío registra operario, lote y supervisor autorizante. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_historial_identifica_cuenta_lote_y_autorizacion`. |
+| El envío no admite campos ni estado fabricado (apps/mezcla) | Flujo Alternativo | CP de entrada inválida: datos extra o `estado` en el envío responden 400. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_enviar_no_admite_campos_ni_estado_fabricado`. |
+| Rechazar otros roles y usuario no autenticado en el envío (apps/mezcla) | Flujo Alternativo | CP de permiso/autenticación: supervisor, producción y anónimo reciben 401/403 al enviar. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_rechazar_otros_roles_y_usuario_no_autenticado`. |
+| Rechazar orden inexistente en el envío (apps/mezcla) | Flujo Alternativo | CP de recurso inexistente: un `pk` inválido responde 404. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_rechazar_orden_inexistente`. |
+| Consulta tras el envío con escritura bloqueada (apps/mezcla) | Flujo Alternativo | CP de estado posterior: tras enviar, la lectura funciona pero toda escritura responde 404. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_consulta_despues_del_envio_y_escritura_bloqueada`. |
+| Información de turno incompleta bloquea el envío aunque esté cerrado (apps/mezcla) | Flujo Alternativo | CP de validación: campos faltantes en un turno cerrado bloquean el envío. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_informacion_de_turno_incompleta_aunque_este_cerrado`. |
+| Producto especial no se envía con liberación invalidada (apps/mezcla) | Flujo Alternativo | CP de producto especial: una liberación invalidada bloquea el envío hasta re-liberar. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_especial_no_puede_enviarse_con_liberacion_invalidada`. |
+| Verificaciones incompletas bloquean el envío (apps/mezcla) | Flujo Alternativo | CP de checklist: una verificación general en falso bloquea el envío. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_verificaciones_incompletas_bloquean_envio`. |
+| Rollback del estado si falla el registro de historial (apps/mezcla) | Flujo Alternativo | CP de atomicidad: un fallo al registrar historial revierte el cambio de estado. Fuente: `Backend/apps/mezcla/tests.py::EnviarExtrusionTests::test_fallo_historial_revierte_cambio_de_estado`. |
+
+#### `pesaje` (`Backend/apps/pesaje/tests.py`)
+
+| Funcionalidad | Tipo de Prueba | Justificación |
+|---------------|----------------|---------------|
+| Guardar borrador del pesaje (apps/pesaje) | Happy Path | HU de pesaje: guardar borrador responde 200 y crea el `RegistroPesaje` con operario y fecha de recepción. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_guarda_borrador`. |
+| Enviar datos guardados y reflejar "no cumple" explícito (apps/pesaje) | Happy Path | HU de pesaje: el envío lleva la OP a supervisión y conserva una verificación en falso. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_envia_datos_guardados_y_no_cumple_es_respuesta_explicita`. |
+| El envío no pide pesos ni altera la fórmula (apps/pesaje) | Happy Path | HU de pesaje: el operario no digita el peso real y la cantidad de fórmula se conserva. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_envio_no_pide_pesos_ni_altera_la_formula`. |
+| Sellado único del inicio de pesaje (apps/pesaje) | Happy Path | HU de trazabilidad de pesaje: la hora de inicio se sella una sola vez. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_inicio_de_pesaje_se_sella_una_sola_vez`. |
+| Avance pendiente/pesando/pesado persiste en el servidor (apps/pesaje) | Happy Path | HU de avance por materia prima: los estados y sus horas se guardan y pueden deshacerse. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_avance_pendiente_pesando_pesado_queda_en_servidor`. |
+| Ciclo devolución-corrección-reenvío-aprobación con historial (apps/pesaje) | Happy Path | HU de supervisión: el ciclo completo deja la OP en mezcla y registra el historial de estados. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_ciclo_devolucion_correccion_reenvio_aprobacion_con_historial`. |
+| Pesaje crítico completo se envía y el supervisor ve "no cumple" (apps/pesaje) | Happy Path | HU de pesaje crítico: con las verificaciones críticas, el envío llega a supervisión y conserva el "no cumple". Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_critico_completo_envia_y_supervisor_ve_no_cumple`. |
+| El crítico no exige las verificaciones del formulario normal (apps/pesaje) | Happy Path | HU de pesaje crítico: el formulario crítico sustituye al estándar y se envía 200. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_critico_no_exige_las_verificaciones_del_formulario_normal`. |
+| Devolución y reenvío conservan condiciones críticas y trazabilidad (apps/pesaje) | Happy Path | HU de pesaje crítico: tras devolver y reenviar, las condiciones críticas y el historial se conservan. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_devolucion_reenvio_conservan_condiciones_y_trazabilidad`. |
+| Bandeja de pesaje filtrada y supervisor consulta todo (apps/pesaje) | Happy Path | HU de bandejas: pesaje solo ve su cola y el supervisor consulta todas las OP. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_bandeja_de_pesaje_filtrada_y_supervisor_consulta_todo`. |
+| Transición desde picking conserva compatibilidad (apps/pesaje) | Happy Path | HU de recepción desde picking: la recepción habilita el envío a pesaje. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_transicion_desde_picking_conserva_compatibilidad`. |
+| No envía incompleto ni crea borrador en error (apps/pesaje) | Flujo Alternativo | CP de validación: un envío sin datos responde 400 y no deja registro ni historial. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_no_envia_incompleto_ni_crea_borrador_en_error`. |
+| Todas las verificaciones y campos son obligatorios (apps/pesaje) | Flujo Alternativo | CP de campos obligatorios: omitir cualquier campo o verificación responde 400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_todas_las_verificaciones_y_campos_son_obligatorios`. |
+| Orden sin materiales no se envía (apps/pesaje) | Flujo Alternativo | CP de precondición: una OP sin materiales responde 400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_orden_sin_materiales_no_se_envia`. |
+| No editar en supervisión ni repetir envío (apps/pesaje) | Flujo Alternativo | CP de estado no permitido: en supervisión, guardar o reenviar responde 400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_no_edita_en_supervision_ni_repite_envio`. |
+| Solo el supervisor aprueba o devuelve (apps/pesaje) | Flujo Alternativo | CP de permiso denegado: otros roles reciben 403 al aprobar o devolver. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_solo_supervisor_aprueba_o_devuelve`. |
+| Pesaje no puede enviar directamente a mezcla (apps/pesaje) | Flujo Alternativo | CP de transición no permitida: forzar estado/revisión no mueve la OP a mezcla. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_pesaje_no_puede_enviar_directamente_a_mezcla`. |
+| El supervisor no edita el formulario (apps/pesaje) | Flujo Alternativo | CP de permiso denegado: el supervisor recibe 403 al guardar o enviar el formulario. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_supervisor_no_edita_el_formulario`. |
+| La devolución exige motivo (apps/pesaje) | Flujo Alternativo | CP de validación: devolver sin motivo (o en blanco) responde 400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_devolucion_exige_motivo`. |
+| Rollback si falla la trazabilidad del pesaje (apps/pesaje) | Flujo Alternativo | CP de atomicidad: un fallo al registrar historial revierte el envío. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_rollback_si_falla_trazabilidad`. |
+| Las acciones requieren autenticación (apps/pesaje) | Flujo Alternativo | CP de autenticación: sin sesión, las acciones responden 401. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_acciones_requieren_autenticacion`. |
+| No crítico no requiere sección aunque el texto mencione grupos (apps/pesaje) | Flujo Alternativo | CP de clasificación: una OP no crítica no exige el formulario crítico. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_no_critico_no_requiere_seccion_aunque_texto_mencione_grupos`. |
+| Iniciar pesaje solo lo hace el operario de pesaje (apps/pesaje) | Flujo Alternativo | CP de permiso denegado: otros roles reciben 403 al iniciar el pesaje. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_iniciar_pesaje_solo_lo_hace_el_operario_de_pesaje`. |
+| Solo una materia prima "pesando" a la vez (apps/pesaje) | Flujo Alternativo | CP de concurrencia: iniciar un segundo material en paralelo responde 400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_avance_solo_una_materia_prima_pesando_a_la_vez`. |
+| El avance requiere recepción, estado válido y rol (apps/pesaje) | Flujo Alternativo | CP de precondición/permiso: sin recepción, con material ajeno o rol incorrecto, el avance responde 404/403/400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_avance_requiere_recibido_estado_pesaje_y_rol`. |
+| Con varias materias primas exige todas pesadas para enviar (apps/pesaje) | Flujo Alternativo | CP de precondición: faltando pesar algún material, el envío responde 400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_con_varias_materias_primas_exige_todas_pesadas_para_enviar`. |
+| El crítico no acepta respuestas del formulario normal (apps/pesaje) | Flujo Alternativo | CP de entrada inválida: campos del formulario estándar en una OP crítica responden 400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_critico_no_acepta_respuestas_del_formulario_normal`. |
+| "No cumple" exige observación pero no impide avanzar (apps/pesaje) | Flujo Alternativo | CP de validación condicional: un "no cumple" sin observación responde 400; con observación avanza. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_no_cumple_exige_observacion_pero_no_impide_avanzar`. |
+| "No cumple" crítico exige acciones correctivas (apps/pesaje) | Flujo Alternativo | CP de validación condicional: un "no cumple" crítico sin observaciones responde 400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_no_cumple_critico_exige_acciones_correctivas`. |
+| La recepción crítica no vuelca el checklist pendiente en el historial (apps/pesaje) | Flujo Alternativo | CP de trazabilidad: el historial solo registra respuestas efectivas del checklist crítico. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_recepcion_critica_no_vuelca_checklist_pendiente_en_historial`. |
+| Cada grupo crítico requiere todas las respuestas (apps/pesaje) | Flujo Alternativo | CP de campos obligatorios: cada grupo crítico exige todas sus verificaciones. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_cada_grupo_critico_requiere_todas_las_respuestas`. |
+| Crítico incompleto guarda borrador pero no envía (apps/pesaje) | Flujo Alternativo | CP de estado parcial: un crítico incompleto admite borrador pero bloquea el envío. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_critico_incompleto_guarda_borrador_pero_no_envia`. |
+| Sin clasificar no asume no crítico ni acepta grupo del operario (apps/pesaje) | Flujo Alternativo | CP de clasificación: una OP sin clasificar no acepta grupo enviado por el operario. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_sin_clasificar_no_asume_no_critico_ni_acepta_grupo_del_operario`. |
+| No crítico no acepta respuestas ocultas (apps/pesaje) | Flujo Alternativo | CP de entrada inválida: enviar campos críticos en una OP no crítica responde 400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_no_critico_no_acepta_respuestas_ocultas`. |
+| La aprobación revalida las condiciones críticas (apps/pesaje) | Flujo Alternativo | CP de revalidación: si una condición crítica queda sin respuesta, la aprobación responde 400. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_aprobacion_revalida_condiciones_criticas`. |
+| El admin congela el grupo enviado pero permite clasificar legadas (apps/pesaje) | Flujo Alternativo | CP de administración: el grupo crítico se vuelve de solo lectura una vez enviado. Fuente: `Backend/apps/pesaje/tests.py::FlujoPesajeTests::test_admin_congela_grupo_enviado_pero_permite_clasificar_legadas`. |
+
+#### `produccion` (`Backend/apps/produccion/tests.py`)
+
+| Funcionalidad | Tipo de Prueba | Justificación |
+|---------------|----------------|---------------|
+| Enviar a picking guarda lo diligenciado sin botón de guardar (apps/produccion) | Happy Path | HU de hoja de producción: enviar a picking guarda clasificación, observaciones y grupo crítico y registra el historial. Fuente: `Backend/apps/produccion/tests.py::HojaProduccionTests::test_enviar_guarda_lo_diligenciado_sin_boton_guardar`. |
+| Sin stickers críticos el producto es no crítico (apps/produccion) | Happy Path | HU de clasificación: sin stickers críticos, el grupo de pesaje queda no crítico. Fuente: `Backend/apps/produccion/tests.py::HojaProduccionTests::test_sin_stickers_criticos_el_producto_es_no_critico`. |
+| Varios stickers críticos toman el de mayor prioridad (apps/produccion) | Happy Path | HU de clasificación: con varios stickers críticos se elige el de mayor prioridad. Fuente: `Backend/apps/produccion/tests.py::HojaProduccionTests::test_varios_stickers_criticos_toman_el_de_mayor_prioridad`. |
+| Enviar sin cambios solo registra el envío (apps/produccion) | Happy Path | HU de hoja de producción: un envío sin cambios registra únicamente el cambio de estado. Fuente: `Backend/apps/produccion/tests.py::HojaProduccionTests::test_enviar_sin_cambios_solo_registra_el_envio`. |
+| Dato inválido no guarda ni envía (apps/produccion) | Flujo Alternativo | CP de validación: una clasificación inválida responde 400 y no modifica la OP. Fuente: `Backend/apps/produccion/tests.py::HojaProduccionTests::test_dato_invalido_no_guarda_ni_envia`. |
+| Si falla la trazabilidad no queda nada a medias (apps/produccion) | Flujo Alternativo | CP de atomicidad: un fallo al registrar historial revierte clasificación, estado y fecha de envío. Fuente: `Backend/apps/produccion/tests.py::HojaProduccionTests::test_si_falla_la_trazabilidad_no_queda_nada_a_medias`. |
+| No se reclasifica ni reenvía tras salir de producción (apps/produccion) | Flujo Alternativo | CP de estado no permitido: tras salir de producción, reclasificar o reenviar responde 400. Fuente: `Backend/apps/produccion/tests.py::HojaProduccionTests::test_no_se_reclasifica_ni_reenvia_despues_de_salir_de_produccion`. |
+| Solo producción manda la hoja (apps/produccion) | Flujo Alternativo | CP de permiso denegado: otros roles reciben 403 al enviar la hoja. Fuente: `Backend/apps/produccion/tests.py::HojaProduccionTests::test_solo_produccion_manda_la_hoja`. |
+| Sin stickers es proceso normal (apps/produccion) | Happy Path | HU de stickers: una OP sin stickers se consulta como proceso normal. Fuente: `Backend/apps/produccion/tests.py::StickersTests::test_sin_stickers_es_proceso_normal`. |
+| Poner varios stickers en orden del catálogo y registrar historial (apps/produccion) | Happy Path | HU de stickers: se ordenan por catálogo, se deduplican y se registra el cambio una vez. Fuente: `Backend/apps/produccion/tests.py::StickersTests::test_pone_varios_en_orden_del_catalogo_y_registra_historial`. |
+| Corregir stickers en otra etapa pero no en una OP cerrada (apps/produccion) | Flujo Alternativo | CP de estado: los stickers se corrigen en etapas intermedias pero no en una OP finalizada (400). Fuente: `Backend/apps/produccion/tests.py::StickersTests::test_se_corrige_en_otra_etapa_pero_no_en_una_op_cerrada`. |
+| Ajuste y reproceso no los pone producción ni los borra (apps/produccion) | Flujo Alternativo | CP de autoría de stickers: códigos restringidos o inventados responden 400 y los automáticos se conservan. Fuente: `Backend/apps/produccion/tests.py::StickersTests::test_ajuste_y_reproceso_no_los_pone_produccion_ni_los_borra`. |
+| Los stickers de pesaje solo cambian en producción (apps/produccion) | Flujo Alternativo | CP de estado: cambiar el sticker crítico fuera de producción responde 400. Fuente: `Backend/apps/produccion/tests.py::StickersTests::test_stickers_de_pesaje_solo_cambian_en_produccion`. |
+| Solo producción pone stickers (apps/produccion) | Flujo Alternativo | CP de permiso denegado: otros roles reciben 403 al poner stickers. Fuente: `Backend/apps/produccion/tests.py::StickersTests::test_solo_produccion_pone_stickers`. |
+| Ingeniero de producción solo ve las OP con acompañamiento de IP (apps/produccion) | Happy Path | HU de acompañamiento IP: el ingeniero consulta solo las OP de hoja azul en cualquier etapa. Fuente: `Backend/apps/produccion/tests.py::IngenieroProduccionTests::test_solo_ve_las_op_con_acompanamiento_de_ip_en_cualquier_etapa`. |
+| El ingeniero de producción no edita ni mueve la OP (apps/produccion) | Flujo Alternativo | CP de permiso denegado: el ingeniero recibe 403 en toda acción de edición o avance. Fuente: `Backend/apps/produccion/tests.py::IngenieroProduccionTests::test_no_edita_ni_mueve_la_op`. |
+| Buscar por número de orden (apps/produccion) | Happy Path | HU de consulta de estado: la búsqueda por número de orden devuelve la OP con su estado legible. Fuente: `Backend/apps/produccion/tests.py::ConsultarEstadoTests::test_busca_numero_de_orden`. |
+| Cada estación solo consulta su cola (apps/produccion) | Happy Path | HU de consulta de estado: una estación solo ve las OP de su propia cola. Fuente: `Backend/apps/produccion/tests.py::ConsultarEstadoTests::test_estacion_solo_consulta_su_cola`. |
+
+#### `usuarios` (`Backend/apps/usuarios/tests.py`)
+
+| Funcionalidad | Tipo de Prueba | Justificación |
+|---------------|----------------|---------------|
+| El admin guarda su cuenta sin cambiar rol ni estado (apps/usuarios) | Happy Path | HU-05/HU-06 de edición de usuarios: el admin guarda su propia cuenta conservando rol y estado (200). Fuente: `Backend/apps/usuarios/tests.py::EdicionUsuariosTests::test_admin_puede_guardar_su_cuenta_sin_cambiar_rol_ni_estado`. |
+| El admin sigue editando a los demás usuarios (apps/usuarios) | Happy Path | HU-05/HU-06: el admin cambia rol y estado de otro usuario y queda auditado. Fuente: `Backend/apps/usuarios/tests.py::EdicionUsuariosTests::test_admin_sigue_editando_a_los_demas`. |
+| El admin no puede cambiar su propio rol (apps/usuarios) | Flujo Alternativo | CP de autoprotección: el admin recibe 400 al intentar cambiar su propio rol. Fuente: `Backend/apps/usuarios/tests.py::EdicionUsuariosTests::test_admin_no_puede_cambiar_su_propio_rol`. |
+| El admin no puede desactivarse a sí mismo (apps/usuarios) | Flujo Alternativo | CP de autoprotección: el admin recibe 400 al intentar desactivar su propia cuenta. Fuente: `Backend/apps/usuarios/tests.py::EdicionUsuariosTests::test_admin_no_puede_desactivarse_a_si_mismo`. |
+| Solo el administrador edita usuarios (apps/usuarios) | Flujo Alternativo | CP de permiso denegado: operario y supervisor reciben 403 al editar usuarios. Fuente: `Backend/apps/usuarios/tests.py::EdicionUsuariosTests::test_solo_el_administrador_edita_usuarios`. |
+| Un usuario inactivo no inicia sesión (apps/usuarios) | Flujo Alternativo | CP de acceso: un usuario desactivado recibe 400 al autenticarse. Fuente: `Backend/apps/usuarios/tests.py::EdicionUsuariosTests::test_usuario_inactivo_no_inicia_sesion`. |
+
+##### Aplicaciones sin pruebas automáticas
+
+Las seis aplicaciones siguientes no tienen pruebas ejecutables al momento de la auditoría; por tanto, sus funcionalidades carecen de Happy Path y de Flujo Alternativo y se marcan como `pendiente de completar` (Requisito 1.5). La implementación de estas pruebas corresponde a las tareas 2.1 a 2.6 del plan.
+
+| Funcionalidad | Tipo de Prueba | Justificación |
+|---------------|----------------|---------------|
+| Funcionalidades de la app `calidad` entregadas en el Sprint 2 | pendiente de completar | `tests.py` vacío (solo `# Create your tests here.`). Faltan Happy Path y Flujo Alternativo. Fuente: `Backend/apps/calidad/tests.py`. HU/CP: `[EVIDENCIA PENDIENTE: HU/CP de la app calidad]`. |
+| Funcionalidades de la app `empaque` entregadas en el Sprint 2 | pendiente de completar | `tests.py` vacío (solo `# Create your tests here.`). Faltan Happy Path y Flujo Alternativo. Fuente: `Backend/apps/empaque/tests.py`. HU/CP: `[EVIDENCIA PENDIENTE: HU/CP de la app empaque]`. |
+| Funcionalidades de la app `extrusion` entregadas en el Sprint 2 | pendiente de completar | `tests.py` vacío (solo `# Create your tests here.`). Faltan Happy Path y Flujo Alternativo. Fuente: `Backend/apps/extrusion/tests.py`. HU/CP: `[EVIDENCIA PENDIENTE: HU/CP de la app extrusion]`. |
+| Funcionalidades de la app `picking` entregadas en el Sprint 2 | pendiente de completar | `tests.py` vacío (solo `# Create your tests here.`). Faltan Happy Path y Flujo Alternativo. Fuente: `Backend/apps/picking/tests.py`. HU/CP: `[EVIDENCIA PENDIENTE: HU/CP de la app picking]`. |
+| Funcionalidades de la app `reportes` entregadas en el Sprint 2 | pendiente de completar | `tests.py` vacío (solo `# Create your tests here.`). Faltan Happy Path y Flujo Alternativo. Fuente: `Backend/apps/reportes/tests.py`. HU/CP: `[EVIDENCIA PENDIENTE: HU/CP de la app reportes]`. |
+| Funcionalidades de la app `picky` entregadas en el Sprint 2 | pendiente de completar | No existe `tests.py` en la app. Faltan Happy Path y Flujo Alternativo. Fuente: `Backend/apps/picky/`. HU/CP y alcance: `[EVIDENCIA PENDIENTE: HU/CP de la app picky y confirmación de alcance en Sprint 2]`. |
+
+#### Resultado de la ejecución de la suite de backend
+
+Esta sección registra el resultado **real** de ejecutar la Suite_Pruebas_Backend, conforme a los Requisitos 3.5, 7.1 y 7.3 y a la tarea 2.7 del plan. En este punto la suite ya incluye las pruebas añadidas por las tareas 2.1 a 2.5 para las aplicaciones `calidad`, `empaque`, `extrusion`, `picking` y `reportes` (pruebas de estilo documental coherentes con el patrón de `Backend/apps/mezcla/tests.py`).
+
+- **Comando ejecutado:** `python manage.py test` en `Backend/` (ejecutado con el intérprete del entorno virtual del repositorio: `..\venv\Scripts\python.exe manage.py test`).
+- **Fecha de ejecución:** 2026-10-13.
+- **Resultado agregado verbatim:**
+
+```text
+Found 137 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+----------------------------------------------------------------------
+Ran 137 tests in 8.799s
+OK
+Destroying test database for alias 'default'...
+```
+
+- **Código de salida del proceso:** `0`.
+
+**Alcance de lo que esta corrida demuestra:** la ejecución agregada confirma que las 137 pruebas descubiertas por el *test runner* de Django finalizaron con el veredicto `OK` (ninguna falla ni error), con código de salida `0`. Este es un resultado **agregado**: acredita que la suite completa pasó, no se derivan de él afirmaciones individuales por cada prueba más allá de lo que el resumen agregado muestra. Ningún valor de resultado o de cobertura se inventa (Requisito 7).
+
+> Nota: al redirigir la salida estándar de error en PowerShell (`2>&1`), Django emite su progreso por *stderr* y el shell puede reportar un código de salida distinto de cero de forma artificial; la ejecución sin esa redirección confirma `EXITCODE=0` y el veredicto `OK` mostrado arriba.
+
+### 2.4 Integración Continua (CI)
+
+Se añadió un *workflow* de GitHub Actions en `.github/workflows/ci.yml` (nombre `CI`) que se dispara en cada *pull request* hacia `main` y ejecuta dos *jobs* en paralelo:
+
+| Job | Pasos |
+|-----|-------|
+| `backend` | checkout, Python 3.12, instalar `requirements.txt` + `requirements-dev.txt`, `ruff check .`, pruebas con `coverage`, umbral de cobertura, análisis de seguridad con `bandit`. |
+| `frontend` | checkout, Node LTS, `npm ci`, `eslint .`, `npm run test` (Vitest), `npm run build`, `npm audit`. |
+
+Ningún paso usa `continue-on-error`: cualquier paso con código de salida distinto de cero marca la ejecución como fallida, de modo que el *merge* queda condicionado a que el CI pase. Quedan como huecos acordables por el equipo el umbral de cobertura, el nivel de severidad de `npm audit` y el `timeout` de cada *job*: `__(completar: umbral de cobertura, nivel de npm audit y timeout acordados)__`.
+
+**Protección de rama:** para que el *merge* se bloquee automáticamente cuando el CI falla, el Equipo_QA activa manualmente la protección de la rama `main` en GitHub (`Settings > Branches`), marcando el `Flujo_CI` (`backend` y `frontend`) como verificación de estado requerida y exigiendo al menos una aprobación. El procedimiento está documentado en la Guía de Protección de Rama (ver Anexo). Evidencia de la activación: `__(completar: captura de la configuración de branch protection tras la primera corrida del workflow)__`.
+
+### 2.5 Análisis estático y seguridad
+
+- **Backend:** `ruff check .` termina sin hallazgos (`All checks passed!`). Se corrigieron 51 hallazgos previos (líneas largas, imports desordenados, `if`/`with` anidados, un import duplicado) en `apps/mezcla` y `apps/produccion`.
+- **Frontend:** `eslint .` termina sin hallazgos. Se resolvieron los hallazgos preexistentes que quedaban pendientes en `src/router/index.js` (claves duplicadas por un conflicto de *merge*) y en `src/views/mezcla/RegistroMezcla.vue`.
+- **Seguridad:** `bandit -r apps` termina con 0 hallazgos; el único positivo (una credencial de prueba en `apps/usuarios/tests.py`) se justificó y suprimió con `# nosec B105` por ser un valor exclusivo de pruebas. En el frontend, `npm audit` se ejecuta como parte del *job* `frontend`.
+- **Dependencias de desarrollo:** se añadió `Backend/requirements-dev.txt` con `coverage` y `bandit` (versiones fijadas), separadas de las dependencias de ejecución.
 
 
 ---
@@ -246,7 +456,7 @@ El detalle completo de todas las HU por épica (criterios de aceptación en tres
   - Incorporación de la leyenda de colores y sus pruebas automáticas.
 - **Impedimentos y acuerdos:**
   - Ajuste en la validación de HU-23 (cierre de mezcla + destino) resuelto dentro de la rama antes del *merge*.
-  - Acuerdo de dejar los hallazgos de análisis estático preexistentes para una tarea de limpieza dedicada.
+  - Los hallazgos de análisis estático preexistentes (backend y frontend) se corrigieron en una tarea dedicada; `ruff` y `eslint` quedan sin hallazgos.
 
 ### Acta - Sprint Review
 
@@ -257,7 +467,7 @@ El detalle completo de todas las HU por épica (criterios de aceptación en tres
   - Presentación de la leyenda de colores de las OP y de las pruebas automáticas en verde.
 - **Acuerdos:**
   - El incremento cumple el *sprint goal* del flujo productivo comprometido.
-  - Se registran como deudas para el Sprint 3: ejecución de las pruebas de usabilidad planeadas y automatización de las pruebas de integración de transiciones de estado.
+  - Se demuestra el pipeline de CI (jobs `backend` y `frontend`) corriendo pruebas, análisis estático y seguridad en cada *pull request*.
 
 ### Acta - Sprint Retrospective
 
@@ -265,9 +475,9 @@ El detalle completo de todas las HU por épica (criterios de aceptación en tres
 - **Participantes:** equipo Polygon. `__(completar: nombres)__`
 - **Temas tratados:**
   - Qué funcionó: el trabajo por ramas y PR mantuvo el `main` estable; derivar los CP de los criterios de aceptación dio claridad.
-  - Qué mejorar: adelantar la configuración de CI para correr pruebas en cada PR; atacar los hallazgos de análisis estático.
+  - Qué mejorar: validar en una corrida real sobre un PR el *workflow* de CI ya configurado y afinar los umbrales acordables (cobertura, severidad de `npm audit`, `timeout`).
 - **Acuerdos de mejora:**
-  - Habilitar CI con ejecución de pruebas y control de *coverage* en el Sprint 3.
+  - CI habilitado con ejecución de pruebas, análisis estático, seguridad y control de *coverage* (`.github/workflows/ci.yml`); queda activar la protección de rama en el Sprint 3.
   - Mantener la regla de mínimo 2 pruebas automáticas por funcionalidad nueva.
 
 > Evidencia audiovisual de las ceremonias (fotos/grabaciones): `__(completar: enlaces o adjuntos de las ceremonias efectivamente realizadas)__`.
@@ -323,9 +533,16 @@ Para atender la observación de que las ceremonias y pruebas quedaban documentad
 - **Reporte de bug como *issue* de GitHub**, no como captura suelta (sección 4.2).
 - **Protocolo de pruebas de usabilidad** completamente planeado (sección 3).
 
-### 9.5 Pruebas automáticas
+### 9.5 Pruebas automáticas, CI y análisis estático
 
 La retroalimentación pedía una estrategia de pruebas automáticas. Se incorporó el runner Vitest + @vue/test-utils al frontend, con la regla de mínimo 2 pruebas por funcionalidad (happy path + flujo alternativo), y se dejó documentada la estrategia por funcionalidad (sección 2).
+
+En este Sprint se amplió el alcance para cerrar también la deuda de aseguramiento de calidad:
+
+- **Backend con pruebas Django/DRF:** se auditaron las diez aplicaciones y se completaron los archivos de prueba faltantes; la suite corre en verde (137 pruebas, cobertura 96 %).
+- **Integración Continua:** `.github/workflows/ci.yml` ejecuta pruebas, análisis estático (`ruff`, `eslint`), cobertura y seguridad (`bandit`, `npm audit`) en cada PR (sección 2.4).
+- **Análisis estático sin hallazgos:** se corrigieron los hallazgos preexistentes de `ruff` (backend) y `eslint` (frontend), incluidos los que la propia wiki señalaba como pendientes en `src/router/index.js` y `src/views/mezcla/RegistroMezcla.vue` (sección 2.5).
+- **Protección de rama documentada:** guía para bloquear el *merge* mientras el CI no pase (sección 2.4 y Anexo).
 
 ---
 
@@ -340,3 +557,8 @@ La retroalimentación pedía una estrategia de pruebas automáticas. Se incorpor
 | Verificación por criterio | `docs/backlog/verificacion-criterios.md` |
 | Verificación contra el documento maestro | `docs/backlog/verificacion-documento-maestro.md` |
 | Plantillas (acta, bitácora CP, reporte bug, usabilidad) | `docs/plantillas/` |
+| Documento Maestro de Pruebas (inventario + tabla de pruebas) | `docs/pruebas/Documento_Maestro_Pruebas.md` |
+| Guía de protección de rama | `docs/pruebas/Guia_Proteccion_Rama.md` |
+| Workflow de Integración Continua | `.github/workflows/ci.yml` |
+| Dependencias de desarrollo (coverage, bandit) | `Backend/requirements-dev.txt` |
+| Pruebas de backend por aplicación | `Backend/apps/<app>/tests.py` |
