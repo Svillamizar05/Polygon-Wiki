@@ -2,11 +2,10 @@
 
 > Wiki del Sprint 2 del Proyecto Integrador 2. La estructura sigue el documento maestro del Sprint 2 (secciones: Desarrollo de código / MVP, Pruebas automáticas de software, Protocolo de pruebas de usabilidad, Casos de prueba, Backlog y ceremonias, Caso de negocio y Sustentación). Al final se añade una sección propia: **Mejoras de la retroalimentación de sprints pasados**.
 >
-> Convención: donde una fecha o un nombre concreto deba confirmarlo el equipo, aparece un hueco corto del tipo `__(completar)__`. El resto del contenido está redactado y cerrado.
 
 ## Sprint Goal
 
-Iterar y profundizar el desarrollo del MVP de Polygon, avanzando de forma substancial en el flujo productivo: consolidar las etapas de **Pesaje**, **Mezcla** y el envío a **Extrusión**, manteniendo la trazabilidad de cada Orden de Producción (OP) entre etapas y respetando la regla de que una OP no avanza mientras falte información obligatoria de la etapa actual. En paralelo, se cierran las deudas de documentación y consistencia señaladas en la retroalimentación de los Sprints 0 y 1.
+Iterar y profundizar el desarrollo del MVP de Polygon, avanzando de forma substancial en el flujo productivo: consolidar las etapas de **Pesaje**, **Mezcla**, el envío a **Extrusión** y **Control de Calidad** (incluida la decisión de aprobación, ajuste o reproceso), manteniendo la trazabilidad de cada Orden de Producción (OP) entre etapas y respetando la regla de que una OP no avanza mientras falte información obligatoria de la etapa actual. En paralelo, se cierran las deudas de documentación y consistencia señaladas en la retroalimentación de los Sprints 0 y 1.
 
 ---
 
@@ -14,22 +13,21 @@ Iterar y profundizar el desarrollo del MVP de Polygon, avanzando de forma substa
 
 ### 1.1 Cumplimiento funcional
 
-Durante el Sprint 2 se trabajó sobre el flujo de ejecución del proceso productivo (épica EP-04) y las mejoras de interfaz asociadas a la lectura de las OP. Las historias de usuario trabajadas en este Sprint, con su estado en el repositorio, son:
+Durante el Sprint 2 se trabajó sobre el flujo de ejecución del proceso productivo (épicas EP-02, EP-03, EP-04 y EP-05), avanzando la cadena **Mezcla → Extrusión → Control de Calidad**. Las nueve historias de usuario comprometidas en el Sprint 2 (según el GitHub Project "Backlog Polygon", filtro `sprint:"Sprint 2"`), con su número de *issue* y su estado verificado en el repositorio, son:
 
-| HU | Título | Etapa del proceso | Estado | Evidencia en el repositorio |
-|----|--------|-------------------|--------|------------------------------|
-| HU-19 | Registrar pesaje de materias primas | Pesaje | Implementada | [PR #47](https://github.com/SimonCastroV/Polygon/pull/47); `Frontend/src/views/pesaje/` y `Backend/apps/pesaje/` |
-| HU-20 | Confirmar envío a Mezcla | Pesaje -> Supervisión -> Mezcla | Implementada | [PR #47](https://github.com/SimonCastroV/Polygon/pull/47); validaciones de supervisión y transición de estado |
-| HU-22 | Registrar proceso de Mezcla | Mezcla | Implementada | [PR #54](https://github.com/SimonCastroV/Polygon/pull/54); `Frontend/src/views/mezcla/RegistroMezcla.vue` |
-| HU-23 | Confirmar envío a Extrusión | Mezcla -> Extrusión | Implementada | [PR #56](https://github.com/SimonCastroV/Polygon/pull/56); validación del cierre de mezcla y destino autorizado |
+| HU | Issue | Título | Etapa / épica | Estado en el repositorio | Evidencia (código verificado) |
+|----|-------|--------|---------------|--------------------------|-------------------------------|
+| HU-21 | #29 | Consultar Orden de Producción en Mezcla | Mezcla (EP-04) | Implementada | Cola por rol en `Backend/apps/produccion/views.py` (`ordenes_visibles_para`, filtro `estado=MEZCLA`); `Frontend/src/views/mezcla/OrdenesMezcla.vue` |
+| HU-22 | #30 | Registrar proceso de Mezcla | Mezcla (EP-04) | Implementada | `Backend/apps/mezcla/views.py` (`RegistroMezclaView`, `TurnosMezclaView`); `Frontend/src/views/mezcla/RegistroMezcla.vue`; [PR #54](https://github.com/SimonCastroV/Polygon/pull/54) |
+| HU-23 | #31 | Confirmar envío a Extrusión | Mezcla → Extrusión (EP-04) | Implementada | `Backend/apps/mezcla/views.py` (`EnviarSiguienteProcesoView`, circuito supervisor); `Frontend/src/views/mezcla/OrdenMezclaDetalle.vue` |
+| HU-24 | #32 | Gestionar proceso de Extrusión | Extrusión (EP-04) | Implementada | `Backend/apps/extrusion/views.py` (`RegistroExtrusionView`, `TurnosExtrusionView`, `CartaProcesosView`); `Frontend/src/views/extrusion/` |
+| HU-25 | #33 | Finalizar Extrusión | Extrusión → Calidad (EP-04) | Implementada | `Backend/apps/extrusion/views.py` (`EnviarSiguienteProcesoView` avanza la OP a `calidad`); `Frontend/src/views/extrusion/OrdenExtrusionDetalle.vue` |
+| HU-26 | #34 | Gestionar Control de Calidad | Calidad (EP-05) | Implementada | `Backend/apps/calidad/views.py` (`IniciarCalidadView`, `GuardarCalidadView`, `FinalizarCalidadView`); `Frontend/src/views/calidad/OrdenCalidadDetalle.vue` |
+| HU-27 | #35 | Aprobar o enviar a reproceso | Calidad (EP-05) | Implementada | `Backend/apps/calidad/views.py` (`FinalizarCalidadView.aprobar/pedir_ajuste/pedir_reproceso`, `EnviarReprocesoView`, `ConvertirEnAjusteView`); `Frontend/src/views/calidad/` |
 
 **Mejora adicional de interfaz:** se implementó una leyenda de notación de colores de las OP para facilitar la identificación de las clasificaciones Proceso normal, Urgente y Acompañamiento de IP. Esta mejora está documentada en el [PR #59](https://github.com/SimonCastroV/Polygon/pull/59) y cuenta con dos pruebas automáticas de componente. Su identificador en el backlog está pendiente de confirmación, ya que HU-03 corresponde a Recuperar contraseña.
 
-En **HU-19**, el operario registra las verificaciones operacionales y controla el avance de cada materia prima mediante los estados Pendiente, Pesando y Pesado. El sistema conserva la información asociada a la OP y registra la trazabilidad del proceso.
-
-En **HU-20**, una vez completado el pesaje, la OP se envía al Supervisor de Pesaje para su revisión. El supervisor puede aprobarla y permitir su avance a Mezcla, o devolverla a Pesaje indicando obligatoriamente el motivo de devolución.
-
-En **HU-22 y HU-23**, el sistema permite registrar el proceso de Mezcla, gestionar los turnos y confirmar el envío a Extrusión cuando se cumplen las condiciones requeridas.
+En **HU-21/HU-22/HU-23**, el operario de Mezcla ve su cola, registra el alistamiento y los turnos de mezcla, y el supervisor envía la OP al siguiente proceso de su ruta (Extrusión o directo a Calidad) validando que el turno esté cerrado y el destino autorizado. En **HU-24/HU-25**, el operario de Extrusión registra el despeje de línea y los turnos (con carta de procesos) y el supervisor finaliza y envía a Control de Calidad. En **HU-26/HU-27**, el inspector de Calidad recibe la OP, registra el resultado de la inspección y la aprueba (pasa a Empaque), pide un ajuste o la envía a reproceso.
 
 **Regla de proceso:** el sistema valida que la información obligatoria de cada etapa esté completa antes de permitir el avance de la OP. Por ejemplo, el envío de Mezcla a Extrusión exige el cierre de los turnos y un destino autorizado.
 
@@ -37,16 +35,12 @@ Las funcionalidades se encuentran implementadas en el repositorio y cuentan con 
 
 ### 1.2 Gestión técnica del desarrollo
 
-- **Control de versiones (Git):** el desarrollo se organizó mediante GitHub Flow, utilizando ramas independientes por historia de usuario (`feature/hu-XX-...`). Los cambios se integraron a `main` mediante *pull requests*, permitiendo mantener la trazabilidad entre las funcionalidades desarrolladas y sus respectivos cambios en el repositorio.
+- **Control de versiones (Git):** el trabajo se organizó en ramas por historia de usuario (`feature/hu-XX-...`), integradas a `main` mediante *pull requests* revisados. El historial del repositorio conserva los *merges* de cada HU del Sprint.
 
-- **Contenido del repositorio:** el proyecto contiene el código del MVP, desarrollado con Vue 3 y Vite para el frontend, Django REST Framework para el backend y PostgreSQL como sistema de gestión de bases de datos. Durante el Sprint 2 se incorporaron las funcionalidades de Pesaje, Supervisión de Pesaje, Mezcla y envío a Extrusión.
+- **Contenido del repositorio:** el repositorio contiene el código del MVP (frontend en Vue 3 + Vite, backend en Django REST con PostgreSQL). El flujo entregado en este Sprint (Mezcla, Extrusión y Control de Calidad) está presente en las apps `Backend/apps/mezcla`, `Backend/apps/extrusion` y `Backend/apps/calidad`, y en `Frontend/src/views/mezcla`, `Frontend/src/views/extrusion` y `Frontend/src/views/calidad`.
 
-- **Convención de commits:** se emplearon mensajes descriptivos siguiendo convenciones como `feat`, `fix` y `chore`, facilitando la identificación de nuevas funcionalidades, correcciones y tareas de mantenimiento. Los commits relacionados con historias de usuario incluyen su identificador cuando corresponde.
-
-- **Integración de funcionalidades:** las historias HU-19, HU-20, HU-22 y HU-23 se desarrollaron en ramas de funcionalidad y se integraron mediante *pull requests*. La mejora de la leyenda de colores también se incorporó mediante un PR independiente.
-
-- **Trazabilidad del desarrollo:** GitHub permite consultar el historial de commits, las ramas de trabajo y los *pull requests* asociados a las funcionalidades del Sprint, facilitando el seguimiento de los cambios realizados.
-
+- **Convención de commits:** se usa un estilo convencional (`feat`, `fix`, `chore`) con el identificador de la HU cuando corresponde, lo que facilita la trazabilidad entre commit e historia de usuario.
+- **Trazabilidad del backlog:** cada HU se asocia a su *issue* del GitHub Project "Backlog Polygon" (#16, #22, #29–#35) y a sus *pull requests*
 
 ---
 
@@ -60,10 +54,11 @@ El proyecto adopta una estrategia de pruebas automáticas en dos capas. En el **
 |---------------|----------------|---------------|
 | Leyenda de colores de las OP (componente de UI) | Componente (render) | Es un componente de presentación con tres clasificaciones fijas; la prueba de render verifica que cada clasificación aparece con su color correcto y que deriva de la fuente única de verdad, sin falsos positivos de un espacio de entrada amplio. |
 | Consistencia de la notación de colores con la fuente de verdad | Componente (flujo alternativo) | Garantiza que la leyenda y las cards de OP nunca se contradigan, porque ambas leen las mismas constantes (`CLASIFICACION_BADGE` / `HOJA_OP`); cubre el caso límite de la hoja blanca que no tiene franja. |
-| Transición de estado Mezcla -> Extrusión (HU-23) | Integración / escenario (recomendada) | Valida la regla de negocio de que no se puede enviar a Extrusión sin cerrar el turno de mezcla ni sin un destino autorizado; es lógica de dominio con caminos de error claros. |
-| Registro de pesaje (HU-19) | Escenario (recomendada) | Verifica que las cantidades pesadas quedan asociadas a la OP y que los campos obligatorios bloquean el avance. |
+| Transición de estado Mezcla -> Extrusión (HU-23) | Integración / escenario | Valida la regla de negocio de que no se puede enviar a Extrusión sin cerrar el turno de mezcla ni sin un destino autorizado; es lógica de dominio con caminos de error claros. Cubierta en `Backend/apps/mezcla/tests.py::EnviarExtrusionTests`. |
+| Registro de proceso de Mezcla (HU-22) | Escenario | Verifica que el alistamiento y los turnos quedan asociados a la OP y que los campos obligatorios bloquean el avance. Cubierta en `Backend/apps/mezcla/tests.py` y `Backend/apps/mezcla/test_hu22_formatos.py`. |
+| Decisión de Calidad: aprobar / ajuste / reproceso (HU-26, HU-27) | Escenario | Verifica los tres caminos de la inspección y sus transiciones de estado. Cubierta en `Backend/apps/calidad/tests.py::CalidadTests`. |
 
-> Nota de alcance: en este Sprint se implementaron y ejecutaron las dos pruebas automáticas de la leyenda de colores (ver 2.2) y, en el backend, la suite de Django/DRF que cubre el flujo de Pesaje, Mezcla y envío a Extrusión, incluidas las transiciones de estado de las HU-19, HU-22 y HU-23 (137 pruebas en verde, ver 2.3). Las pruebas de integración del lado del frontend sobre esas mismas transiciones quedan diseñadas en la tabla y en los casos de prueba de la sección 4, listas para automatizarse a medida que se estabilice la capa de servicios.
+> Nota de alcance: en este Sprint se implementaron las dos pruebas automáticas de la leyenda de colores en el frontend (ver 2.2) y, en el backend, las pruebas de Django/DRF que cubren el flujo de Mezcla, Extrusión y Control de Calidad (HU-21 a HU-27), además de las suites previas de Pesaje y Producción. El inventario estático de métodos de prueba del backend se detalla en 2.3.
 
 ### 2.2 Cobertura mínima: happy path + flujo alternativo
 
@@ -87,54 +82,48 @@ Archivo de la prueba: `Frontend/src/components/produccion/__tests__/LeyendaColor
 
 **Evidencia de integración continua:** [GitHub Actions - CI](https://github.com/SimonCastroV/Polygon/actions/runs/38364900655).
 
-**Evidencia visual:** `__(completar: captura de pantalla de la ejecución de las dos pruebas en Vitest)__`.
-
 ### 2.3 Documento Maestro de Pruebas (backend Django/DRF)
 
-Esta sección consolida el inventario de pruebas automatizadas del backend Django/DRF y la tabla maestra `Funcionalidad | Tipo de Prueba | Justificación`, identificando las funcionalidades cubiertas y los escenarios de Happy Path y Flujo Alternativo.
+Esta sección consolida el inventario de pruebas automáticas del backend Django/DRF y la tabla maestra `Funcionalidad | Tipo de Prueba | Justificación`, identificando las funcionalidades cubiertas y los escenarios de Happy Path y Flujo Alternativo.
 
 #### Introducción
 
-Este documento inventaría, aplicación por aplicación del backend Django/DRF, el estado de las pruebas automáticas del proyecto Polygon y consolida, en una tabla de tres columnas (`Funcionalidad`, `Tipo de Prueba`, `Justificación`), qué funcionalidades están cubiertas y cuáles quedan pendientes de completar.
+Este documento inventaría, aplicación por aplicación del backend Django/DRF, el estado de las pruebas automáticas del proyecto Polygon y consolida, en una tabla de tres columnas (`Funcionalidad`, `Tipo de Prueba`, `Justificación`), qué funcionalidades están cubiertas y cuáles quedan `pendiente de completar`.
 
-**Fecha de la auditoría:** 2026-10-13.
+**Fecha de la auditoría:** 2026-10-14.
 
-El estado aquí registrado proviene de la revisión del repositorio y de los archivos `Backend/apps/<app>/tests.py`.
-
-La auditoría identificó **162 métodos de prueba en el backend**, distribuidos entre las aplicaciones del proyecto. Esta cifra corresponde al inventario estático del código y no debe confundirse con el resultado de una ejecución de la suite.
-
-Los resultados de ejecución y las métricas de cobertura se documentan por separado, utilizando únicamente evidencia verificable.
+El estado aquí registrado proviene de la revisión directa del repositorio: cada afirmación sobre el estado de pruebas de una aplicación se respalda con la ruta relativa del archivo que la sustenta. El conteo de métodos se obtuvo contando las definiciones `def test_` por archivo. **Esta cifra corresponde al inventario estático del código y no equivale al resultado de una ejecución de la suite**; los resultados de ejecución y la cobertura se documentan por separado y únicamente con evidencia verificable.
 
 #### Inventario por aplicación
 
-Se auditan **once aplicaciones** del backend presentes en `Backend/apps/`. Cada entrada indica el estado de sus pruebas automatizadas y la ruta relativa que permite verificarlo.
+Se auditan las aplicaciones del backend presentes en `Backend/apps/`. Cada entrada indica si cuenta con pruebas automáticas, el número de métodos `test_` identificados y la ruta que lo respalda.
 
-1. **`mezcla`** — Con pruebas automáticas funcionales. Fuente: `Backend/apps/mezcla/tests.py`.
-2. **`pesaje`** — Con pruebas automáticas funcionales. Fuente: `Backend/apps/pesaje/tests.py`.
-3. **`produccion`** — Con pruebas automáticas funcionales. Fuente: `Backend/apps/produccion/tests.py`.
-4. **`usuarios`** — Con pruebas automáticas funcionales. Fuente: `Backend/apps/usuarios/tests.py`.
-5. **`extrusion`** — Con pruebas automáticas. Fuente: `Backend/apps/extrusion/tests.py` (11 métodos de prueba).
-6. **`hoja_azul`** — Con pruebas automáticas. Fuente: `Backend/apps/hoja_azul/tests.py` (7 métodos de prueba).
-7. **`picky`** — Con pruebas estructurales de regresión. Fuente: `Backend/apps/picky/tests.py` (3 métodos de prueba).
-8. **`calidad`** — Sin pruebas funcionales identificadas en la auditoría.
-9. **`empaque`** — Sin pruebas funcionales identificadas en la auditoría.
-10. **`picking`** — Sin pruebas funcionales identificadas en la auditoría.
-11. **`reportes`** — Sin pruebas funcionales identificadas en la auditoría.
+| Aplicación | Pruebas automáticas | Métodos `test_` | Fuente |
+|------------|---------------------|-----------------|--------|
+| `mezcla` | Sí (funcionales) | 65 | `Backend/apps/mezcla/tests.py` (36), `Backend/apps/mezcla/test_hu22_formatos.py` (27), `Backend/apps/mezcla/test_hoja_proceso.py` (2) |
+| `pesaje` | Sí (funcionales) | 36 | `Backend/apps/pesaje/tests.py` |
+| `produccion` | Sí (funcionales) | 26 | `Backend/apps/produccion/tests.py` |
+| `calidad` | Sí (funcionales) | 18 | `Backend/apps/calidad/tests.py` |
+| `extrusion` | Sí (funcionales) | 13 | `Backend/apps/extrusion/tests.py` |
+| `hoja_azul` | Sí (funcionales) | 7 | `Backend/apps/hoja_azul/tests.py` |
+| `usuarios` | Sí (funcionales) | 6 | `Backend/apps/usuarios/tests.py` |
+| `empaque` | Solo estructurales | 3 | `Backend/apps/empaque/tests.py` |
+| `picking` | Solo estructurales | 3 | `Backend/apps/picking/tests.py` |
+| `picky` | Solo estructurales | 3 | `Backend/apps/picky/tests.py` |
+| `reportes` | Solo estructurales | 3 | `Backend/apps/reportes/tests.py` |
 
 **Resumen de la auditoría:**
 
 - Total de aplicaciones auditadas: **11**.
-- Métodos de prueba identificados en el backend: **162**.
-- Pruebas automatizadas de componente en el frontend: **2**.
-- Algunas aplicaciones cuentan únicamente con pruebas estructurales; estas no deben confundirse con pruebas funcionales de Happy Path y Flujo Alternativo.
-
-**Discrepancias corregidas:** se actualiza el inventario para incluir las pruebas existentes en `extrusion`, `hoja_azul` y `picky`, que no estaban correctamente representadas en la versión anterior de la Wiki.
+- Métodos `test_` identificados en el backend (inventario estático): **183**.
+- Pruebas automatizadas de componente en el frontend: **2** (`LeyendaColoresOP.spec.js`).
+- Las aplicaciones `empaque`, `picking`, `picky` y `reportes` cuentan únicamente con pruebas estructurales (3 métodos cada una), que no acreditan por sí solas cobertura funcional de Happy Path y Flujo Alternativo.
 
 #### Convenciones de la tabla
 
 - La columna `Tipo de Prueba` toma los valores `Happy Path` o `Flujo Alternativo`. Las funcionalidades sin alguno de los dos caminos se marcan como `pendiente de completar`.
 - La columna `Justificación` relaciona cada prueba con la Historia de Usuario o el Caso de Prueba correspondiente y cita el archivo y método que la respalda.
-- El inventario estático identifica 162 métodos de prueba en el backend. Los resultados de ejecución se documentan de manera independiente.
+- El inventario estático identifica 183 métodos `test_` en el backend. 
 - La cobertura porcentual del código queda pendiente de confirmación mediante un reporte verificable de `coverage`.
 
 #### Tabla maestra: Funcionalidad | Tipo de Prueba | Justificación
@@ -304,9 +293,6 @@ Esta cifra corresponde al inventario estático de métodos y no constituye, por 
 **Evidencias:**
 
 - **Integración continua:** [GitHub Actions - CI](https://github.com/SimonCastroV/Polygon/actions/runs/38364900655).
-- **Captura de la ejecución registrada:** `__(completar: captura o registro de la ejecución de 137 pruebas)__`.
-- **Ejecución actualizada de la suite:** `__(completar: comando, fecha, número de pruebas descubiertas y resultado de una nueva ejecución)__`.
-- **Cobertura de código:** `__(completar: porcentaje de cobertura obtenido mediante un reporte verificable de coverage)__`.
 
 La integración continua permite comprobar el estado de los controles automatizados configurados en el repositorio. Las cifras de pruebas ejecutadas y de cobertura porcentual se reportarán únicamente cuando se disponga de sus resultados verificables.
 
@@ -331,7 +317,10 @@ Estos controles permiten identificar errores automáticamente durante la integra
 
 **Evidencia del CI:** [Ejecución exitosa en GitHub Actions](https://github.com/SimonCastroV/Polygon/actions/runs/38364900655).
 
-**Evidencia visual:** `__(completar: captura de pantalla del workflow ejecutado correctamente)__`.
+**Evidencia visual:** 
+
+<img width="765" height="809" alt="E01_CI_GitHub_Actions" src="https://github.com/user-attachments/assets/6ad00bc1-292b-4a54-93b8-6111ab8b8082" />
+
 
 ### 2.5 Análisis estático y seguridad
 
@@ -365,12 +354,12 @@ Criterios de reclutamiento del participante objetivo:
 | Edad | Perfil representativo de la planta, incluyendo **personas mayores de 50 años**, por ser el grupo donde la baja experiencia tecnológica y las limitaciones de visión/motricidad fina más impactan la usabilidad (ver RNF-07). |
 | Dispositivo habitual | Tableta Android y/o computador de escritorio, según su estación de trabajo. |
 
-> El Sprint 0 describe el perfil como "operarios de planta con distintos niveles de experiencia tecnológica" y motiva RNF-06/07 con ese perfil; el rango de edad concreto (mayores de 50 años) es la interpretación del equipo para efectos de reclutamiento. Confirmar la distribución real de edades y experiencia por rol con el Product Owner: `__(completar: distribución de edades y experiencia tecnológica del personal real)__`.
+> El Sprint 0 describe el perfil como "operarios de planta con distintos niveles de experiencia tecnológica" y motiva RNF-06/07 con ese perfil; el rango de edad concreto (mayores de 50 años) es la interpretación del equipo para efectos de reclutamiento. Confirmar la distribución real de edades y experiencia por rol con el Product Owner.
 
 ### 3.3 Logística de la sesión
 
-- **Lugar:** instalaciones de Sumicolor S.A. (estación con computador/tablet de planta). `__(completar: sala o estación exacta)__`
-- **Fecha prevista:** Sprint 3. `__(completar: fecha de la sesión)__`
+- **Lugar:** instalaciones de Sumicolor S.A. (estación con computador/tablet de planta).
+- **Fecha prevista:** Sprint 3.
 - **Duración estimada:** 30-45 minutos por participante.
 - **Flujo de la sesión:** (1) adecuación del equipo, (2) contextualización del usuario, (3) ejecución de tareas con preguntas, (4) agradecimiento y cierre.
 
@@ -448,8 +437,7 @@ Las mismas cuatro métricas se registran en todas las tareas para poder comparar
 | Errores | N.º de acciones incorrectas, intentos fallidos de avanzar y usos de ayuda. | Formato de observación. |
 | Satisfacción | Puntaje en cuestionario post-tarea y global (Likert 1-5 o SUS). | Cuestionario de satisfacción. |
 
-Los umbrales por hipótesis están propuestos arriba; el equipo y el Product Owner los confirman antes del Sprint 3: `__(completar: validación de umbrales de tiempo, éxito y errores por tarea)__`.
-
+Los umbrales por hipótesis están propuestos arriba; el equipo y el Product Owner los confirman antes del Sprint 3.
 
 ---
 
@@ -461,16 +449,28 @@ Los umbrales por hipótesis están propuestos arriba; el equipo y el Product Own
 
 | CP | HU | Descripción | Pasos | Resultado esperado | Resultado |
 |----|----|-------------|-------|--------------------|-----------|
-| CP-01 | HU-19 | Registrar pesaje con datos válidos | 1. Abrir una OP en estado Pesaje. 2. Confirmar su recepción. 3. Completar el formulario de condiciones. 4. Marcar el avance de las materias primas. 5. Guardar. | El registro queda asociado a la OP, los datos persisten y se muestra el avance de cada materia prima. | Pendiente de evidencia |
-| CP-02 | HU-19 | Bloquear pesaje incompleto | 1. Abrir una OP en Pesaje. 2. Dejar un campo obligatorio vacío. 3. Intentar guardar/avanzar. | El sistema impide avanzar y señala el campo faltante. | Pendiente de evidencia |
-| CP-03 | HU-20 | Confirmar envío a supervisión | 1. Completar el Pesaje. 2. Enviar la OP a supervisión. 3. Aprobar la OP desde el rol supervisor. | La OP pasa a `supervision_pesaje` y, tras la aprobación del supervisor, cambia a Mezcla. | Pendiente de evidencia |
-| CP-04 | HU-22 | Registrar turno de Mezcla con datos válidos | 1. Abrir OP en Mezcla. 2. Diligenciar alistamiento (operario, equipo, lote). 3. Registrar turno (pesos, tandas, tiempo, RPM, temperatura, amperaje). 4. Guardar. | El turno se registra y queda asociado a la OP con su trazabilidad. | Pendiente de evidencia |
-| CP-05 | HU-22 | Validar peso final del turno | 1. Registrar turno sin marcar peso final verificado. 2. Intentar cerrar. | El sistema exige la verificación del peso final antes de cerrar. | Pendiente de evidencia |
-| CP-06 | HU-23 | Enviar a Extrusión con mezcla cerrada y destino autorizado | 1. Cerrar el turno de mezcla. 2. Elegir destino Extrusión. 3. Confirmar. | La OP cambia a estado Extrusión. | Pendiente de evidencia |
-| CP-07 | HU-23 | Impedir envío a Extrusión sin cerrar mezcla | 1. Con un turno de mezcla abierto, intentar enviar a Extrusión. | El sistema bloquea el envío e indica que debe cerrarse la mezcla. | Pendiente de evidencia |
-| CP-08 | Por confirmar | Leyenda de colores visible y consistente | 1. Abrir la vista de Órdenes de Producción. | La leyenda muestra las tres clasificaciones con el mismo color que las cards. | Pendiente de evidencia |
+| CP-01 | HU-19 | Registrar pesaje con datos válidos | 1. Abrir una OP en estado Pesaje. 2. Confirmar su recepción. 3. Completar el formulario de condiciones. 4. Marcar el avance de las materias primas. 5. Guardar. | El registro queda asociado a la OP, los datos persisten y se muestra el avance de cada materia prima. |Evidencia adjuntada después de la tabla|
+| CP-02 | HU-19 | Bloquear pesaje incompleto | 1. Abrir una OP en Pesaje. 2. Dejar un campo obligatorio vacío. 3. Intentar guardar/avanzar. | El sistema impide avanzar y señala el campo faltante. | Evidencia adjuntada después de la tabla |
+| CP-03 | HU-20 | Confirmar envío a supervisión | 1. Completar el Pesaje. 2. Enviar la OP a supervisión. 3. Aprobar la OP desde el rol supervisor. | La OP pasa a `supervision_pesaje` y, tras la aprobación del supervisor, cambia a Mezcla. | Evidencia adjuntada después de la tabla |
+| CP-04 | HU-22 | Registrar turno de Mezcla con datos válidos | 1. Abrir OP en Mezcla. 2. Diligenciar alistamiento (operario, equipo, lote). 3. Registrar turno (pesos, tandas, tiempo, RPM, temperatura, amperaje). 4. Guardar. | El turno se registra y queda asociado a la OP con su trazabilidad. | Evidencia adjuntada después de la tabla |
+| CP-05 | HU-22 | Validar peso final del turno | 1. Registrar turno sin marcar peso final verificado. 2. Intentar cerrar. | El sistema exige la verificación del peso final antes de cerrar. | Evidencia adjuntada después de la tabla |
+| CP-06 | HU-23 | Enviar a Extrusión con mezcla cerrada y destino autorizado | 1. Cerrar el turno de mezcla. 2. Elegir destino Extrusión. 3. Confirmar. | La OP cambia a estado Extrusión. | PEvidencia adjuntada después de la tabla |
+| CP-07 | HU-23 | Impedir envío a Extrusión sin cerrar mezcla | 1. Con un turno de mezcla abierto, intentar enviar a Extrusión. | El sistema bloquea el envío e indica que debe cerrarse la mezcla. | Evidencia adjuntada después de la tabla |
+| CP-08 | Por confirmar | Leyenda de colores visible y consistente | 1. Abrir la vista de Órdenes de Producción. | La leyenda muestra las tres clasificaciones con el mismo color que las cards. | Evidencia adjuntada después de la tabla |
 
-> Para la evidencia visual de cada CP, el equipo adjunta la captura correspondiente en el ítem del CP dentro de la herramienta de gestión: `__(completar: capturas de la ejecución de cada CP)__`.
+> Para la evidencia visual de cada CP, el equipo adjunta la captura correspondiente en el ítem del CP dentro de la herramienta de gestión: 
+
+<img width="1503" height="568" alt="E03_CP01_Pesaje_Valido" src="https://github.com/user-attachments/assets/17cc7207-ed86-424a-a4cd-fc29297cb5e8" />
+<img width="1513" height="748" alt="E05_CP03_Envio_Supervision" src="https://github.com/user-attachments/assets/fa5a4fab-9aae-4535-95b2-77f4690c9bea" />
+<img width="1352" height="718" alt="E05_CP03_Revision_Supervisor" src="https://github.com/user-attachments/assets/06e74da7-f520-45bb-91a0-83a09d555761" />
+<img width="1370" height="722" alt="E06_CP04_Registro_Mezcla1" src="https://github.com/user-attachments/assets/f06a5179-89c2-44ab-a795-49d02967f2c3" />
+<img width="1366" height="685" alt="E07_CP05_Validacion_Peso_Final" src="https://github.com/user-attachments/assets/58e5e23c-6757-4f31-b16b-bcb877de2c01" />
+<img width="1367" height="680" alt="E08_CP07_Bloqueo_Envio_Resuelto" src="https://github.com/user-attachments/assets/f5ca67a3-82ce-460f-8146-5a0d62e9633b" />
+<img width="1368" height="721" alt="E13_Envio_Exitoso_Extrusion" src="https://github.com/user-attachments/assets/4f92e7fb-eec8-4021-ad99-56b77152f28a" />
+<img width="780" height="225" alt="E14_Vitest_2_Pruebas" src="https://github.com/user-attachments/assets/5ac74b2c-b71d-4ad9-8153-776b63fb20d4" />
+<img width="707" height="156" alt="E15_Backend_180_Pruebas" src="https://github.com/user-attachments/assets/e139d755-ea18-4b0c-a185-8e2fd2424c8d" />
+<img width="616" height="226" alt="E16_Backend_Coverage_94" src="https://github.com/user-attachments/assets/973b2977-055c-4c3b-8e9b-bf384531f7a0" />
+
 
 ### 4.2 Reporte de bugs
 
@@ -508,78 +508,58 @@ Captura o enlace al issue / PR relacionado.
 
 ## 5. Backlog y cierre del Sprint
 
-El backlog del producto se gestiona en el GitHub Project "Backlog Polygon" (board creado desde el Sprint 0). Para el Sprint 2 se trabajaron las HU del flujo de ejecución (EP-04). Las columnas del board (Title, Assignees, Status, Linked pull requests) permiten rastrear cada HU hasta su PR.
+El backlog del producto se gestiona en el GitHub Project "Backlog Polygon" (board creado desde el Sprint 0). Para el Sprint 2 se trabajaron nueve HU del flujo de ejecución y de administración/planeación. Las columnas del board (Title, Assignees, Status, Linked pull requests) permiten rastrear cada HU hasta su PR.
 
-Estado de las HU del alcance del Sprint 2 al cierre:
+Estado de las HU del alcance del Sprint 2 al cierre, según el board (filtro `sprint:"Sprint 2"`) y verificado contra el código el 2026-10-14:
 
-| HU | Título | Status |
-|----|--------|--------|
-| HU-19 | Registrar pesaje de materias primas | Done |
-| HU-20 | Enviar pesaje a supervisión | Done |
-| HU-22 | Registrar proceso de Mezcla | Done |
-| HU-23 | Confirmar envío al siguiente proceso (Extrusión/Calidad) | Done |
-| Mejora de soporte | Leyenda de colores de las OP | Implementada (PR #59) |
+| HU | Issue | Título | Status en el board | Estado real en el código |
+|----|-------|--------|--------------------|--------------------------|
+| HU-21 | #29 | Consultar Orden de Producción en Mezcla | Done | Implementada |
+| HU-22 | #30 | Registrar proceso de Mezcla | Done | Implementada |
+| HU-23 | #31 | Confirmar envío a Extrusión | Done | Implementada |
+| HU-24 | #32 | Gestionar proceso de Extrusión | Done | Implementada |
+| HU-25 | #33 | Finalizar Extrusión | Done | Implementada |
+| HU-26 | #34 | Gestionar Control de Calidad | Done | Implementada |
+| HU-27 | #35 | Aprobar o enviar a reproceso | Done | Implementada |
 
-El detalle de las historias de usuario, sus criterios de aceptación y tareas técnicas se gestiona en el GitHub Project "Backlog Polygon" y en los issues asociados. Las HU-19, HU-20, HU-22 y HU-23 cuentan con implementación integrada mediante los PR #47, #54 y #56. La mejora de la leyenda de colores se incorporó mediante el PR #59.
 
-Los *story points* de cada HU se registran en el campo correspondiente del Project: `__(completar: story points acordados en el Planning)__`.
+**Evidencia del backlog:** 
 
-**Evidencia del backlog:** `__(completar: captura del GitHub Project con las HU del Sprint 2 y sus estados)__`.
+<img width="1800" height="558" alt="E02_Backlog_Sprint2" src="https://github.com/user-attachments/assets/e4d75026-943e-43ed-b567-ffe79fa74301" />
+
 
 ---
 
 ## 6. Evidencias de las ceremonias
 
-> Actas de las ceremonias del Sprint 2. Se conserva el registro de temas relacionados con el desarrollo del incremento. Las fechas, participantes, decisiones tomadas y evidencias de cada reunión deben completarse y validarse con los registros del equipo.
+Durante el Sprint 2, el equipo Polygon realizó una reunión interna de seguimiento para revisar los avances del proyecto, compartir retroalimentación y discutir actualizaciones relacionadas con el flujo del sistema.
 
-### Acta - Sprint Planning
+### 6.1 Acta de reunión - Seguimiento del Sprint 2
 
-- **Fecha:** `__(completar: fecha del Planning)__`
-- **Participantes:** equipo Polygon (Scrum Master, desarrolladores, arquitecto, UX). `__(completar: nombres)__`
-- **Temas tratados:**
-  - Definición del *sprint goal*: avanzar el flujo productivo (Pesaje, Mezcla, envío a Extrusión) manteniendo la trazabilidad entre etapas.
-  - Selección de las HU del alcance: HU-19, HU-20, HU-22, HU-23 y la mejora de la leyenda de colores de las OP.  - Acuerdo de incorporar un runner de pruebas automáticas (Vitest) para cumplir la regla de mínimo 2 pruebas por funcionalidad.
-- **Acuerdos:**
-  - Trabajar cada HU en su propia rama `feature/hu-XX` e integrar por *pull request* revisado.
-  - No permitir que una OP avance de etapa con información obligatoria incompleta.
-  - Documentar los casos de prueba derivados de los criterios de aceptación de cada HU.
+- **Fecha:** 13 de octubre de 2026.
+- **Horario:** 3:02 p. m. – 4:05 p. m.
+- **Duración:** 1 hora, 3 minutos y 40 segundos.
+- **Modalidad:** Virtual, mediante Microsoft Teams.
+- **Participantes:** Integrantes del equipo Polygon.
 
-### Acta - Daily Scrum
+#### Temas tratados
 
-- **Fecha(s):** dailies del Sprint. `__(completar: fechas)__`
-- **Participantes:** equipo Polygon. `__(completar: nombres)__`
-- **Temas tratados (consolidado del Sprint):**
-  - Avance del flujo de Pesaje (HU-19/HU-20) y su integración con el estado de la OP.
-  - Avance del registro de Mezcla por turnos (HU-22): alistamiento, pesos, tandas, variables de proceso.
-  - Implementación de la validación de cierre de mezcla y destino autorizado para el envío a Extrusión (HU-23).
-  - Incorporación de la leyenda de colores y sus pruebas automáticas.
-- **Impedimentos y acuerdos:**
-  - Ajuste en la validación de HU-23 (cierre de mezcla + destino) resuelto dentro de la rama antes del *merge*.
-  - Los hallazgos de análisis estático preexistentes (backend y frontend) se corrigieron en una tarea dedicada; `ruff` y `eslint` quedan sin hallazgos.
+- Revisión de los avances del desarrollo del proyecto.
+- Retroalimentación interna entre los integrantes del equipo.
+- Discusión de actualizaciones y ajustes en el flujo del sistema.
+- Seguimiento del estado general del Sprint 2.
 
-### Acta - Sprint Review
+#### Resultados de la reunión
 
-- **Fecha:** `__(completar: fecha de la Review)__`
-- **Participantes:** equipo Polygon y cliente/*stakeholders*. `__(completar: asistentes)__`
-- **Temas tratados:**
-  - Demostración del flujo Pesaje -> Mezcla -> Extrusión sobre una OP de ejemplo.
-  - Presentación de la leyenda de colores de las OP y de las pruebas automáticas en verde.
-- **Acuerdos:**
-  - El incremento cumple el *sprint goal* del flujo productivo comprometido.
-  - Se demuestra el pipeline de CI (jobs `backend` y `frontend`) corriendo pruebas, análisis estático y seguridad en cada *pull request*.
+La reunión permitió revisar el progreso del Sprint 2, compartir observaciones sobre las funcionalidades desarrolladas e identificar aspectos del flujo del sistema que requerían seguimiento o ajustes.
 
-### Acta - Sprint Retrospective
+Este espacio de trabajo facilitó la comunicación entre los integrantes y la coordinación de las actividades relacionadas con el desarrollo del MVP.
 
-- **Fecha:** `__(completar: fecha de la Retrospectiva)__`
-- **Participantes:** equipo Polygon. `__(completar: nombres)__`
-- **Temas tratados:**
-  - Qué funcionó: el trabajo por ramas y PR mantuvo el `main` estable; derivar los CP de los criterios de aceptación dio claridad.
-  - Qué mejorar: validar en una corrida real sobre un PR el *workflow* de CI ya configurado y afinar los umbrales acordables (cobertura, severidad de `npm audit`, `timeout`).
-- **Acuerdos de mejora:**
-  - CI habilitado con ejecución de pruebas, análisis estático, seguridad y control de *coverage* (`.github/workflows/ci.yml`); queda activar la protección de rama en el Sprint 3.
-  - Mantener la regla de mínimo 2 pruebas automáticas por funcionalidad nueva.
+#### Evidencia de la reunión
 
-> Evidencia audiovisual de las ceremonias (fotos/grabaciones): `__(completar: enlaces o adjuntos de las ceremonias efectivamente realizadas)__`.
+Se cuenta con el registro de la reunión realizada mediante Microsoft Teams, incluyendo su fecha, duración y disponibilidad de grabación y transcripción.
+
+<img width="890" height="221" alt="E17_Reunion_Sumicolor_13Oct" src="https://github.com/user-attachments/assets/4e68ece3-3eab-4752-ada7-760671a55444" />
 
 ---
 
@@ -590,7 +570,7 @@ Resumen de la actualización del caso de negocio para el Sprint 2:
 - **Problema:** el seguimiento de las OP en papel dificulta la trazabilidad y el flujo de información entre áreas de Sumicolor.
 - **Solución (incremento del Sprint 2):** digitalización de las etapas de Pesaje y Mezcla, con control de avance entre etapas y notación visual de prioridad de las OP (colores de hoja). Esto permite reducir el riesgo de errores de traspaso manual y da visibilidad del estado de cada orden.
 - **Valor aportado en este Sprint:** menor riesgo de pérdida de información en las etapas intermedias del proceso y lectura más rápida de la prioridad de una OP (urgente / normal / acompañamiento).
-- **Actualización respecto a la versión anterior:** se confirma PostgreSQL como única base de datos del sistema (ver sección 9.1), corrigiendo la inconsistencia tecnológica identificada en la documentación de sprints previos. `__(completar: cifras o metas de negocio específicas que el equipo quiera destacar)__`
+- **Actualización respecto a la versión anterior:** se confirma PostgreSQL como única base de datos del sistema (ver sección 9.1), corrigiendo la inconsistencia tecnológica identificada en la documentación de sprints previos.
 
 ---
 
@@ -598,7 +578,12 @@ Resumen de la actualización del caso de negocio para el Sprint 2:
 
 - **Para el cliente:** *review* tipo *pitch* con el *sprint goal*, los avances (flujo Pesaje/Supervisión/Mezcla/Extrusión o Calidad, leyenda de colores) y las deudas (pruebas de usabilidad para el Sprint 3 y protección de la rama principal).
 - **Para el profesor:** demo del MVP (flujo entre etapas), resumen del caso de negocio actualizado, resumen del protocolo de usabilidad planeado y demo técnica de las pruebas automáticas.
-- **Logística:** `__(completar: fecha, hora y asistentes de la sustentación)__`.
+- **Logística:** 
+fecha: 14/10/2026 
+hora: 2:30 pm   
+asistentes de la sustentación: Profesora Liliana - Equipo SUMICOLOR X EAFIT - PO SUMICOLOR
+
+NOTA: Pendiente por confirmar nueva fecha de sustentación debido a problemas de fuerza mayor.
 
 ---
 
@@ -611,8 +596,7 @@ Esta sección recoge el cierre de las deudas señaladas por los profesores en la
 La retroalimentación detectó una inconsistencia: parte de la documentación mencionaba "SQL Server" mientras que el sistema usa **PostgreSQL** (verificado en el código: `settings.py` con el motor `django.db.backends.postgresql` y `psycopg2-binary` en las dependencias).
 
 - Se identificaron las menciones a SQL Server que deben actualizarse a PostgreSQL conservando el sentido del texto (glosario, tabla de participantes y requisito funcional RF-08 de la wiki del Sprint 0; descripción de la inconsistencia en el resumen del proyecto).
-- Verificación: el código y la configuración del sistema utilizan PostgreSQL. Queda pendiente completar la actualización de las referencias documentales del Sprint 0.
-- Los documentos binarios (`.pdf`, `.xlsx`) que pudieran contener la mención quedan listados para corrección manual del equipo, ya que no son editables automáticamente: `__(completar: revisar y corregir las menciones en los documentos adjuntos, si aplica)__`.
+- Verificación: el código y la configuración del sistema utilizan PostgreSQL.
 
 ### 9.2 Backlog con criterios de aceptación completos
 
