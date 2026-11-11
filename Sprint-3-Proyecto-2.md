@@ -349,13 +349,13 @@ Un rasgo propio de este caso: el despliegue es **on-premise, en un servidor que 
 | Personal | UX, manual y documentación, hora | $38.000 | 120 | $4.560.000 |
 | Personal | Coordinación e implantación, hora | $50.000 | 120 | $6.000.000 |
 | Equipos | Uso/amortización de computador durante el proyecto, unidad | $600.000 | 4 | $2.400.000 |
-| Equipos | Dispositivo de prueba (tableta), alquiler, unidad | $180.000 | 2 | $360.000 |
+| Equipos | Dispositivo de prueba (tableta), alquiler, unidad | $500.000 | 10 | $5.000.000 |
 | Licencias / activos digitales | Entorno temporal de pruebas, mes | $120.000 | 3 | $360.000 |
 | Licencias / activos digitales | Dominio de referencia, año | $60.000 | 1 | $60.000 |
 | Transporte | Visitas técnicas a planta, desplazamiento | $60.000 | 8 | $480.000 |
 | Registro de propiedad intelectual | Titularidad del código entre equipo y cliente | $0 | 1 | $0 |
 | Publicidad | No aplica en una implantación para un cliente identificado | $0 | 1 | $0 |
-| **TOTAL PREOPERACIÓN** | | | | **$56.100.000** |
+| **TOTAL PREOPERACIÓN** | | | | **$60.740.000 ** |
 
 El personal concentra el 93 % del presupuesto (1.160 horas de trabajo técnico), lo esperable en un producto de software hecho a medida. El equipo se valora por su uso durante el proyecto, no como compra de equipos nuevos. La propiedad intelectual queda en cero como supuesto: la titularidad del código se acuerda entre el equipo y Sumicolor sin un trámite con costo asociado. No se presupuesta publicidad porque el producto se dirige a un cliente ya identificado.
 
@@ -368,11 +368,11 @@ Como el despliegue es on-premise sobre el servidor propio de Sumicolor, no hay f
 | Rubro | Base de cálculo | Valor mensual (COP) |
 |---|---|---:|
 | Servidor de aplicación y base de datos | Infraestructura propia del cliente, ya existente | $0 |
-| Energía y operación del servidor | Prorrateo del consumo del servidor en planta | $40.000 |
+| Energía y operación del servidor | Prorrateo del consumo del servidor en planta | $140.000 |
 | Copias de seguridad | Medio de respaldo y su gestión | $50.000 |
 | Mantenimiento correctivo/preventivo | 16 horas × $42.000 | $672.000 |
 | Soporte a usuarios | 8 horas × $38.000 | $304.000 |
-| **Total de costos fijos mensuales** | | **$1.066.000** |
+| **Total de costos fijos mensuales** | | **$1.166.000** |
 
 #### 4.4.4 Costos variables
 
