@@ -553,7 +553,9 @@ El inventario de riesgos, la matriz de probabilidad e impacto, la matriz RACI y 
 
 **Estados posibles:** `Aprobado`, `Fallido` o `Bloqueado`. Todos los casos se verificaron sobre el ambiente desplegado en el recorrido grabado en video que acompaña esta sección.
 
-**Video Demo:** [DEMO POLYGON](https://youtu.be/-DyVI09W7wE)
+**Video DEMO POLYGON:** [DEMO POLYGON](https://youtu.be/-DyVI09W7wE)
+
+**Video MANUAL USUARIO POLYGON:** [MANUAL USUARIO POLYGON](https://youtu.be/2y52iYN_nxo) (Ver también en la sección 8.11)
 
 | CP | Módulo / tipo | Instrucción y resultado esperado | Estado |
 |---|---|---|---|
@@ -838,7 +840,9 @@ Resumen de la observación de cada participante durante su tarea. La valoración
 
 **Canal de soporte:** Vbenjumea@sumicolor.com.co Nombre: Edisson Vladimir Benjumea González
 
-**Video Demo:** [DEMO POLYGON](https://youtu.be/-DyVI09W7wE)
+**Video MANUAL USUARIO POLYGON:** [MANUAL USUARIO POLYGON](https://youtu.be/2y52iYN_nxo)
+
+**Video DEMO POLYGON:** [DEMO POLYGON](https://youtu.be/-DyVI09W7wE) (Ver también en la sección 6.1)
 
 ---
 
